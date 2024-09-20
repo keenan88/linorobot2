@@ -35,8 +35,6 @@ COPY linorobot2_description /home/humble_ws/src/linorobot2_description
 COPY linorobot2_gazebo /home/humble_ws/src/linorobot2_gazebo
 COPY linorobot2_navigation /home/humble_ws/src/linorobot2_navigation
 
-RUN source /opt/ros/humble/setup.bash && colcon build --symlink-install --packages-select antworker_bringup antworker_pcl
-
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
