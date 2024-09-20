@@ -31,55 +31,55 @@ services:
               count: 1
               capabilities: [gpu]
     runtime: nvidia  # Use the NVIDIA runtime for GPU access
-    # entrypoint: /gz_entrypoint.sh
-    command: sleep infinity
+    entrypoint: /gz_entrypoint.sh
+    # command: sleep infinity
     network_mode: host
     ipc: host
     pid: host
 
-  # linorobot2-nav-slam:
-  #   container_name: linorobot2-gz-nav-slam
-  #   build:
-  #     context: .
-  #     dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
-  #   stdin_open: true
-  #   tty: true
-  #   environment:
-  #     - DISPLAY=${DISPLAY}
-  #   volumes:
-  #     - /tmp/.X11-unix:/tmp/.X11-unix
-  #     - ./linorobot2:/home/humble_ws/src/linorobot2
-  #     - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
-  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-  #     - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
-  #     - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
-  #     - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
-  #     - ./docker/linorobot2/entry_scripts/slam_entrypoint.sh:/slam_entrypoint.sh
-  #   working_dir: /home/humble_ws
-  #   deploy:
-  #     resources:
-  #       reservations:
-  #         devices:
-  #           - capabilities:
-  #               - gpu
-  #   entrypoint: /slam_entrypoint.sh
-  #   network_mode: host
-  #   ipc: host
-  #   pid: host
+  linorobot2-nav-slam:
+    container_name: linorobot2-gz-nav-slam
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./linorobot2:/home/humble_ws/src/linorobot2
+      - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
+      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+      - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
+      - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
+      - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+      - ./docker/linorobot2/entry_scripts/slam_entrypoint.sh:/slam_entrypoint.sh
+    working_dir: /home/humble_ws
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+    entrypoint: /slam_entrypoint.sh
+    network_mode: host
+    ipc: host
+    pid: host
 
-  # linorobot2-joytick:
-  #   container_name: linorobot2-joystick
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/linorobot2/dockerfiles/joystick.dockerfile
-  #   tty: true
-  #   stdin_open: true
-  #   volumes:
-  #     - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
-  #     - ./linorobot2_joystick:/home/humble_ws/src/linorobot2_joystick:rw
-  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-  #   privileged: true
-  #   entrypoint: /joystick_entrypoint.sh
-  #   network_mode: host
-  #   ipc: host
-  #   pid: host
+  linorobot2-joytick:
+    container_name: linorobot2-joystick
+    build:
+      context: .
+      dockerfile: ./docker/linorobot2/dockerfiles/joystick.dockerfile
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
+      - ./linorobot2_joystick:/home/humble_ws/src/linorobot2_joystick:rw
+      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+    privileged: true
+    entrypoint: /joystick_entrypoint.sh
+    network_mode: host
+    ipc: host
+    pid: host
