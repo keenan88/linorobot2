@@ -24,7 +24,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-humble-imu-tools \
     ros-humble-joy-linux \
     ros-humble-laser-filters \
+    libglvnd0 \
+    libgl1-mesa-glx \
+    libgl1-mesa-dri \
+    mesa-utils \
+    x11-xserver-utils \
     && rm -rf /var/lib/apt/lists/*
+    
 
 RUN pip3 install -U trimesh
 
