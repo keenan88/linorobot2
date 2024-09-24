@@ -20,33 +20,33 @@ services:
       - ./docker/linorobot2/entry_scripts/gz_entrypoint.sh:/gz_entrypoint.sh
     privileged: true
     working_dir: /home/humble_ws
-    # entrypoint: /gz_entrypoint.sh
+    entrypoint: /gz_entrypoint.sh
     command: sleep infinity
     network_mode: host
 
-  # linorobot2-nav-slam:
-  #   container_name: linorobot2-nav-slam
-  #   build:
-  #     context: .
-  #     dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
-  #   stdin_open: true
-  #   tty: true
-  #   environment:
-  #     - DISPLAY=${DISPLAY}
-  #     - SLAM_OR_NAV=${SLAM_OR_NAV}
-  #   volumes:
-  #     - /tmp/.X11-unix:/tmp/.X11-unix
-  #     - ./linorobot2:/home/humble_ws/src/linorobot2
-  #     - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
-  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-  #     - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
-  #     - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
-  #     - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
-  #     - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
-  #   working_dir: /home/humble_ws
-  #   entrypoint: /slam_nav_entrypoint.sh
-  #   command: sleep infinity
-  #   network_mode: host
+  linorobot2-nav-slam:
+    container_name: linorobot2-nav-slam
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - SLAM_OR_NAV=${SLAM_OR_NAV}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./linorobot2:/home/humble_ws/src/linorobot2
+      - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
+      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+      - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
+      - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
+      - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+      - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
+    working_dir: /home/humble_ws
+    entrypoint: /slam_nav_entrypoint.sh
+    command: sleep infinity
+    network_mode: host
 
   # linorobot2-joytick:
   #   container_name: linorobot2-joystick
@@ -61,4 +61,20 @@ services:
   #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
   #   privileged: true
   #   entrypoint: /joystick_entrypoint.sh
+  #   network_mode: host
+
+
+# linorobot2-keyboard-teleop:
+  #   container_name: linorobot2-keyboard-teleop
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/linorobot2/dockerfiles/keyboard_teleop.dockerfile
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./docker/linorobot2/entry_scripts/keyboard_teleop.sh:/keyboard_teleop.sh
+  #   tty: true
+  #   entrypoint: /keyboard_teleop.sh
+  #   stdin_open: true
   #   network_mode: host
