@@ -20,14 +20,14 @@ services:
       - ./docker/linorobot2/entry_scripts/gz_entrypoint.sh:/gz_entrypoint.sh
     privileged: true
     working_dir: /home/humble_ws
-    # entrypoint: /gz_entrypoint.sh
+    entrypoint: /gz_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host
     pid: host
 
   linorobot2-nav-slam:
-    container_name: linorobot2-gz-nav-slam
+    container_name: linorobot2-nav-slam
     build:
       context: .
       dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
@@ -45,7 +45,7 @@ services:
       - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
       - ./docker/linorobot2/entry_scripts/slam_entrypoint.sh:/slam_entrypoint.sh
     working_dir: /home/humble_ws
-    # entrypoint: /slam_entrypoint.sh
+    entrypoint: /slam_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host
