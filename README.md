@@ -8,7 +8,7 @@ Forked from [linorobot2](https://github.com/linorobot/linorobot2).
 2. In `.env`, set _SLAM_OR_NAV_ to either _NAV_ or _SLAM_.
 3. (Optional) Plug in a Microsoft Xbox controller (Model 1914) to USB.
 4. Run `docker compose build`.
-5. Run `docker compose up`. It may take 1-2 minutes for Gazebo to load.
+5. Run `docker compose up`. It may take 1-2 minutes for Gazebo to load. A `teleop twist` terminal window will open for you to drive the robot.
 6. If running NAV, set the robot's starting position in RVIZ2 with the "2D pose estimate" button. Spin the robot a few times until the scans and map line up in RVIZ2.
 7. Drive the robot using:
    - Xbox controller (Hold the right bumper and toggle the right joystick to move), **or**
