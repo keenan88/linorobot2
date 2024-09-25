@@ -32,9 +32,13 @@ def generate_launch_description():
         [FindPackageShare('nav2_bringup'), 'launch', 'bringup_launch.py']
     )
 
-    rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_navigation.rviz']
-    )
+    print("nav2_launch_path: ", nav2_launch_path)
+
+    # rviz_config_path = PathJoinSubstitution(
+    #     [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_navigation.rviz']
+    # )
+
+    rviz_config_path = '/home/humble_ws/src/linorobot2_navigation/rviz/linorobot2_navigation.rviz'
 
     default_map_path = PathJoinSubstitution(
         [FindPackageShare('linorobot2_navigation'), 'maps', f'{MAP_NAME}.yaml']
@@ -47,7 +51,6 @@ def generate_launch_description():
     nav2_sim_config_path = PathJoinSubstitution(
         [FindPackageShare('linorobot2_navigation'), 'config', 'navigation_sim.yaml']
     )
-
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -84,7 +87,7 @@ def generate_launch_description():
             launch_arguments={
                 'map': LaunchConfiguration("map"),
                 'use_sim_time': LaunchConfiguration("sim"),
-                'params_file': nav2_sim_config_path
+                'params_file': '/home/humble_ws/src/linorobot2_navigation/config/navigation_sim.yaml'
             }.items()
         ),
 
@@ -96,5 +99,34 @@ def generate_launch_description():
             arguments=['-d', rviz_config_path],
             condition=IfCondition(LaunchConfiguration("rviz")),
             parameters=[{'use_sim_time': LaunchConfiguration("sim")}]
+        ),
+
+        Node(
+            package='nav2_map_server',
+            executable='map_server',
+            name='filter_mask_server',
+            parameters=[
+                '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
+            ]
+        ),
+
+        Node(
+            package='nav2_map_server',
+            executable='costmap_filter_info_server',
+            name='costmap_filter_info_server',
+            parameters=[
+                '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
+            ]
+        ),
+
+        Node(
+            package='nav2_lifecycle_manager',
+            executable='lifecycle_manager',
+            name='lifecycle_manager_costmap_filters',
+            parameters=[
+                '/home/humble_ws/src/linorobot2_navigation/config/lifecycle_manager_costmap_filters.yaml'
+            ]
         )
+
+
     ])

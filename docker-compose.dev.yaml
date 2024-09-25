@@ -17,3 +17,41 @@ services:
     network_mode: host
     ipc: host
     pid: host
+
+
+  # linorobot2-discoverer:
+  #   container_name: linorobot2-discoverer
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/discoverer.dockerfile
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./ros2_explorer:/home/humble_ws/src/ros2_explorer
+  #   working_dir: /home/humble_ws
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
+
+  # linorobot2-wfd:
+  #   container_name: linorobot2-wfd
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/wfd.dockerfile
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./nav2_wavefront_frontier_exploration:/home/humble_ws/src/nav2_wavefront_frontier_exploration
+  #   working_dir: /home/humble_ws
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
+  

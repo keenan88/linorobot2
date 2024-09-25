@@ -79,6 +79,11 @@ def generate_launch_description():
             output='screen'
         ),
 
+        # ExecuteProcess(
+        #     cmd=['gzclient'],
+        #     output='screen'
+        # ),
+
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',

@@ -1,0 +1,13 @@
+/lifecycle_manager_costmap_filters:
+  ros__parameters:
+    attempt_respawn_reconnection: true
+    autostart: true
+    bond_respawn_max_duration: 10.0
+    bond_timeout: 4.0
+    diagnostic_updater:
+      period: 1.0
+      use_fqn: false
+    node_names:
+     - filter_mask_server
+     - costmap_filter_info_server
+    use_sim_time: true
