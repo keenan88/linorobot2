@@ -70,19 +70,19 @@ services:
     pid: host
   
 
-  linorobot2-keyboard-teleop:
-    container_name: linorobot2-keyboard-teleop
-    build:
-      context: .
-      dockerfile: ./docker/linorobot2/dockerfiles/keyboard_teleop.dockerfile
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./docker/linorobot2/entry_scripts/keyboard_teleop.sh:/keyboard_teleop.sh
-    tty: true
-    entrypoint: /keyboard_teleop.sh
-    stdin_open: true
-    network_mode: host
-    ipc: host
-    pid: host
+  # linorobot2-keyboard-teleop:
+  #   container_name: linorobot2-keyboard-teleop
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/linorobot2/dockerfiles/keyboard_teleop.dockerfile
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./docker/linorobot2/entry_scripts/keyboard_teleop.sh:/keyboard_teleop.sh
+  #   tty: true
+  #   entrypoint: /keyboard_teleop.sh
+  #   stdin_open: true
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host

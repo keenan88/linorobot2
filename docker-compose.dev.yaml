@@ -1,0 +1,19 @@
+services:
+
+  linorobot2-frontier-exploration:
+    container_name: linorobot2-frontier-exploration
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/frontier-exploration.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./m-explore-ros2:/home/humble_ws/src/m-explore-ros2
+    working_dir: /home/humble_ws
+    command: sleep infinity
+    network_mode: host
+    ipc: host
+    pid: host

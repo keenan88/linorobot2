@@ -69,8 +69,13 @@ def generate_launch_description():
             description='Robot spawn heading'
         ),
 
+        # ExecuteProcess(
+        #     cmd=['gazebo', '--headless-rendering', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
+        #     output='screen'
+        # ),
+
         ExecuteProcess(
-            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
+            cmd=['gzserver', '--verbose', '-s', 'libgazebo_ros_factory.so', '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
             output='screen'
         ),
 
