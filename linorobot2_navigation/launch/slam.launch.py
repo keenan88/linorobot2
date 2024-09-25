@@ -41,9 +41,11 @@ def generate_launch_description():
         [FindPackageShare('linorobot2_navigation'), 'config', 'navigation.yaml']    
     )
 
-    rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_slam.rviz']
-    )
+    # rviz_config_path = PathJoinSubstitution(
+    #     [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_slam.rviz']
+    # )
+
+    rviz_config_path = '/home/humble_ws/src/linorobot2_navigation/rviz/linorobot2_slam.rviz'
     
     lc = LaunchContext()
     ros_distro = EnvironmentVariable('ROS_DISTRO')
