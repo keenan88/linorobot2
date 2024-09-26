@@ -3,7 +3,8 @@
 
   <xacro:include filename="$(find linorobot2_description)/urdf/mecanum_properties.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/mech/base.urdf.xacro" />
-  <xacro:include filename="$(find linorobot2_description)/urdf/mech/mecanum_wheel.urdf.xacro" />
+  <xacro:include filename="$(find linorobot2_description)/urdf/mech/mecanum_wheel_left.urdf.xacro" />
+  <xacro:include filename="$(find linorobot2_description)/urdf/mech/mecanum_wheel_right.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/sensors/imu.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/sensors/generic_laser.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/sensors/depth_sensor.urdf.xacro" />
@@ -18,8 +19,8 @@
     wheel_pos_z="${wheel_pos_z}"
 />
 
-  <xacro:mecanum_wheel 
-    mecanum_style="left"
+  <xacro:mecanum_wheel_left 
+    side="left"
     end="front"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
@@ -29,17 +30,21 @@
     mass="${wheel_mass}"
   />
 
-  <!-- <xacro:mecanum_wheel 
-    mecanum_style="front_right"
+  <xacro:mecanum_wheel_right
+    side="right"
+    end="front"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
     pos_x="${wheel_pos_x}" 
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  /> -->
-  <!-- <xacro:mecanum_wheel 
-    mecanum_style="left"
+  />
+
+  <!-- Back wheels mechanum style swapped (left mecanum wheel goes on right side of robot, and vice versa) -->
+
+  <xacro:mecanum_wheel_right 
+    side="left"
     end="rear"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
@@ -47,11 +52,11 @@
     pos_y="${wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  /> -->
+  />
 
-  <!-- Left style mecanum wheel is on back RIGHT of robot -->
-  <xacro:mecanum_wheel 
-    mecanum_style="left"
+  
+  <xacro:mecanum_wheel_left 
+    side="right"
     end="rear"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
