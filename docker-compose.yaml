@@ -44,6 +44,7 @@ services:
       - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
       - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
       - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+      - ./linorobot2_interfaces:/home/humble_ws/src/linorobot2_interfaces
       - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
     working_dir: /home/humble_ws
     entrypoint: /slam_nav_entrypoint.sh

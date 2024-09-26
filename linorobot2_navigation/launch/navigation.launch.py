@@ -116,7 +116,15 @@ def generate_launch_description():
             parameters=[
                 '/home/humble_ws/src/linorobot2_navigation/config/lifecycle_manager_costmap_filters.yaml'
             ]
-        )
+        ),
+
+        # Node(
+        #     package='linorobot2_navigation',
+        #     executable='navigate_to_named_pose', 
+        #     parameters=[
+        #         {'named_poses_file': '/home/humble_ws/src/linorobot2_navigation/config/named_poses.yaml'}
+        #     ]
+        # )
 
 
     ])

@@ -1,0 +1,14 @@
+named_poses:
+  home:
+    x: 0.0
+    y: 0.0
+    theta: 0.0
+  tree:
+    x: -6.0
+    y: 7.75
+    theta: -1.57
+  concrete_barriers:
+    x: 0.6
+    y: -8.8
+    theta: 1.57
+
