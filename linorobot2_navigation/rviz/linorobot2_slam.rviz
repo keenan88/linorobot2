@@ -7,9 +7,9 @@ Panels:
         - /Global Options1
         - /TF1
         - /TF1/Frames1
-        - /TF1/Frames1/base_footprint1
         - /RobotModel1/Description Topic1
         - /MarkerArray1
+        - /Map3
       Splitter Ratio: 0.5
     Tree Height: 793
   - Class: rviz_common/Selection
@@ -183,8 +183,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 4.2873921394348145
-        Min Value: -10.257857322692871
+        Max Value: 10.232010841369629
+        Min Value: -10.241939544677734
         Value: true
       Axis: X
       Channel Name: intensity
@@ -218,7 +218,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        frontiers: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile

@@ -118,8 +118,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 10.124448776245117
-        Min Value: -10.35291576385498
+        Max Value: 10.26933765411377
+        Min Value: -10.129178047180176
         Value: true
       Axis: X
       Channel Name: intensity
@@ -593,8 +593,8 @@ Visualization Manager:
       Scale: -39.792724609375
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -1.1531569957733154
-      Y: -0.3562835454940796
+      X: 0.08720862865447998
+      Y: -1.0182322263717651
     Saved: ~
 Window Geometry:
   Displays:
