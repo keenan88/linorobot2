@@ -1,52 +1,960 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="mecanum_wheel" params="side radius width pos_x pos_y pos_z mass">
-    <link name="${side}_wheel_link">
+    
+    <link name="${side}_base_link">
+      <inertial>
+        <origin
+          xyz="-3.9077136779291E-16 -0.0136205707454137 -1.44489682185117E-14"
+          rpy="0 0 0" />
+        <mass
+          value="0.039620820516108" />
+        <inertia
+          ixx="3.76577202480009E-05"
+          ixy="-1.07908308681007E-19"
+          ixz="3.89356499633093E-22"
+          iyy="7.10123305553507E-05"
+          iyz="-1.66085499471637E-18"
+          izz="3.76577202480009E-05" />
+      </inertial>
       <visual>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
         <geometry>
-          <cylinder radius="${radius}" length="${width}"/>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/base_link.STL" />
         </geometry>
-        <material name="red">
-            <color rgba="0.8764 0.4588 0.8509 1.0"/>
+        <material
+          name="">
+          <color
+            rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
         </material>
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
         <geometry>
-          <cylinder radius="${radius}" length="${width}"/>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/base_link.STL" />
         </geometry>
       </collision>
-
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <mass value="${mass}"/>
-        <inertia ixx="${(2/5) * mass * (radius * radius)}" ixy="0" ixz="0"
-                 iyy="${(2/5) * mass * (radius * radius)}" iyz="0"
-                 izz="${(2/5) * mass * (radius * radius)}" />
-      </inertial>
     </link>
 
-    <gazebo reference="${side}_wheel_link">
-        <mu1>0.01</mu1>
-        <mu2>0.01</mu2>
-    </gazebo>
 
-    <gazebo reference="${side}_wheel_link">  
-      <visual>  
-        <material>
-          <ambient>0.8764 0.4588 0.8509 1.0</ambient>  
-          <diffuse>0.8764 0.4588 0.8509 1.0</diffuse>  
-          <specular>0.8764 0.4588 0.8509 1.0</specular>  
-          <emissive>0.0 0.0 0.0 0.0</emissive>  
-        </material>
-      </visual>  
-    </gazebo>
-    <joint name="${side}_wheel_joint" type="continuous">
-      <axis xyz="0 1 0" />
-      <parent link="base_link"/>
-      <child link="${side}_wheel_link"/>
-      <origin xyz="${pos_x} ${pos_y} ${pos_z}" rpy="0 0 0"/>
+    <joint name="base_link_to_${side}_base_link" type="fixed">
+      <origin xyz="${pos_x} ${pos_y} 0"  rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="${side}_base_link" />
+      <axis xyz="0 0 0" />
     </joint>
+
+    <link
+      name="${side}_plate1">
+      <inertial>
+        <origin
+          xyz="8.83119736279022E-16 3.33301269118141E-17 -0.000551568670724527"
+          rpy="0 0 0" />
+        <mass
+          value="0.0253986639693882" />
+        <inertia
+          ixx="4.21627753206923E-05"
+          ixy="1.3976043629696E-20"
+          ixz="-2.39458839321443E-21"
+          iyy="4.21627753206922E-05"
+          iyz="4.06169630282727E-21"
+          izz="8.39719993847474E-05" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/plate1.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/plate1.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_plate1"
+      type="fixed">
+      <origin
+        xyz="0 0.023114 0"
+        rpy="-1.5708 0.03287 0" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_plate1" />
+      <axis
+        xyz="0 0 0" />
+    </joint>
+    <link
+      name="${side}_plate2">
+      <inertial>
+        <origin
+          xyz="-1.10651810076925E-15 8.09386876632109E-17 -0.000551568670724527"
+          rpy="0 0 0" />
+        <mass
+          value="0.0253986639693882" />
+        <inertia
+          ixx="4.21627753206924E-05"
+          ixy="1.65171424714589E-20"
+          ixz="4.28643950323039E-22"
+          iyy="4.21627753206923E-05"
+          iyz="2.75305456980319E-21"
+          izz="8.39719993847476E-05" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/plate2.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/plate2.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_plate2"
+      type="fixed">
+      <origin
+        xyz="0 -0.023114 0"
+        rpy="-1.5707963267949 0.0335546833724646 -3.14159265358979" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_plate2" />
+      <axis
+        xyz="0 0 0" />
+    </joint>
+
+    <link
+      name="${side}_roller1">
+      <inertial>
+        <origin
+          xyz="5.96744875736022E-16 -1.24475083018716E-14 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848208" />
+        <inertia
+          ixx="8.99919949242919E-07"
+          ixy="3.97046694025453E-23"
+          ixz="9.81863387100444E-22"
+          iyy="8.9991994924288E-07"
+          iyz="-8.0163727523739E-19"
+          izz="3.31951561004127E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller1.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller1.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint
+      name="${side}_base_link_to_${side}_roller1"
+      type="continuous">
+      <origin
+        xyz="-0.064997 -0.01515 0.019737"
+        rpy="2.3375 0.48899 -0.038445" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller1" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+
+
+    <link
+      name="${side}_roller2">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -9.95687907123788E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848216" />
+        <inertia
+          ixx="8.99919949245561E-07"
+          ixy="-3.30872245021211E-24"
+          ixz="8.56959114604937E-22"
+          iyy="8.99919949245641E-07"
+          iyz="-8.01716684576195E-19"
+          izz="3.31951561009139E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller2.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller2.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller2"
+      type="continuous">
+      <origin
+        xyz="-0.05135 -0.01515 0.044467"
+        rpy="2.3122 0.90744 -0.055132" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller2" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller3">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -3.41003267290141E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.9991994924907E-07"
+          ixy="-9.92616735063633E-24"
+          ixz="8.47860127866853E-22"
+          iyy="8.99919949249046E-07"
+          iyz="-8.01743154355797E-19"
+          izz="3.3195156101569E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller3.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller3.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller3"
+      type="continuous">
+      <origin
+        xyz="-0.028824 -0.01515 0.061508"
+        rpy="2.22 1.3248 -0.13976" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller3" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller4">
+      <inertial>
+        <origin
+          xyz="5.68989300120393E-16 -3.35365415993216E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848229" />
+        <inertia
+          ixx="8.9991994924904E-07"
+          ixy="1.65436122510606E-23"
+          ixz="7.69277969674316E-22"
+          iyy="8.99919949249123E-07"
+          iyz="-8.01796093915E-19"
+          izz="3.31951561015737E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller4.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller4.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller4"
+      type="continuous">
+      <origin
+        xyz="-0.0013143 -0.01515 0.067914"
+        rpy="-0.59653 1.3924 -2.9492" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller4" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller5">
+      <inertial>
+        <origin
+          xyz="5.96744875736022E-16 2.4459601011273E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848241" />
+        <inertia
+          ixx="8.99919949250993E-07"
+          ixy="3.14328632770151E-23"
+          ixz="7.25437397209005E-22"
+          iyy="8.99919949251052E-07"
+          iyz="-8.01796093915E-19"
+          izz="3.31951561019638E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller5.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller5.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller5"
+      type="continuous">
+      <origin
+        xyz="0.026423 -0.01515 0.062578"
+        rpy="-0.73578 0.97593 -3.081" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller5" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller6">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -7.52392939618041E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.99919949249441E-07"
+          ixy="5.9557004103818E-23"
+          ixz="8.28834973778134E-22"
+          iyy="8.99919949249495E-07"
+          iyz="-8.017828590252E-19"
+          izz="3.31951561016508E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller6.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller6.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller6"
+      type="continuous">
+      <origin
+        xyz="0.049591 -0.01515 0.04642"
+        rpy="-0.76481 0.55754 -3.1016" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller6" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller7">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -3.4109000346394E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.9991994924911E-07"
+          ixy="-3.30872245021211E-24"
+          ixz="7.51079996198149E-22"
+          iyy="8.99919949249103E-07"
+          iyz="-8.00353490926708E-19"
+          izz="3.31951561015786E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller7.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller7.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller7"
+      type="continuous">
+      <origin
+        xyz="0.064184 -0.01515 0.022237"
+        rpy="-0.78123 0.13894 -3.1073" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller7" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller8">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -1.76421377506841E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848253" />
+        <inertia
+          ixx="8.9991994925561E-07"
+          ixy="-4.13590306276514E-23"
+          ixz="7.46944093135384E-22"
+          iyy="8.99919949255578E-07"
+          iyz="-8.01624040347589E-19"
+          izz="3.31951561027997E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller8.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller8.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller8"
+      type="continuous">
+      <origin
+        xyz="0.06768 -0.01515 -0.0057919"
+        rpy="-0.79573 -0.27969 -3.1063" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller8" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller9">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -5.1013880619788E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.99919949250354E-07"
+          ixy="1.81979734761666E-22"
+          ixz="8.08982639076861E-22"
+          iyy="8.99919949250367E-07"
+          iyz="-8.01835798584403E-19"
+          izz="3.31951561017902E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller9.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller9.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller9"
+      type="continuous">
+      <origin
+        xyz="0.059473 -0.01515 -0.032819"
+        rpy="-0.81448 -0.69826 -3.0973" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller9" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller10">
+      <inertial>
+        <origin
+          xyz="5.96744875736022E-16 -6.51952450358984E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.99919949250464E-07"
+          ixy="-1.43929426584227E-22"
+          ixz="8.58613475830043E-22"
+          iyy="8.99919949250483E-07"
+          iyz="-8.01756389245598E-19"
+          izz="3.31951561018128E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller10.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller10.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller10"
+      type="continuous">
+      <origin
+        xyz="0.040982 -0.01515 -0.054171"
+        rpy="-0.85554 -1.1164 -3.0642" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller10" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller11">
+      <inertial>
+        <origin
+          xyz="5.68989300120393E-16 -3.40699690681845E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.99919949249114E-07"
+          ixy="-6.61744490042422E-24"
+          ixz="8.13118542139626E-22"
+          iyy="8.99919949249044E-07"
+          iyz="-8.00419665375712E-19"
+          izz="3.31951561015731E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller11.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller11.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller11"
+      type="continuous">
+      <origin
+        xyz="0.015406 -0.01515 -0.066157"
+        rpy="-1.5658 -1.5225 -2.3612" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller11" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller12">
+      <inertial>
+        <origin
+          xyz="5.96744875736022E-16 -9.87751547221194E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848222" />
+        <inertia
+          ixx="8.99919949247458E-07"
+          ixy="8.27180612553028E-24"
+          ixz="7.10548146183051E-22"
+          iyy="8.99919949247364E-07"
+          iyz="-8.01716684576195E-19"
+          izz="3.31951561012396E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller12.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller12.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller12"
+      type="continuous">
+      <origin
+        xyz="-0.012835 -0.01515 -0.066704"
+        rpy="2.4393 -1.1848 -0.090248" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller12" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller13">
+      <inertial>
+        <origin
+          xyz="6.10622663543836E-16 -6.50608039665102E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.0049954365884824" />
+        <inertia
+          ixx="8.99919949251263E-07"
+          ixy="3.30872245021211E-24"
+          ixz="8.75984268693656E-22"
+          iyy="8.9991994925119E-07"
+          iyz="-8.01491691449581E-19"
+          izz="3.31951561019653E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller13.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller13.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller13"
+      type="continuous">
+      <origin
+        xyz="-0.038856 -0.01515 -0.055716"
+        rpy="2.3883 -0.76678 -0.047134" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller13" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller14">
+      <inertial>
+        <origin
+          xyz="5.96744875736022E-16 -3.365797224264E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848228" />
+        <inertia
+          ixx="8.99919949249125E-07"
+          ixy="2.81241408268029E-23"
+          ixz="6.46855239016468E-22"
+          iyy="8.99919949249103E-07"
+          iyz="-8.01888738143606E-19"
+          izz="3.31951561015801E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller14.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller14.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller14"
+      type="continuous">
+      <origin
+        xyz="-0.058159 -0.01515 -0.035095"
+        rpy="2.3679 -0.34825 -0.036106" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller14" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+    <link
+      name="${side}_roller15">
+      <inertial>
+        <origin
+          xyz="5.82867087928207E-16 -3.35452152167015E-15 -0.0215899999999933"
+          rpy="0 0 0" />
+        <mass
+          value="0.00499543658848229" />
+        <inertia
+          ixx="8.99919949249126E-07"
+          ixy="-1.15805285757424E-23"
+          ixz="8.54477572767278E-22"
+          iyy="8.99919949249124E-07"
+          iyz="-8.01796093915E-19"
+          izz="3.31951561015821E-07" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller15.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="0 0 0"
+          rpy="0 0 0" />
+        <geometry>
+          <mesh
+            filename="package://linorobot2_description/mecanum_wheel_left/meshes/roller15.STL" />
+        </geometry>
+      </collision>
+    </link>
+    <joint
+      name="${side}_base_link_to_${side}_roller15"
+      type="continuous">
+      <origin
+        xyz="-0.0674050504299177 -0.0151497403158722 -0.00840608812639412"
+        rpy="2.35322166168045 0.070379538766794 -0.0340216727613588" />
+      <parent
+        link="${side}_base_link" />
+      <child
+        link="${side}_roller15" />
+      <axis
+        xyz="0 0 1" />
+    </joint>
+
   </xacro:macro>
 </robot>

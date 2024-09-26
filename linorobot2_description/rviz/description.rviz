@@ -3,9 +3,11 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
-    Tree Height: 907
+    Tree Height: 793
 Visualization Manager:
   Class: ""
   Displays:
@@ -54,17 +56,101 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_left_wheel_link:
+        front_left_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_right_wheel_link:
+        front_left_plate1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_plate2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller13:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller14:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller15:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_left_roller9:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -78,16 +164,9 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        rear_left_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_right_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -97,46 +176,104 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
         base_footprint:
-          Value: true
+          Value: false
         base_link:
           Value: true
+        camera_depth_link:
+          Value: false
         camera_link:
+          Value: false
+        front_left_base_link:
           Value: true
-        front_left_wheel_link:
+        front_left_plate1:
           Value: true
-        front_right_wheel_link:
+        front_left_plate2:
+          Value: true
+        front_left_roller1:
+          Value: true
+        front_left_roller10:
+          Value: true
+        front_left_roller11:
+          Value: true
+        front_left_roller12:
+          Value: true
+        front_left_roller13:
+          Value: true
+        front_left_roller14:
+          Value: true
+        front_left_roller15:
+          Value: true
+        front_left_roller2:
+          Value: true
+        front_left_roller3:
+          Value: true
+        front_left_roller4:
+          Value: true
+        front_left_roller5:
+          Value: true
+        front_left_roller6:
+          Value: true
+        front_left_roller7:
+          Value: true
+        front_left_roller8:
+          Value: true
+        front_left_roller9:
           Value: true
         imu_link:
-          Value: true
+          Value: false
         laser:
-          Value: true
-        rear_left_wheel_link:
-          Value: true
-        rear_right_wheel_link:
-          Value: true
+          Value: false
       Marker Scale: 0.10000000149011612
       Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
+      Show Arrows: false
+      Show Axes: false
+      Show Names: false
       Tree:
         base_footprint:
           base_link:
             camera_link:
-              {}
-            front_left_wheel_link:
-              {}
-            front_right_wheel_link:
-              {}
+              camera_depth_link:
+                {}
+            front_left_base_link:
+              front_left_plate1:
+                {}
+              front_left_plate2:
+                {}
+              front_left_roller1:
+                {}
+              front_left_roller10:
+                {}
+              front_left_roller11:
+                {}
+              front_left_roller12:
+                {}
+              front_left_roller13:
+                {}
+              front_left_roller14:
+                {}
+              front_left_roller15:
+                {}
+              front_left_roller2:
+                {}
+              front_left_roller3:
+                {}
+              front_left_roller4:
+                {}
+              front_left_roller5:
+                {}
+              front_left_roller6:
+                {}
+              front_left_roller7:
+                {}
+              front_left_roller8:
+                {}
+              front_left_roller9:
+                {}
             imu_link:
               {}
             laser:
-              {}
-            rear_left_wheel_link:
-              {}
-            rear_right_wheel_link:
               {}
       Update Interval: 0
       Value: true
@@ -168,7 +305,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.6006462574005127
+      Distance: 0.5872616171836853
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -183,18 +320,18 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4653983414173126
+      Pitch: 0.46039795875549316
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.7553982138633728
+      Yaw: 0.6353983879089355
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1136
+  Height: 1016
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000015600000416fc0200000001fb000000100044006900730070006c006100790073010000003d00000416000000c900ffffff000005f40000041600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 1872
-  X: 48
+  QMainWindow State: 000000ff00000000fd000000010000000000000156000003a2fc0200000001fb000000100044006900730070006c006100790073010000003b000003a2000000c700ffffff00000264000003a200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 960
+  X: 0
   Y: 27

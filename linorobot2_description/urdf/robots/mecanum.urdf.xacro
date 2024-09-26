@@ -28,7 +28,7 @@
     mass="${wheel_mass}"
   />
 
-  <xacro:mecanum_wheel 
+  <!-- <xacro:mecanum_wheel 
     side="front_right"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
@@ -55,7 +55,7 @@
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  />
+  /> -->
 
   <xacro:imu/>
   

@@ -28,9 +28,8 @@ def generate_launch_description():
         [FindPackageShare("linorobot2_description"), "urdf/robots", f"{robot_base}.urdf.xacro"]
     )
 
-    rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_description'), 'rviz', 'description.rviz']
-    )
+    rviz_config_path = '/home/humble_ws/src/linorobot2_description/rviz/description.rviz'
+
 
     return LaunchDescription([
         DeclareLaunchArgument(
