@@ -19,4 +19,14 @@ install(DIRECTORY mecanum_wheel_left/meshes
   FILES_MATCHING PATTERN "*.STL"
 )
 
+install(DIRECTORY mecanum_wheel_right/urdf/
+  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/urdf/
+  FILES_MATCHING PATTERN "*.urdf"
+)
+
+install(DIRECTORY mecanum_wheel_right/meshes
+  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/
+  FILES_MATCHING PATTERN "*.STL"
+)
+
 ament_package()

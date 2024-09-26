@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /RobotModel1
         - /TF1
         - /TF1/Frames1
       Splitter Ratio: 0.5
@@ -29,7 +30,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 0.8999999761581421
+    - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Description File: ""
@@ -164,6 +165,96 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        rear_left_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_plate1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_plate2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller13:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller14:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller15:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rear_left_roller9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -225,6 +316,42 @@ Visualization Manager:
           Value: false
         laser:
           Value: false
+        rear_left_base_link:
+          Value: true
+        rear_left_plate1:
+          Value: true
+        rear_left_plate2:
+          Value: true
+        rear_left_roller1:
+          Value: true
+        rear_left_roller10:
+          Value: true
+        rear_left_roller11:
+          Value: true
+        rear_left_roller12:
+          Value: true
+        rear_left_roller13:
+          Value: true
+        rear_left_roller14:
+          Value: true
+        rear_left_roller15:
+          Value: true
+        rear_left_roller2:
+          Value: true
+        rear_left_roller3:
+          Value: true
+        rear_left_roller4:
+          Value: true
+        rear_left_roller5:
+          Value: true
+        rear_left_roller6:
+          Value: true
+        rear_left_roller7:
+          Value: true
+        rear_left_roller8:
+          Value: true
+        rear_left_roller9:
+          Value: true
       Marker Scale: 0.10000000149011612
       Name: TF
       Show Arrows: false
@@ -275,6 +402,41 @@ Visualization Manager:
               {}
             laser:
               {}
+            rear_left_base_link:
+              rear_left_plate1:
+                {}
+              rear_left_plate2:
+                {}
+              rear_left_roller1:
+                {}
+              rear_left_roller10:
+                {}
+              rear_left_roller11:
+                {}
+              rear_left_roller12:
+                {}
+              rear_left_roller13:
+                {}
+              rear_left_roller14:
+                {}
+              rear_left_roller15:
+                {}
+              rear_left_roller2:
+                {}
+              rear_left_roller3:
+                {}
+              rear_left_roller4:
+                {}
+              rear_left_roller5:
+                {}
+              rear_left_roller6:
+                {}
+              rear_left_roller7:
+                {}
+              rear_left_roller8:
+                {}
+              rear_left_roller9:
+                {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Axes
@@ -305,25 +467,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.5872616171836853
+      Distance: 1.283301830291748
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.08448563516139984
+        Y: 0.11818493157625198
+        Z: -0.010939031839370728
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.46039795875549316
+      Pitch: 0.8653978109359741
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.6353983879089355
+      Yaw: 0.015400180593132973
     Saved: ~
 Window Geometry:
   Displays:

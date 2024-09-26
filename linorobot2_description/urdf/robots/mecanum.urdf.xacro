@@ -19,7 +19,8 @@
 />
 
   <xacro:mecanum_wheel 
-    side="front_left"
+    mecanum_style="left"
+    end="front"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
     pos_x="${wheel_pos_x}" 
@@ -29,33 +30,36 @@
   />
 
   <!-- <xacro:mecanum_wheel 
-    side="front_right"
+    mecanum_style="front_right"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
     pos_x="${wheel_pos_x}" 
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  />
-  <xacro:mecanum_wheel 
-    side="rear_left"
+  /> -->
+  <!-- <xacro:mecanum_wheel 
+    mecanum_style="left"
+    end="rear"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
     pos_x="${-wheel_pos_x}" 
     pos_y="${wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  />
+  /> -->
 
+  <!-- Left style mecanum wheel is on back RIGHT of robot -->
   <xacro:mecanum_wheel 
-    side="rear_right"
+    mecanum_style="left"
+    end="rear"
     radius="${wheel_radius}" 
     width="${wheel_width}" 
     pos_x="${-wheel_pos_x}" 
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  /> -->
+  />
 
   <xacro:imu/>
   
