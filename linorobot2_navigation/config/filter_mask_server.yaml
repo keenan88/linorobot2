@@ -5,7 +5,7 @@
   ros__parameters:
     type: 0
     filter_info_topic: "costmap_filter_info"
-    mask_topic: "keepout_filter_mask"
+    mask_topic: "/global_costmap/keepout_filter_mask"
     base: 0.0
     multiplier: 1.0
     use_sim_time: true
@@ -14,6 +14,6 @@
   ros__parameters:
     use_sim_time: true
     frame_id: "map"
-    topic_name: "/keepout_filter_mask"
+    topic_name: "/global_costmap/keepout_filter_mask"
     yaml_filename: "/home/humble_ws/src/linorobot2_navigation/maps/keepout_mask.yaml"
 

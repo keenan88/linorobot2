@@ -32,12 +32,6 @@ def generate_launch_description():
         [FindPackageShare('nav2_bringup'), 'launch', 'bringup_launch.py']
     )
 
-    print("nav2_launch_path: ", nav2_launch_path)
-
-    # rviz_config_path = PathJoinSubstitution(
-    #     [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_navigation.rviz']
-    # )
-
     rviz_config_path = '/home/humble_ws/src/linorobot2_navigation/rviz/linorobot2_navigation.rviz'
 
     default_map_path = PathJoinSubstitution(
@@ -46,10 +40,6 @@ def generate_launch_description():
 
     nav2_config_path = PathJoinSubstitution(
         [FindPackageShare('linorobot2_navigation'), 'config', 'navigation.yaml']
-    )
-
-    nav2_sim_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'config', 'navigation_sim.yaml']
     )
 
     return LaunchDescription([
