@@ -57,15 +57,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_depth_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         front_left_base_link:
           Alpha: 1
           Show Axes: false
@@ -247,15 +238,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         front_right_roller9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        laser:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -459,15 +441,11 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_footprint:
-          Value: true
-        base_link:
-          Value: true
-        camera_depth_link:
           Value: false
-        camera_link:
+        base_link:
           Value: false
         front_left_base_link:
-          Value: false
+          Value: true
         front_left_plate1:
           Value: false
         front_left_plate2:
@@ -503,7 +481,7 @@ Visualization Manager:
         front_left_roller9:
           Value: false
         front_right_base_link:
-          Value: false
+          Value: true
         front_right_drum:
           Value: false
         front_right_plate1:
@@ -540,12 +518,8 @@ Visualization Manager:
           Value: false
         front_right_roller9:
           Value: false
-        imu_link:
-          Value: false
-        laser:
-          Value: false
         rear_left_base_link:
-          Value: false
+          Value: true
         rear_left_drum:
           Value: false
         rear_left_plate1:
@@ -583,7 +557,7 @@ Visualization Manager:
         rear_left_roller9:
           Value: false
         rear_right_base_link:
-          Value: false
+          Value: true
         rear_right_plate1:
           Value: false
         rear_right_plate2:
@@ -626,9 +600,6 @@ Visualization Manager:
       Tree:
         base_footprint:
           base_link:
-            camera_link:
-              camera_depth_link:
-                {}
             front_left_base_link:
               front_left_plate1:
                 {}
@@ -701,10 +672,6 @@ Visualization Manager:
                 {}
               front_right_roller9:
                 {}
-            imu_link:
-              {}
-            laser:
-              {}
             rear_left_base_link:
               rear_left_drum:
                 {}
@@ -800,7 +767,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.5709035396575928
+      Distance: 1.504012942314148
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -815,10 +782,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4703981578350067
+      Pitch: 0.6953983306884766
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.9385906457901
+      Yaw: 2.5985944271087646
     Saved: ~
 Window Geometry:
   Displays:

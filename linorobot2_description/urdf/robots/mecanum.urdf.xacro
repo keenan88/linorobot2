@@ -30,7 +30,7 @@
     mass="${wheel_mass}"
   />
 
-  <!-- <xacro:mecanum_wheel_right
+  <xacro:mecanum_wheel_right
     side="right"
     end="front"
     radius="${wheel_radius}" 
@@ -39,11 +39,11 @@
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  /> -->
+  />
 
   <!-- Back wheels mechanum style swapped (left mecanum wheel goes on right side of robot, and vice versa) -->
 
-  <!-- <xacro:mecanum_wheel_right 
+  <xacro:mecanum_wheel_right 
     side="left"
     end="rear"
     radius="${wheel_radius}" 
@@ -64,6 +64,6 @@
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  /> -->
+  />
 
 </robot>
