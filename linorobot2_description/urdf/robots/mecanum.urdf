@@ -166,6 +166,7 @@
     <parent link="base_link"/>
     <child link="front_left_wheel"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_plate1">
     <inertial>
@@ -245,6 +246,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller1"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller2">
     <inertial>
@@ -272,6 +274,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller2"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller3">
     <inertial>
@@ -299,6 +302,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller3"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller4">
     <inertial>
@@ -326,6 +330,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller4"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller5">
     <inertial>
@@ -353,6 +358,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller5"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller6">
     <inertial>
@@ -380,6 +386,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller6"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller7">
     <inertial>
@@ -407,6 +414,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller7"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller8">
     <inertial>
@@ -434,6 +442,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller8"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller9">
     <inertial>
@@ -461,6 +470,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller9"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller10">
     <inertial>
@@ -488,6 +498,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller10"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller11">
     <inertial>
@@ -515,6 +526,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller11"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller12">
     <inertial>
@@ -542,6 +554,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller12"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller13">
     <inertial>
@@ -569,6 +582,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller13"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller14">
     <inertial>
@@ -596,6 +610,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller14"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_left_roller15">
     <inertial>
@@ -623,6 +638,7 @@
     <parent link="front_left_wheel"/>
     <child link="front_left_roller15"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_wheel">
     <inertial>
@@ -756,6 +772,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller1"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller2">
     <inertial>
@@ -783,6 +800,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller2"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller3">
     <inertial>
@@ -810,6 +828,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller3"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller4">
     <inertial>
@@ -837,6 +856,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller4"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller5">
     <inertial>
@@ -864,6 +884,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller5"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller6">
     <inertial>
@@ -891,6 +912,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller6"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller7">
     <inertial>
@@ -918,6 +940,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller7"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller8">
     <inertial>
@@ -945,6 +968,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller8"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller9">
     <inertial>
@@ -972,6 +996,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller9"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller10">
     <inertial>
@@ -999,6 +1024,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller10"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller11">
     <inertial>
@@ -1026,6 +1052,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller11"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller12">
     <inertial>
@@ -1053,6 +1080,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller12"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller13">
     <inertial>
@@ -1080,6 +1108,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller13"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller14">
     <inertial>
@@ -1107,6 +1136,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller14"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="front_right_roller15">
     <inertial>
@@ -1134,6 +1164,7 @@
     <parent link="front_right_wheel"/>
     <child link="front_right_roller15"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <!-- Back wheels mechanum style swapped (left mecanum wheel goes on right side of robot, and vice versa) -->
   <link name="rear_left_wheel">
@@ -1268,6 +1299,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller1"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller2">
     <inertial>
@@ -1295,6 +1327,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller2"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller3">
     <inertial>
@@ -1322,6 +1355,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller3"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller4">
     <inertial>
@@ -1349,6 +1383,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller4"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller5">
     <inertial>
@@ -1376,6 +1411,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller5"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller6">
     <inertial>
@@ -1403,6 +1439,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller6"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller7">
     <inertial>
@@ -1430,6 +1467,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller7"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller8">
     <inertial>
@@ -1457,6 +1495,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller8"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller9">
     <inertial>
@@ -1484,6 +1523,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller9"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller10">
     <inertial>
@@ -1511,6 +1551,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller10"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller11">
     <inertial>
@@ -1538,6 +1579,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller11"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller12">
     <inertial>
@@ -1565,6 +1607,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller12"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller13">
     <inertial>
@@ -1592,6 +1635,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller13"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller14">
     <inertial>
@@ -1619,6 +1663,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller14"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_left_roller15">
     <inertial>
@@ -1646,6 +1691,7 @@
     <parent link="rear_left_wheel"/>
     <child link="rear_left_roller15"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_wheel">
     <inertial>
@@ -1673,6 +1719,7 @@
     <parent link="base_link"/>
     <child link="rear_right_wheel"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_plate1">
     <inertial>
@@ -1752,6 +1799,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller1"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller2">
     <inertial>
@@ -1779,6 +1827,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller2"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller3">
     <inertial>
@@ -1806,6 +1855,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller3"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller4">
     <inertial>
@@ -1833,6 +1883,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller4"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller5">
     <inertial>
@@ -1860,6 +1911,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller5"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller6">
     <inertial>
@@ -1887,6 +1939,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller6"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller7">
     <inertial>
@@ -1914,6 +1967,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller7"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller8">
     <inertial>
@@ -1941,6 +1995,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller8"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller9">
     <inertial>
@@ -1968,6 +2023,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller9"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller10">
     <inertial>
@@ -1995,6 +2051,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller10"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller11">
     <inertial>
@@ -2022,6 +2079,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller11"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller12">
     <inertial>
@@ -2049,6 +2107,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller12"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller13">
     <inertial>
@@ -2076,6 +2135,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller13"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller14">
     <inertial>
@@ -2103,6 +2163,7 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller14"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
   <link name="rear_right_roller15">
     <inertial>
@@ -2130,5 +2191,6 @@
     <parent link="rear_right_wheel"/>
     <child link="rear_right_roller15"/>
     <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.01"/>
   </joint>
 </robot>
