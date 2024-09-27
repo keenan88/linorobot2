@@ -69,35 +69,30 @@ def generate_launch_description():
             description='Robot spawn heading'
         ),
 
-        # ExecuteProcess(
-        #     cmd=['gazebo', '--headless-rendering', '--verbose', '-s', 'libgazebo_ros_factory.so',  '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
-        #     output='screen'
-        # ),
-
         ExecuteProcess(
             cmd=['gzserver', '--verbose', '-s', 'libgazebo_ros_factory.so', '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
             output='screen'
         ),
 
-        # ExecuteProcess(
-        #     cmd=['gzclient'],
-        #     output='screen'
-        # ),
-
-        Node(
-            package='gazebo_ros',
-            executable='spawn_entity.py',
-            name='urdf_spawner',
-            output='screen',
-            arguments=[
-                '-topic', 'robot_description', 
-                '-entity', 'linorobot2', 
-                '-x', LaunchConfiguration('spawn_x'),
-                '-y', LaunchConfiguration('spawn_y'),
-                '-z', LaunchConfiguration('spawn_z'),
-                '-Y', LaunchConfiguration('spawn_yaw'),
-            ]
+        ExecuteProcess(
+            cmd=['gzclient'],
+            output='screen'
         ),
+
+        # Node(
+        #     package='gazebo_ros',
+        #     executable='spawn_entity.py',
+        #     name='urdf_spawner',
+        #     output='screen',
+        #     arguments=[
+        #         '-topic', 'robot_description', 
+        #         '-entity', 'linorobot2', 
+        #         '-x', LaunchConfiguration('spawn_x'),
+        #         '-y', LaunchConfiguration('spawn_y'),
+        #         '-z', LaunchConfiguration('spawn_z'),
+        #         '-Y', LaunchConfiguration('spawn_yaw'),
+        #     ]
+        # ),
 
         Node(
             package='linorobot2_gazebo',
