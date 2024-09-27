@@ -126,5 +126,15 @@ def generate_launch_description():
         #     ]
         # )
 
+        Node(
+            package='linorobot2_navigation',
+            executable='wheel_odometry', 
+            parameters=[
+                {
+                    'use_sim_time' : True
+                }
+            ]
+        )
+
 
     ])
