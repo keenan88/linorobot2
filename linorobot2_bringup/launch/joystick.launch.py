@@ -20,10 +20,21 @@ def generate_launch_description():
         parameters = [
             '/home/humble_ws/src/linorobot2_joystick/config/teleop_twist_joy_config.yaml'
         ]
+    )
+
+    cmd_vel_to_motor_vel = Node(
+        package = 'linorobot2_joystick', 
+        executable = 'cmd_vel_to_motor_vel',
+        parameters = [
+            {
+                'use_sim_time': True
+            }
+        ]
     )    
 
     ld = LaunchDescription()
     ld.add_action(joystick_driver)
     ld.add_action(joystick_twist)
+    ld.add_action(cmd_vel_to_motor_vel)
     
     return ld

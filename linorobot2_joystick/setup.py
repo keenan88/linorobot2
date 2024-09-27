@@ -22,6 +22,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
+            'cmd_vel_to_motor_vel = linorobot2_joystick.cmd_vel_to_motor_vel:main',
         ],
     },
 )
