@@ -1,0 +1,41 @@
+services:
+
+  antdrone-isaacsim:
+    build:
+      context: .
+      dockerfile: ./docker/isaacsim/dockerfiles/isaacsim.dockerfile
+    container_name: antdrone-isaacsim
+    stdin_open: true
+    tty: true
+    environment:
+      - ACCEPT_EULA=Y
+      - PRIVACY_CONSENT=Y
+      - USE_SIM=True
+      - ROS_DOMAIN_ID=${MAIN_ROS_DOMAIN}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+    volumes:
+      - ./docker/isaacsim/fastdds.xml:/root/.ros/fastdds.xml:rw
+      - ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw
+      - ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw
+      - ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw
+      - ~/docker/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw
+      - ~/docker/isaac-sim/cache/computecache:/root/.nv/ComputeCache:rw
+      - ~/docker/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw
+      - ~/docker/isaac-sim/data:/root/.local/share/ov/data:rw
+      - ~/docker/isaac-sim/documents:/root/Documents:rw
+      - ./linorobot2_description:/isaac-sim/humble_ws/src/linorobot2_description
+      - ./simulation/isaacsim:/isaac-sim/humble_ws/src/antworker_isaacsim_world:rw
+      - ./docker/isaacsim/entry_scripts/isaacsim_entrypoint.sh:/isaacsim_entrypoint.sh:rwx
+    restart: "no"
+    # entrypoint: ""
+    entrypoint: /isaacsim_entrypoint.sh
+    # command: sleep infinity
+    network_mode: host
+
+
+

@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<robot name="rails">
+  <link name="rail1">
+
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="30 0.05 0.05"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="30 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="588"/>
+    </inertial>
+
+  </link>
+
+  <link name="rail2">
+
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="30 0.05 0.05"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="30 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="588"/>
+    </inertial>
+  </link>
+
+  <joint name="rails_joint" type="fixed">
+    <parent link="rail1"/>
+    <child link="rail2"/>
+    <origin rpy="0 0 0" xyz="0 0.6 0"/>
+  </joint>
+
+  
+
+
+
+</robot>

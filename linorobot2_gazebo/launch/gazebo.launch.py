@@ -74,36 +74,36 @@ def generate_launch_description():
         #     output='screen'
         # ),
 
-        ExecuteProcess(
-            cmd=['gzserver', '--verbose', '-s', 'libgazebo_ros_factory.so', '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
-            output='screen'
-        ),
+        # ExecuteProcess(
+        #     cmd=['gzserver', '--verbose', '-s', 'libgazebo_ros_factory.so', '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
+        #     output='screen'
+        # ),
 
         # ExecuteProcess(
         #     cmd=['gzclient'],
         #     output='screen'
         # ),
 
-        Node(
-            package='gazebo_ros',
-            executable='spawn_entity.py',
-            name='urdf_spawner',
-            output='screen',
-            arguments=[
-                '-topic', 'robot_description', 
-                '-entity', 'linorobot2', 
-                '-x', LaunchConfiguration('spawn_x'),
-                '-y', LaunchConfiguration('spawn_y'),
-                '-z', LaunchConfiguration('spawn_z'),
-                '-Y', LaunchConfiguration('spawn_yaw'),
-            ]
-        ),
+        # Node(
+        #     package='gazebo_ros',
+        #     executable='spawn_entity.py',
+        #     name='urdf_spawner',
+        #     output='screen',
+        #     arguments=[
+        #         '-topic', 'robot_description', 
+        #         '-entity', 'linorobot2', 
+        #         '-x', LaunchConfiguration('spawn_x'),
+        #         '-y', LaunchConfiguration('spawn_y'),
+        #         '-z', LaunchConfiguration('spawn_z'),
+        #         '-Y', LaunchConfiguration('spawn_yaw'),
+        #     ]
+        # ),
 
-        Node(
-            package='linorobot2_gazebo',
-            executable='command_timeout.py',
-            name='command_timeout'
-        ),
+        # Node(
+        #     package='linorobot2_gazebo',
+        #     executable='command_timeout.py',
+        #     name='command_timeout'
+        # ),
 
         Node(
             package='robot_localization',

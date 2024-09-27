@@ -31,17 +31,6 @@
       </inertial>
     </link>
 
-    <gazebo reference="base_link">  
-      <visual>  
-        <material>
-          <ambient>0.8392 0.6314 0.0 1.0</ambient>  
-          <diffuse>0.8392 0.6314 0.0 1.0</diffuse>  
-          <specular>0.99 0.99 0.99 1.0</specular>  
-          <emissive>0.0 0.0 0.0 0.0</emissive>  
-        </material>
-      </visual> 
-    </gazebo>
-
     <joint name="base_to_footprint" type="fixed">
       <parent link="base_footprint"/>
       <child link="base_link"/>

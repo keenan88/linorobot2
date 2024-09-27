@@ -5,10 +5,10 @@
   <xacro:include filename="$(find linorobot2_description)/urdf/mech/base.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/mech/mecanum_wheel_left.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/mech/mecanum_wheel_right.urdf.xacro" />
-  <xacro:include filename="$(find linorobot2_description)/urdf/sensors/imu.urdf.xacro" />
+  <!-- <xacro:include filename="$(find linorobot2_description)/urdf/sensors/imu.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/sensors/generic_laser.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/sensors/depth_sensor.urdf.xacro" />
-  <xacro:include filename="$(find linorobot2_description)/urdf/controllers/omni_drive.urdf.xacro" />
+  <xacro:include filename="$(find linorobot2_description)/urdf/controllers/omni_drive.urdf.xacro" /> -->
 
   <xacro:base 
     length="${base_length}" 
@@ -30,7 +30,7 @@
     mass="${wheel_mass}"
   />
 
-  <xacro:mecanum_wheel_right
+  <!-- <xacro:mecanum_wheel_right
     side="right"
     end="front"
     radius="${wheel_radius}" 
@@ -39,11 +39,11 @@
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  />
+  /> -->
 
   <!-- Back wheels mechanum style swapped (left mecanum wheel goes on right side of robot, and vice versa) -->
 
-  <xacro:mecanum_wheel_right 
+  <!-- <xacro:mecanum_wheel_right 
     side="left"
     end="rear"
     radius="${wheel_radius}" 
@@ -64,17 +64,5 @@
     pos_y="${-wheel_pos_y}" 
     pos_z="${wheel_pos_z}" 
     mass="${wheel_mass}"
-  />
-
-  <xacro:imu/>
-  
-  <xacro:generic_laser>
-    <xacro:insert_block name="laser_pose" />
-  </xacro:generic_laser>
-  
-  <xacro:depth_sensor>
-    <xacro:insert_block name="depth_sensor_pose" />
-  </xacro:depth_sensor>
-
-  <xacro:omni_drive_controller/>
+  /> -->
 </robot>

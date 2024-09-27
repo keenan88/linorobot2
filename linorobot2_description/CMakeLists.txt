@@ -9,24 +9,24 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(DIRECTORY mecanum_wheel_left/urdf/
-  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_left/urdf/
-  FILES_MATCHING PATTERN "*.urdf"
-)
+# install(DIRECTORY mecanum_wheel_left/urdf/
+#   DESTINATION share/${PROJECT_NAME}/mecanum_wheel_left/urdf/
+#   FILES_MATCHING PATTERN "*.urdf"
+# )
 
-install(DIRECTORY mecanum_wheel_left/meshes
-  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_left/
+install(DIRECTORY meshes/mecanum_wheel_left/
+  DESTINATION share/${PROJECT_NAME}/meshes/mecanum_wheel_left/
   FILES_MATCHING PATTERN "*.STL"
 )
 
-install(DIRECTORY mecanum_wheel_right/urdf/
-  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/urdf/
-  FILES_MATCHING PATTERN "*.urdf"
-)
+# install(DIRECTORY mecanum_wheel_right/urdf/
+#   DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/urdf/
+#   FILES_MATCHING PATTERN "*.urdf"
+# )
 
-install(DIRECTORY mecanum_wheel_right/meshes
-  DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/
-  FILES_MATCHING PATTERN "*.STL"
-)
+# install(DIRECTORY mecanum_wheel_right/meshes
+#   DESTINATION share/${PROJECT_NAME}/mecanum_wheel_right/
+#   FILES_MATCHING PATTERN "*.STL"
+# )
 
 ament_package()
