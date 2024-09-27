@@ -24,10 +24,10 @@ class MecanumRobotController(Node):
         )
 
         self.wheel_names = [
-            'base_link_to_front_left_base_link', 
-            'base_link_to_front_right_base_link', 
-            'base_link_to_rear_left_base_link', 
-            'base_link_to_rear_right_base_link'
+            'base_link_to_front_left_wheel', 
+            'base_link_to_front_right_wheel', 
+            'base_link_to_rear_left_wheel', 
+            'base_link_to_rear_right_wheel'
         ]
 
     def cmd_vel_callback(self, msg):

@@ -16,6 +16,9 @@
           <box size="0.05398 0.4953 0.08458"/> <!-- Box dimensions (x, y, z) -->
         </geometry>
       </collision>
+      <inertial>
+        <mass value="5"/>
+      </inertial>
     </link>
 
     <joint name="base_link_to_${end}_channel" type="fixed">

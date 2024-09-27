@@ -2,20 +2,13 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="mecanum_wheel_right" params="side end radius width pos_x pos_y pos_z mass">
     
-    <link name="${end}_${side}_base_link">
+    <link name="${end}_${side}_wheel">
       <inertial>
         <origin
           xyz="-1.48571881243385E-15 -6.7886631592007E-16 -0.0136209233699844"
           rpy="0 0 0" />
         <mass
-          value="0.0396439871820506" />
-        <inertia
-          ixx="3.76805204137311E-05"
-          ixy="1.66580607308995E-20"
-          ixz="3.71031510257902E-18"
-          iyy="3.76805204137311E-05"
-          iyz="1.63812405352096E-18"
-          izz="7.1054120055567E-05" />
+          value="0.25" />
       </inertial>
       <visual>
         <origin
@@ -42,10 +35,10 @@
       </collision>
     </link>
 
-    <joint name="base_link_to_${end}_${side}_base_link" type="continuous">
+    <joint name="base_link_to_${end}_${side}_wheel" type="continuous">
       <origin xyz="${pos_x} ${pos_y} 0"  rpy="0 0 0" />
       <parent link="base_link" />
-      <child link="${end}_${side}_base_link" />
+      <child link="${end}_${side}_wheel" />
       <axis xyz="0 1 0" />
     </joint>
 
@@ -56,14 +49,7 @@
           xyz="0.0136209233699844 6.56957443528167E-16 -1.48512976903392E-15"
           rpy="0 0 0" />
         <mass
-          value="0.0396439871820506" />
-        <inertia
-          ixx="7.1054120055567E-05"
-          ixy="1.62690471844664E-18"
-          ixz="-3.70636817664487E-18"
-          iyy="3.76805204137311E-05"
-          iyz="1.0973915143622E-20"
-          izz="3.76805204137311E-05" />
+          value="0.5" />
       </inertial>
       <visual>
         <origin
@@ -90,13 +76,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_drum"
+      name="${end}_${side}_wheel_to_drum"
       type="fixed">
       <origin
         xyz="0 0 0"
         rpy="1.5707963267949 0 -1.5707963267949" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_drum" />
       <axis
@@ -105,18 +91,7 @@
     <link
       name="${end}_${side}_plate1">
       <inertial>
-        <origin
-          xyz="-0.00283756867072453 8.89413056967719E-16 2.68096171575045E-15"
-          rpy="0 0 0" />
-        <mass
-          value="0.0253986639693881" />
-        <inertia
-          ixx="8.39719993847471E-05"
-          ixy="1.90079838330856E-18"
-          ixz="4.7133202434868E-18"
-          iyy="4.21627753206921E-05"
-          iyz="-1.48230765769502E-20"
-          izz="4.21627753206921E-05" />
+        <mass value="0.5" />
       </inertial>
       <visual>
         <origin
@@ -143,13 +118,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_plate1"
+      name="${end}_${side}_wheel_to_${end}_${side}_plate1"
       type="fixed">
       <origin
         xyz="0 0.0254 0"
         rpy="-1.60435101016735 0 1.5707963267949" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_plate1" />
       <axis
@@ -158,18 +133,7 @@
     <link
       name="${end}_${side}_plate2">
       <inertial>
-        <origin
-          xyz="-0.00283756867072453 -9.8249688244021E-17 5.89771118826868E-17"
-          rpy="0 0 0" />
-        <mass
-          value="0.0253986639693881" />
-        <inertia
-          ixx="8.39719993847471E-05"
-          ixy="-9.13983660820293E-21"
-          ixz="5.31128745957199E-22"
-          iyy="4.2162775320692E-05"
-          iyz="1.59877468794249E-20"
-          izz="4.21627753206921E-05" />
+        <mass value="0.5" />
       </inertial>
       <visual>
         <origin
@@ -196,13 +160,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_plate2"
+      name="${end}_${side}_wheel_to_${end}_${side}_plate2"
       type="fixed">
       <origin
         xyz="0 -0.0254 0"
         rpy="1.60435101016734 0 -1.5707963267949" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_plate2" />
       <axis
@@ -215,14 +179,7 @@
           xyz="5.82867087928207E-16 3.51108031537706E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848254" />
-        <inertia
-          ixx="8.99919949255961E-07"
-          ixy="0"
-          ixz="7.14684049245816E-22"
-          iyy="8.999199492559E-07"
-          iyz="-8.01670362461892E-19"
-          izz="3.31951561028667E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -249,13 +206,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller1"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller1"
       type="continuous">
       <origin
         xyz="0.0513105165568448 -0.0151129693198936 0.0444755356274741"
         rpy="-2.36778917303694 -0.95454994461673 -1.76416393166909" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller1" />
       <axis
@@ -268,14 +225,7 @@
           xyz="5.68989300120393E-16 -1.90819582357449E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848222" />
-        <inertia
-          ixx="8.99919949249302E-07"
-          ixy="-1.32348898008484E-22"
-          ixz="5.16160702233089E-22"
-          iyy="8.99919949249335E-07"
-          iyz="-8.02001234706914E-19"
-          izz="3.31951561015819E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -302,13 +252,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller2"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller2"
       type="continuous">
       <origin
         xyz="0.0287846592696844 -0.0151129693198959 0.0615002908075162"
         rpy="-1.77439072812908 -0.775855866169197 -2.22324127737972" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller2" />
       <axis
@@ -321,14 +271,8 @@
           xyz="5.82867087928207E-16 -4.16333634234434E-17 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848234" />
-        <inertia
-          ixx="8.99919949252429E-07"
-          ixy="-1.45583787809333E-22"
-          ixz="6.48509600241574E-22"
-          iyy="8.9991994925244E-07"
-          iyz="-8.05501863059238E-19"
-          izz="3.3195156102205E-07" />
+          value="0.025" />
+
       </inertial>
       <visual>
         <origin
@@ -355,13 +299,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller3"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller3"
       type="continuous">
       <origin
         xyz="0.00128167289437567 -0.0151129693198984 0.0678910869943366"
         rpy="-1.40103696999546 -0.48194994387805 -2.44694050545059" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller3" />
       <axis
@@ -374,14 +318,7 @@
           xyz="5.89805981832114E-16 -3.20576898360514E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848215" />
-        <inertia
-          ixx="8.99919949244641E-07"
-          ixy="0"
-          ixz="8.73502726855997E-22"
-          iyy="8.99919949244639E-07"
-          iyz="-8.01855650919104E-19"
-          izz="3.31951561007608E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -407,14 +344,15 @@
         </geometry>
       </collision>
     </link>
+
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller4"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller4"
       type="continuous">
       <origin
         xyz="-0.0264429263680024 -0.0151129693199014 0.062542897468674"
         rpy="-1.13469826196558 -0.147073422491862 -2.53094960861872" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller4" />
       <axis
@@ -427,14 +365,7 @@
           xyz="5.82867087928207E-16 -7.39686090156511E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848228" />
-        <inertia
-          ixx="8.99919949249555E-07"
-          ixy="-7.94093388050907E-23"
-          ixz="9.26442286059391E-22"
-          iyy="8.99919949249567E-07"
-          iyz="-8.01729919465996E-19"
-          izz="3.31951561016665E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -461,13 +392,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller5"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller5"
       type="continuous">
       <origin
         xyz="-0.0495953034349089 -0.0151129693199047 0.0463804727862918"
         rpy="-0.894575475762315 0.197031441859666 -2.52483292758441" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller5" />
       <axis
@@ -480,14 +411,7 @@
           xyz="5.89805981832114E-16 -9.20097331658098E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848248" />
-        <inertia
-          ixx="8.99919949253375E-07"
-          ixy="-1.05879118406788E-22"
-          ixz="8.73502726855997E-22"
-          iyy="8.99919949253382E-07"
-          iyz="-8.01961530037511E-19"
-          izz="3.31951561023958E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -514,13 +438,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller6"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller6"
       type="continuous">
       <origin
         xyz="-0.0641722019787319 -0.0151129693199074 0.0221984430057918"
         rpy="-0.618670381864381 0.528470873009444 -2.42501713902796" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller6" />
       <axis
@@ -533,14 +457,7 @@
           xyz="5.89805981832114E-16 -8.25034485174569E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848216" />
-        <inertia
-          ixx="8.99919949243988E-07"
-          ixy="-1.58818677610181E-22"
-          ixz="6.88214269644119E-22"
-          iyy="8.99919949243943E-07"
-          iyz="-8.01842416029303E-19"
-          izz="3.31951561006258E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -567,13 +484,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller7"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller7"
       type="continuous">
       <origin
         xyz="-0.0676531438142786 -0.0151129693199092 -0.0058218992369328"
         rpy="-0.22003525595071 0.81173834281584 -2.17291203984087" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller7" />
       <axis
@@ -586,14 +503,7 @@
           xyz="5.759281940243E-16 2.22044604925031E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848215" />
-        <inertia
-          ixx="8.99919949245218E-07"
-          ixy="-2.64697796016969E-23"
-          ixz="7.94093388050907E-22"
-          iyy="8.99919949245208E-07"
-          iyz="-8.02067409155918E-19"
-          izz="3.31951561008361E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -620,13 +530,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller8"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller8"
       type="continuous">
       <origin
         xyz="-0.0594362424748194 -0.0151129693199101 -0.0328355822112983"
         rpy="0.408043134594723 0.963708851734786 -1.67797755478808" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller8" />
       <axis
@@ -639,14 +549,7 @@
           xyz="5.759281940243E-16 -2.60208521396521E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848229" />
-        <inertia
-          ixx="8.9991994924954E-07"
-          ixy="-2.64697796016969E-23"
-          ixz="7.6762360844921E-22"
-          iyy="8.99919949249544E-07"
-          iyz="-8.01743154355797E-19"
-          izz="3.31951561016627E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -673,13 +576,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller9"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller9"
       type="continuous">
       <origin
         xyz="-0.0409422748501527 -0.015112969319909 -0.0541716947194296"
         rpy="1.1026415771303 0.886919106568413 -1.11464531078552" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller9" />
       <axis
@@ -692,14 +595,7 @@
           xyz="5.89805981832114E-16 -3.42087469462626E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848216" />
-        <inertia
-          ixx="8.99919949244339E-07"
-          ixy="-1.05879118406788E-22"
-          ixz="8.33798057453452E-22"
-          iyy="8.99919949244339E-07"
-          iyz="-8.05177608259117E-19"
-          izz="3.31951561007005E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -726,13 +622,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller10"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller10"
       type="continuous">
       <origin
         xyz="-0.0153690159550034 -0.0151129693199065 -0.0661410290761748"
         rpy="1.57421323203544 0.637163580624169 -0.783361608443036" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller10" />
       <axis
@@ -745,14 +641,7 @@
           xyz="5.89805981832114E-16 -5.03069808033274E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848235" />
-        <inertia
-          ixx="8.99919949251756E-07"
-          ixy="-1.7205356741103E-22"
-          ixz="7.41153828847513E-22"
-          iyy="8.99919949251703E-07"
-          iyz="-8.01815946249702E-19"
-          izz="3.3195156102064E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -779,13 +668,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller11"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller11"
       type="continuous">
       <origin
         xyz="0.0128616854218928 -0.0151129693199038 -0.0666739786332639"
         rpy="1.88109068595424 0.317129294370825 -0.639722033593165" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller11" />
       <axis
@@ -798,14 +687,7 @@
           xyz="5.759281940243E-16 -3.44169137633799E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848216" />
-        <inertia
-          ixx="8.99919949244308E-07"
-          ixy="-5.29395592033938E-23"
-          ixz="6.88214269644119E-22"
-          iyy="8.99919949244286E-07"
-          iyz="-8.02021087041615E-19"
-          izz="3.3195156100692E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -832,13 +714,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller12"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller12"
       type="continuous">
       <origin
         xyz="0.0388684845445997 -0.0151129693199006 -0.0556783915705813"
         rpy="2.12643201705665 -0.025160050703084 -0.60332516970669" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller12" />
       <axis
@@ -851,14 +733,7 @@
           xyz="5.89805981832114E-16 -3.36536354339501E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848228" />
-        <inertia
-          ixx="8.99919949249124E-07"
-          ixy="6.61744490042422E-23"
-          ixz="9.66146955461936E-22"
-          iyy="8.99919949249017E-07"
-          iyz="-8.01875503253805E-19"
-          izz="3.31951561015716E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -885,13 +760,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller13"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller13"
       type="continuous">
       <origin
         xyz="0.0581545695804492 -0.0151129693198971 -0.0350555047830372"
         rpy="2.37615666037905 -0.365916365141497 -0.652805521545524" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller13" />
       <axis
@@ -904,14 +779,7 @@
           xyz="5.82867087928207E-16 -2.38697950294409E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848209" />
-        <inertia
-          ixx="8.99919949243614E-07"
-          ixy="5.29395592033938E-23"
-          ixz="6.61744490042422E-22"
-          iyy="8.99919949243616E-07"
-          iyz="-8.05343044381628E-19"
-          izz="3.31951561005557E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -938,13 +806,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller14"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller14"
       type="continuous">
       <origin
         xyz="0.0673852012181607 -0.0151129693198943 -0.00837120274924246"
         rpy="2.69941973817462 -0.67973266586857 -0.817294146739146" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller14" />
       <axis
@@ -957,14 +825,7 @@
           xyz="5.759281940243E-16 -6.50868248186498E-15 -0.0215899999999933"
           rpy="0 0 0" />
         <mass
-          value="0.00499543658848241" />
-        <inertia
-          ixx="8.99919949251262E-07"
-          ixy="1.05879118406788E-22"
-          ixz="9.13207396258543E-22"
-          iyy="8.99919949251201E-07"
-          iyz="-8.01763006690498E-19"
-          izz="3.31951561019665E-07" />
+          value="0.025" />
       </inertial>
       <visual>
         <origin
@@ -991,13 +852,13 @@
       </collision>
     </link>
     <joint
-      name="${end}_${side}_base_link_to_${end}_${side}_roller15"
+      name="${end}_${side}_wheel_to_${end}_${side}_roller15"
       type="continuous">
       <origin
         xyz="0.0649643193899178 -0.0151129693198934 0.0197605562898849"
         rpy="-3.077965161563 -0.911914057233449 -1.18487158274901" />
       <parent
-        link="${end}_${side}_base_link" />
+        link="${end}_${side}_wheel" />
       <child
         link="${end}_${side}_roller15" />
       <axis
