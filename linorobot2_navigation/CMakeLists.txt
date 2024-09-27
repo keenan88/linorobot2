@@ -19,11 +19,4 @@ install(
   RENAME navigate_to_named_pose  # Remove .py from the installed executable name
 )
 
-install(
-  PROGRAMS
-    linorobot2_navigation/wheel_odometry.py  # Path to your Python script
-  DESTINATION lib/${PROJECT_NAME}  # Install location
-  RENAME wheel_odometry  # Remove .py from the installed executable name
-)
-
 ament_package()

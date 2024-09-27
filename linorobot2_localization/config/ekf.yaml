@@ -1,0 +1,24 @@
+/ekf_filter_node:
+  ros__parameters:
+
+    # General parameters
+    frequency: 30.0
+    sensor_timeout: 1.0
+    transform_time_offset: 0.0
+    use_sim_time: true  # Set to false if not using simulation time
+
+    # Input sources
+    odom0: "/odom/wheels"  # Wheel odometry topic
+    odom0_config: [true, true, true,  # X, Y, Yaw
+                   false, false, false,  # Linear velocities
+                   false, false, false,  # Angular velocities
+                   false, false, false,  # Quaternions
+                   false, false, false]  # No other sensor inputs
+
+    # Output parameters
+    publish_tf: true  # Publish the transform to the TF tree
+    base_frame_id: "base_link"  # Base frame of the robot
+    odom_frame_id: "odom"  # Frame where the odometry is published
+    global_frame_id: "map"  # Global frame (usually the map frame)
+
+    # Additional parameters can be set below as needed

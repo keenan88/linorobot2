@@ -43,80 +43,80 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument(
-            name='sim', 
-            default_value='false',
-            description='Enable use_sime_time to true'
-        ),
+    #     DeclareLaunchArgument(
+    #         name='sim', 
+    #         default_value='false',
+    #         description='Enable use_sime_time to true'
+    #     ),
 
-        DeclareLaunchArgument(
-            name='rviz', 
-            default_value='false',
-            description='Run rviz'
-        ),
+    #     DeclareLaunchArgument(
+    #         name='rviz', 
+    #         default_value='false',
+    #         description='Run rviz'
+    #     ),
 
-       DeclareLaunchArgument(
-            name='map', 
-            default_value=default_map_path,
-            description='Navigation map path'
-        ),
+    #    DeclareLaunchArgument(
+    #         name='map', 
+    #         default_value=default_map_path,
+    #         description='Navigation map path'
+    #     ),
 
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(nav2_launch_path),
-            condition=UnlessCondition(LaunchConfiguration("sim")),
-            launch_arguments={
-                'map': LaunchConfiguration("map"),
-                'use_sim_time': LaunchConfiguration("sim"),
-                'params_file': nav2_config_path
-            }.items()
-        ),
+    #     IncludeLaunchDescription(
+    #         PythonLaunchDescriptionSource(nav2_launch_path),
+    #         condition=UnlessCondition(LaunchConfiguration("sim")),
+    #         launch_arguments={
+    #             'map': LaunchConfiguration("map"),
+    #             'use_sim_time': LaunchConfiguration("sim"),
+    #             'params_file': nav2_config_path
+    #         }.items()
+    #     ),
 
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(nav2_launch_path),
-            condition=IfCondition(LaunchConfiguration("sim")),
-            launch_arguments={
-                'map': LaunchConfiguration("map"),
-                'use_sim_time': LaunchConfiguration("sim"),
-                'params_file': '/home/humble_ws/src/linorobot2_navigation/config/navigation_sim.yaml'
-            }.items()
-        ),
+    #     IncludeLaunchDescription(
+    #         PythonLaunchDescriptionSource(nav2_launch_path),
+    #         condition=IfCondition(LaunchConfiguration("sim")),
+    #         launch_arguments={
+    #             'map': LaunchConfiguration("map"),
+    #             'use_sim_time': LaunchConfiguration("sim"),
+    #             'params_file': '/home/humble_ws/src/linorobot2_navigation/config/navigation_sim.yaml'
+    #         }.items()
+    #     ),
 
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-            arguments=['-d', rviz_config_path],
-            condition=IfCondition(LaunchConfiguration("rviz")),
-            parameters=[{'use_sim_time': LaunchConfiguration("sim")}]
-        ),
+    #     Node(
+    #         package='rviz2',
+    #         executable='rviz2',
+    #         name='rviz2',
+    #         output='screen',
+    #         arguments=['-d', rviz_config_path],
+    #         condition=IfCondition(LaunchConfiguration("rviz")),
+    #         parameters=[{'use_sim_time': LaunchConfiguration("sim")}]
+    #     ),
 
-        Node(
-            package='nav2_map_server',
-            executable='map_server',
-            name='filter_mask_server',
-            parameters=[
-                '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
-            ]
-        ),
+    #     Node(
+    #         package='nav2_map_server',
+    #         executable='map_server',
+    #         name='filter_mask_server',
+    #         parameters=[
+    #             '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
+    #         ]
+    #     ),
 
-        Node(
-            package='nav2_map_server',
-            executable='costmap_filter_info_server',
-            name='costmap_filter_info_server',
-            parameters=[
-                '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
-            ]
-        ),
+    #     Node(
+    #         package='nav2_map_server',
+    #         executable='costmap_filter_info_server',
+    #         name='costmap_filter_info_server',
+    #         parameters=[
+    #             '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml'
+    #         ]
+    #     ),
 
-        Node(
-            package='nav2_lifecycle_manager',
-            executable='lifecycle_manager',
-            name='lifecycle_manager_costmap_filters',
-            parameters=[
-                '/home/humble_ws/src/linorobot2_navigation/config/lifecycle_manager_costmap_filters.yaml'
-            ]
-        ),
+    #     Node(
+    #         package='nav2_lifecycle_manager',
+    #         executable='lifecycle_manager',
+    #         name='lifecycle_manager_costmap_filters',
+    #         parameters=[
+    #             '/home/humble_ws/src/linorobot2_navigation/config/lifecycle_manager_costmap_filters.yaml'
+    #         ]
+    #     ),
 
         # Node(
         #     package='linorobot2_navigation',
@@ -127,14 +127,30 @@ def generate_launch_description():
         # )
 
         Node(
-            package='linorobot2_navigation',
+            package='linorobot2_localization',
             executable='wheel_odometry', 
             parameters=[
                 {
                     'use_sim_time' : True
                 }
             ]
-        )
+        ),
+
+        Node(
+            package='robot_localization',
+            executable='ekf_node',
+            name='ekf_filter_node',
+            output='screen',
+            parameters=[
+                '/home/humble_ws/src/linorobot2_localization/config/ekf.yaml',
+                {
+                'use_sim_time': True,
+                }
+            ],
+            remappings=[
+                # Add any necessary topic remappings here
+            ],
+        ),
 
 
     ])

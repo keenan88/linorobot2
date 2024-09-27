@@ -18,6 +18,7 @@ services:
       - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
       - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
       - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+      - ./linorobot2_localization:/home/humble_ws/src/linorobot2_localization
       - ./docker/linorobot2/entry_scripts/gz_entrypoint.sh:/gz_entrypoint.sh
     privileged: true
     working_dir: /home/humble_ws
