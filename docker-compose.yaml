@@ -1,31 +1,31 @@
 services:
 
-  # linorobot2-gz:
-  #   container_name: linorobot2-gz
-  #   build:
-  #     context: .
-  #     dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
-  #   stdin_open: true
-  #   tty: true
-  #   environment:
-  #     - DISPLAY=${DISPLAY}
-  #     - LINOROBOT2_BASE=${LINOROBOT2_BASE}
-  #   volumes:
-  #     - /tmp/.X11-unix:/tmp/.X11-unix
-  #     - ./linorobot2:/home/humble_ws/src/linorobot2
-  #     - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
-  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-  #     - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
-  #     - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
-  #     - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
-  #     - ./docker/linorobot2/entry_scripts/gz_entrypoint.sh:/gz_entrypoint.sh
-  #   privileged: true
-  #   working_dir: /home/humble_ws
-  #   # entrypoint: /gz_entrypoint.sh
-  #   command: sleep infinity
-  #   network_mode: host
-  #   ipc: host
-  #   pid: host
+  linorobot2-gz:
+    container_name: linorobot2-gz
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - LINOROBOT2_BASE=${LINOROBOT2_BASE}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./linorobot2:/home/humble_ws/src/linorobot2
+      - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
+      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+      - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
+      - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
+      - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+      - ./docker/linorobot2/entry_scripts/gz_entrypoint.sh:/gz_entrypoint.sh
+    privileged: true
+    working_dir: /home/humble_ws
+    # entrypoint: /gz_entrypoint.sh
+    command: sleep infinity
+    network_mode: host
+    ipc: host
+    pid: host
 
   # linorobot2-nav-slam:
   #   container_name: linorobot2-nav-slam

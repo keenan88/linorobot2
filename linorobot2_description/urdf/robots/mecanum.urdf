@@ -9,23 +9,23 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.445 0.2 0.129"/>
+        <box size="0.82067 0.3175 0.07772"/>
         <!-- <mesh filename="" scale="0.001 0.001 0.001"/> -->
       </geometry>
-      <material name="yellow">
-        <color rgba="0.8784 0.6627 0.6627 1.0"/>
+      <material name="gray_base">
+        <color rgba="0.8 0.8 0.83 1.0"/>
       </material>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.445 0.2 0.129"/>
+        <box size="0.82067 0.3175 0.07772"/>
       </geometry>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="10"/>
-      <inertia ixx="0.04720083333333334" ixy="0.0" ixz="0.0" iyy="0.17888833333333332" iyz="0.0" izz="0.19835416666666666"/>
+      <mass value="30"/>
+      <inertia ixx="0.267116621" ixy="0.0" ixz="0.0" iyy="1.69884911825" iyz="0.0" izz="1.93576374725"/>
     </inertial>
   </link>
   <gazebo reference="base_link">
@@ -41,7 +41,93 @@
   <joint name="base_to_footprint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0.1195"/>
+    <origin rpy="0 0 0" xyz="0 0 0.06972"/>
+  </joint>
+  <link name="front_channel">
+    <visual>
+      <geometry>
+        <box size="0.05398 0.4953 0.08458"/>
+        <!-- Box dimensions (x, y, z) -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.70 0.70 0.73 1.0"/>
+        <!-- Blue color -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05398 0.4953 0.08458"/>
+        <!-- Box dimensions (x, y, z) -->
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_to_front_channel" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_channel"/>
+    <origin rpy="0 0 0" xyz="0.383345 0 0"/>
+  </joint>
+  <link name="back_channel">
+    <visual>
+      <geometry>
+        <box size="0.05398 0.4953 0.08458"/>
+        <!-- Box dimensions (x, y, z) -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.70 0.70 0.73 1.0"/>
+        <!-- Blue color -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05398 0.4953 0.08458"/>
+        <!-- Box dimensions (x, y, z) -->
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_to_back_channel" type="fixed">
+    <parent link="base_link"/>
+    <child link="back_channel"/>
+    <origin rpy="0 0 0" xyz="-0.383345 0 0"/>
+  </joint>
+  <link name="left_channel">
+    <visual>
+      <geometry>
+        <box size="0.82067 0.02224 0.07772"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.70 0.70 0.73 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.82067 0.02224 0.07772"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_to_left_channel" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_channel"/>
+    <origin rpy="0 0 0" xyz="0 0.23653 0"/>
+  </joint>
+  <link name="right_channel">
+    <visual>
+      <geometry>
+        <box size="0.82067 0.02224 0.07772"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.70 0.70 0.73 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.82067 0.02224 0.07772"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_to_right_channel" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_channel"/>
+    <origin rpy="0 0 0" xyz="0 -0.23653 0"/>
   </joint>
   <link name="front_left_base_link">
     <inertial>
@@ -66,7 +152,7 @@
     </collision>
   </link>
   <joint name="base_link_to_front_left_base_link" type="continuous">
-    <origin rpy="0 0 0" xyz="0.12 0.1355 0"/>
+    <origin rpy="0 0 0" xyz="0.25857 0.19355 0"/>
     <parent link="base_link"/>
     <child link="front_left_base_link"/>
     <axis xyz="0 1 0"/>
@@ -570,7 +656,7 @@
     </collision>
   </link>
   <joint name="base_link_to_front_right_base_link" type="continuous">
-    <origin rpy="0 0 0" xyz="0.12 -0.1355 0"/>
+    <origin rpy="0 0 0" xyz="0.25857 -0.19355 0"/>
     <parent link="base_link"/>
     <child link="front_right_base_link"/>
     <axis xyz="0 1 0"/>
@@ -1103,7 +1189,7 @@
     </collision>
   </link>
   <joint name="base_link_to_rear_left_base_link" type="continuous">
-    <origin rpy="0 0 0" xyz="-0.12 0.1355 0"/>
+    <origin rpy="0 0 0" xyz="-0.25857 0.19355 0"/>
     <parent link="base_link"/>
     <child link="rear_left_base_link"/>
     <axis xyz="0 1 0"/>
@@ -1635,7 +1721,7 @@
     </collision>
   </link>
   <joint name="base_link_to_rear_right_base_link" type="continuous">
-    <origin rpy="0 0 0" xyz="-0.12 -0.1355 0"/>
+    <origin rpy="0 0 0" xyz="-0.25857 -0.19355 0"/>
     <parent link="base_link"/>
     <child link="rear_right_base_link"/>
     <axis xyz="0 1 0"/>

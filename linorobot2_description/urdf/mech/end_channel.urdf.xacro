@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="end_channel" params="end pos_x">
+    
+    <link name="${end}_channel">
+      <visual>
+        <geometry>
+          <box size="0.05398 0.4953 0.08458"/> <!-- Box dimensions (x, y, z) -->
+        </geometry>
+        <material name="gray">
+          <color rgba="0.70 0.70 0.73 1.0"/> <!-- Blue color -->
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05398 0.4953 0.08458"/> <!-- Box dimensions (x, y, z) -->
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="base_link_to_${end}_channel" type="fixed">
+      <parent link="base_link"/>
+      <child link="${end}_channel"/>
+
+      <origin xyz="${pos_x} 0 0" rpy="0 0 0" />
+
+    </joint>
+
+  </xacro:macro>
+</robot>

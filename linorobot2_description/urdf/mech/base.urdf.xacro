@@ -10,8 +10,8 @@
           <box size="${length} ${width} ${height}"/>
           <!-- <mesh filename="" scale="0.001 0.001 0.001"/> -->
         </geometry>
-        <material name="yellow">
-          <color rgba="0.8784 0.6627 0.6627 1.0"/>
+        <material name="gray_base">
+          <color rgba="0.8 0.8 0.83 1.0"/>
         </material>
       </visual>
       
