@@ -1,0 +1,20 @@
+/front_rs_pointcloud_cropper:
+  ros__parameters:
+    approximate_sync: false
+    keep_organized: false
+    max_queue_size: 3
+
+    # Ensure abs dist of x and z is not far enough to get really noisy realsense data from real realsenses
+    
+    max_x: 5.0 # Set max_x large enough to cover view in front of robot
+    max_y: 0.16 # Set max_y low enough to remove floor
+    max_z: 5.0
+    
+    min_x: -5.0
+    min_y: -0.5
+    min_z: 0.0
+    min_points_per_voxel: 2
+    negative: false
+    transient_local_indices: false
+    filter_limit_negative: false
+    use_indices: false
