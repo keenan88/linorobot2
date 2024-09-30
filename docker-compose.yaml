@@ -93,6 +93,22 @@ services:
     network_mode: host
     ipc: host
     pid: host
+
+  antdrone_depth_to_laserscan:
+    container_name: antdrone-depth-to-laserscan
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/depth_to_laserscan.Dockerfile
+    network_mode: host
+    volumes:
+      - ./antdrone_depth_to_laserscan:/home/humble_ws/src/antdrone_depth_to_laserscan
+    environment:
+      - DISPLAY=${DISPLAY}
+    command: sleep infinity
+    stdin_open: true
+    tty: true
+    ipc: host
+    pid: host
   
 
   # linorobot2-keyboard-teleop:
