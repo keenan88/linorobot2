@@ -3,12 +3,15 @@
     approximate_sync: false
     keep_organized: false
     max_queue_size: 3
-    max_x: 0.55
-    max_y: 0.2 # max_y needs to filter out the rails themselves
-    max_z: 1.0
+
+    # Ensure abs dist of x and z is not far enough to get really noisy realsense data from real realsenses
     
-    min_x: -0.55
-    min_y: -0.0 # Weird artifacts appearing above the robot off shop floor's wall, -0.3 is enough clearance to get robot chassis past any obstacles
+    max_x: 5.0 # Set max_x large enough to cover view in front of robot
+    max_y: 0.16 # Set max_y low enough to remove floor
+    max_z: 5.0
+    
+    min_x: -5.0
+    min_y: -0.5
     min_z: 0.0
     min_points_per_voxel: 2
     negative: false
