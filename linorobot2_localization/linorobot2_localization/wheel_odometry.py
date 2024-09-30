@@ -39,37 +39,30 @@ class MecanumStateEstimator(Node):
         
         self.odometry_publisher = self.create_publisher(Odometry, '/odom/wheels', 10)
         
-        # Last time for integration
         self.last_time = self.get_clock().now()
 
     def joint_state_callback(self, msg):
         # Assuming joint names are ordered: front_left, front_right, back_left, back_right
         wheels_rad_vels = np.array(msg.velocity[0:4])
-
         
-        # Filter out occasional Nan's and Inf's from Isaacsim joint state publisher
-        if not np.any(np.isnan(wheels_rad_vels)):
-            if not np.any(np.isinf(wheels_rad_vels)):
+        vxytheta = self.inverse_kinematics(wheels_rad_vels)
+        self.vx, self.vy, self.vtheta = vxytheta
 
-                # Compute velocities in the robot frame
-                vxytheta = self.inverse_kinematics(wheels_rad_vels)
-                self.vx, self.vy, self.vtheta = vxytheta
+        # Integrate velocities to update position
+        current_time = self.get_clock().now()
+        dt = (current_time - self.last_time).nanoseconds / 1e9  # Convert to seconds
+        self.last_time = current_time
 
-                # Integrate velocities to update position
-                current_time = self.get_clock().now()
-                dt = (current_time - self.last_time).nanoseconds / 1e9  # Convert to seconds
-                self.last_time = current_time
+        # Update the robot's position based on the velocities
+        delta_x = (self.vx * math.cos(self.theta) - self.vy * math.sin(self.theta)) * dt
+        delta_y = (self.vx * math.sin(self.theta) + self.vy * math.cos(self.theta)) * dt
+        delta_theta = self.vtheta * dt
 
-                # Update the robot's position based on the velocities
-                delta_x = (self.vx * math.cos(self.theta) - self.vy * math.sin(self.theta)) * dt
-                delta_y = (self.vx * math.sin(self.theta) + self.vy * math.cos(self.theta)) * dt
-                delta_theta = self.vtheta * dt
+        self.x += delta_x
+        self.y += delta_y
+        self.theta += delta_theta
 
-                self.x += delta_x
-                self.y += delta_y
-                self.theta += delta_theta
-
-                self.publish_odometry()
+        self.publish_odometry()
 
     def inverse_kinematics(self, wheels_rad_vels):
         # Kinematics source: https://www.researchgate.net/publication/308570348_Inverse_kinematic_implementation_of_four-wheels_mecanum_drive_mobile_robot_using_stepper_motors

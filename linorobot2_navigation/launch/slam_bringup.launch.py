@@ -34,7 +34,7 @@ def generate_launch_description():
 
     rviz_config_path = '/home/humble_ws/src/linorobot2_navigation/rviz/linorobot2_slam.rviz'
 
-    start_async_slam_toolbox_node = Node(
+    slam_toolbox = Node(
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
@@ -79,7 +79,7 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    # ld.add_action(start_async_slam_toolbox_node)
+    ld.add_action(slam_toolbox)
     # ld.add_action(navigation)
     ld.add_action(wheel_odometry)
     ld.add_action(wheel_unraveller)

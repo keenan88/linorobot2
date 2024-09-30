@@ -50,17 +50,6 @@ class WheelRotationUnraveller(Node):
         
             self.wheel_state_publisher.publish(wheel_state_unravelled)
 
-        else:
-
-            print(wheel_state.velocity[0:4])
-            print(wheel_state.position[0:4])
-            print(pos_has_NaN)
-            print(vel_has_NaN)
-            print(pos_has_Inf)
-            print(vel_has_Inf)
-            print(vel_unreasonably_high)
-            print()
-
 def main(args=None):
     rclpy.init(args=args)
     sim_wheel_rotation_unraveller = WheelRotationUnraveller()
