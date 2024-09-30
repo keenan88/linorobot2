@@ -33,8 +33,5 @@ def generate_launch_description():
         output='screen',
         arguments=['-d', '/home/humble_ws/src/antdrone_depth_to_laserscan/config/depth_to_laserscan.rviz'],
     )
-    
-    
-    ld.add_action(rviz_node)
 
     return ld

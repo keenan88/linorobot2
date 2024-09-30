@@ -10,17 +10,16 @@ class MecanumStateEstimator(Node):
     def __init__(self):
         super().__init__('mecanum_state_estimator')
 
-        self.wheel_radius = 0.0762  # meters
-        self.robot_width = 0.3871    # width between wheels
-        self.robot_length = 0.51714   # length between wheels
+        self.wheel_radius = 0.0762
+        self.robot_width = 0.3871
+        self.robot_length = 0.51714
         
-        # Initial robot state
-        self.x = 0.0  # X position in meters
-        self.y = 0.0  # Y position in meters
-        self.theta = 0.0  # Orientation in radians
-        self.vx = 0.0  # Linear velocity in X
-        self.vy = 0.0  # Linear velocity in Y
-        self.vtheta = 0.0  # Angular velocity
+        self.x = 0.0 
+        self.y = 0.0
+        self.theta = 0.0
+        self.vx = 0.0
+        self.vy = 0.0
+        self.vtheta = 0.0
 
         # Subscriber for joint state (wheel velocities)
         self.subscription = self.create_subscription(
@@ -30,11 +29,9 @@ class MecanumStateEstimator(Node):
             10
         )
         
-        # Publisher for odometry
         self.odometry_publisher = self.create_publisher(Odometry, '/odom/wheels', 10)
 
-        # Create a timer for publishing odometry
-        self.timer_period = 0.1  # seconds
+        self.timer_period = 0.1
         self.timer = self.create_timer(self.timer_period, self.publish_odometry)
         
         # Last time for integration
