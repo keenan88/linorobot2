@@ -10,8 +10,7 @@ def generate_launch_description():
 
     ld = launch.LaunchDescription()
 
-    # "left_rs", "right_rs"
-    for realsense_placement in ["front_rs", "rear_rs"]:
+    for realsense_placement in ["front_rs", "rear_rs", "left_rs", "right_rs"]:
 
         pointcloud_cropper = Node(
             package='pcl_ros',

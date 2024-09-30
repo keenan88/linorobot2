@@ -1,4 +1,4 @@
-/rear_rs_pointcloud_cropper:
+/left_rs_pointcloud_cropper:
   ros__parameters:
     approximate_sync: false
     keep_organized: false

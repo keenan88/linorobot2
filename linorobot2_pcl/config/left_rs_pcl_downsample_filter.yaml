@@ -1,0 +1,12 @@
+/left_rs_pointcloud_downsampler:
+  ros__parameters:
+    # Realsense d435 simple tech specs: https://www.intelrealsense.com/depth-camera-d435i/
+    filter_field_name: z
+    filter_limit_max: 5.0
+    filter_limit_min: 0.0
+    filter_limit_negative: false
+    leaf_size: 0.025
+    max_queue_size: 3
+    min_points_per_voxel: 2
+    transient_local_indices: false
+    use_indices: false

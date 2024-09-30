@@ -7,7 +7,7 @@
     # Ensure abs dist of x and z is not far enough to get really noisy realsense data from real realsenses
     
     max_x: 5.0 # Set max_x large enough to cover view in front of robot
-    max_y: 0.16 # Set max_y low enough to remove floor
+    max_y: 0.14 # Set max_y low enough to remove floor
     max_z: 5.0
     
     min_x: -5.0
