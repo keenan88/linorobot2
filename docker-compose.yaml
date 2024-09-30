@@ -83,12 +83,12 @@ services:
     environment:
       - use_sim=True
     volumes:
-      # - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
+      - ./docker/linorobot2/entry_scripts/pointcloud_entrypoint.sh:/pointcloud_entrypoint.sh:rw
       - ./linorobot2_pcl:/home/humble_ws/src/linorobot2_pcl:rw
       - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup:rw
       - ./perception_pcl:/home/humble_ws/src/perception_pcl
     privileged: true
-    # entrypoint: /joystick_entrypoint.sh
+    entrypoint: /pointcloud_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host

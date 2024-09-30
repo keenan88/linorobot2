@@ -26,7 +26,9 @@ RUN pip install setuptools==58.2.0
 WORKDIR /home/humble_ws
 
 COPY ./perception_pcl /home/humble_ws/src/perception_pcl
-RUN source /opt/ros/humble/setup.bash && colcon build --symlink-install --packages-select pcl_conversions pcl_ros perception_pcl
+RUN source /opt/ros/humble/setup.bash && \
+    colcon build --symlink-install --packages-select pcl_conversions pcl_ros perception_pcl && \
+    source install/setup.bash
 
 RUN echo "source /home/humble_ws/install/setup.bash" >> ~/.bashrc
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
