@@ -60,6 +60,14 @@ def generate_launch_description():
         ]
     )
 
+    wheel_unraveller = Node(
+        package='linorobot2_localization',
+        executable='wheel_unraveller',
+        parameters=[
+            {'use_sim_time': True}
+        ]
+    )
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -74,6 +82,7 @@ def generate_launch_description():
     # ld.add_action(start_async_slam_toolbox_node)
     # ld.add_action(navigation)
     ld.add_action(wheel_odometry)
+    ld.add_action(wheel_unraveller)
     ld.add_action(rviz)
 
     return ld

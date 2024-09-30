@@ -1,18 +1,20 @@
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
-from geometry_msgs.msg import Twist, Pose, Quaternion
 from sensor_msgs.msg import JointState
 import math
 import numpy as np
+from tf2_ros.static_transform_broadcaster import StaticTransformBroadcaster
+from geometry_msgs.msg import TransformStamped
+
 
 class MecanumStateEstimator(Node):
     def __init__(self):
         super().__init__('mecanum_state_estimator')
 
-        self.wheel_radius = 0.0762
-        self.robot_width = 0.3871
-        self.robot_length = 0.51714
+        self.wheel_radius_m = 0.0762
+        self.wheel_seperation_width_m = 0.3871
+        self.wheel_seperation_length_m = 0.51714
         
         self.x = 0.0 
         self.y = 0.0
@@ -28,11 +30,14 @@ class MecanumStateEstimator(Node):
             self.joint_state_callback,
             10
         )
+
+        self.tf_static_broadcaster = StaticTransformBroadcaster(self)
+
+        self.odom_base_footprint_tf = TransformStamped()
+        self.odom_base_footprint_tf.header.frame_id = 'odom'
+        self.odom_base_footprint_tf.child_frame_id = 'base_footprint'
         
         self.odometry_publisher = self.create_publisher(Odometry, '/odom/wheels', 10)
-
-        self.timer_period = 0.1
-        self.timer = self.create_timer(self.timer_period, self.publish_odometry)
         
         # Last time for integration
         self.last_time = self.get_clock().now()
@@ -64,72 +69,69 @@ class MecanumStateEstimator(Node):
                 self.y += delta_y
                 self.theta += delta_theta
 
+                self.publish_odometry()
+
     def inverse_kinematics(self, wheels_rad_vels):
-        """
-        Given wheel velocities [fl, fr, bl, br], compute vx, vy, vtheta in the robot frame.
-        """
+        # Kinematics source: https://www.researchgate.net/publication/308570348_Inverse_kinematic_implementation_of_four-wheels_mecanum_drive_mobile_robot_using_stepper_motors
         fl, fr, bl, br = wheels_rad_vels
 
-        # Mecanum inverse kinematics
-        l = self.robot_length
-        w = self.robot_width
-        r = self.wheel_radius
+        l = self.wheel_seperation_length_m
+        w = self.wheel_seperation_width_m
+        r = self.wheel_radius_m
 
-        # Wheel velocity matrix
         A = np.array([[1, -1, -(l+w)],
                       [1, 1, (l+w)],
                       [1, 1, -(l+w)],
                       [1, -1, (l+w)]])
         
-        # Robot velocity matrix
         B = np.array([fl, fr, bl, br])
         
         pseudo_inv = np.linalg.inv(np.matmul(A.T, A))
         pseudo_inv = np.matmul(pseudo_inv, A.T)
         vxytheta = np.matmul(pseudo_inv, B) * r
 
-        return vxytheta  # [vx, vy, vtheta]
+        return vxytheta
 
     def quaternion_from_euler_0_0(self, theta):
-        # Convert Euler angles (0, 0, theta) to quaternion
-        # theta is the yaw angle (rotation around the z-axis)
+        cy = np.cos(theta * 0.5)
+        sy = np.sin(theta * 0.5)
 
-        # Calculate the quaternion components
-        cy = np.cos(theta * 0.5)  # cos(theta/2)
-        sy = np.sin(theta * 0.5)  # sin(theta/2)
-
-        # Quaternion components (x, y, z, w)
-        q = np.array([0.0, 0.0, sy, cy])  # [x, y, z, w]
+        q = np.array([0.0, 0.0, sy, cy])
 
         return q
 
     def publish_odometry(self):
-        # Publish the odometry message
         odom_msg = Odometry()
         odom_msg.header.stamp = self.get_clock().now().to_msg()
         odom_msg.header.frame_id = 'odom'
-        odom_msg.child_frame_id = 'base_link'
+        odom_msg.child_frame_id = 'base_footprint'
 
-        # Set the position
         odom_msg.pose.pose.position.x = self.x
         odom_msg.pose.pose.position.y = self.y
         odom_msg.pose.pose.position.z = 0.0
 
-        # Set the orientation from theta
         quat = self.quaternion_from_euler_0_0(self.theta)
         odom_msg.pose.pose.orientation.x = quat[0]
         odom_msg.pose.pose.orientation.y = quat[1]
         odom_msg.pose.pose.orientation.z = quat[2]
         odom_msg.pose.pose.orientation.w = quat[3]
 
-
-        # Set the velocity
         odom_msg.twist.twist.linear.x = self.vx
         odom_msg.twist.twist.linear.y = self.vy
         odom_msg.twist.twist.angular.z = self.vtheta
 
-        # Publish the odometry message
         self.odometry_publisher.publish(odom_msg)
+
+        self.odom_base_footprint_tf.transform.translation.x = self.x
+        self.odom_base_footprint_tf.transform.translation.y = self.y
+
+        self.odom_base_footprint_tf.transform.rotation.x = quat[0]
+        self.odom_base_footprint_tf.transform.rotation.y = quat[1]
+        self.odom_base_footprint_tf.transform.rotation.z = quat[2]
+        self.odom_base_footprint_tf.transform.rotation.w = quat[3]
+
+        self.odom_base_footprint_tf.header.stamp = self.get_clock().now().to_msg()
+        self.tf_static_broadcaster.sendTransform(self.odom_base_footprint_tf)
 
 
 def main(args=None):

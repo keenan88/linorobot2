@@ -140,6 +140,8 @@ Visualization Manager:
           Value: false
         left_rs_depth_optical_frame:
           Value: false
+        odom:
+          Value: true
         rear_left_drum:
           Value: false
         rear_left_plate1:
@@ -388,6 +390,8 @@ Visualization Manager:
               {}
             right_rs_depth_optical_frame:
               {}
+        odom:
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -664,7 +668,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 117; 135; 133
-    Fixed Frame: base_link
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -716,11 +720,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 108.95719146728516
+      Scale: 338.404541015625
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.649431586265564
-      Y: -0.27200624346733093
+      X: -0.03438630700111389
+      Y: -0.03953574597835541
     Saved: ~
 Window Geometry:
   Displays:

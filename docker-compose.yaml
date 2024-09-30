@@ -41,8 +41,8 @@ services:
       - LINOROBOT2_BASE=${LINOROBOT2_BASE}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./linorobot2:/home/humble_ws/src/linorobot2
-      - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
+      # - ./linorobot2:/home/humble_ws/src/linorobot2
+      # - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
       # - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
       # - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
       # - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo

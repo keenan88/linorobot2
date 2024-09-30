@@ -35,11 +35,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 RUN pip3 install -U trimesh
 
-COPY linorobot2 /home/humble_ws/src/linorobot2
-COPY linorobot2_base /home/humble_ws/src/linorobot2_base
 COPY linorobot2_bringup /home/humble_ws/src/linorobot2_bringup
-COPY linorobot2_description /home/humble_ws/src/linorobot2_description
-COPY linorobot2_gazebo /home/humble_ws/src/linorobot2_gazebo
 COPY linorobot2_navigation /home/humble_ws/src/linorobot2_navigation
 
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
