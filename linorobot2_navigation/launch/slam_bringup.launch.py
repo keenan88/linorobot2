@@ -16,18 +16,17 @@ def generate_launch_description():
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
+        namespace = 'nav2',
         parameters=[
             slam_config_path,
             {'use_sim_time': True}
-        ]
+        ],
+        remappings=[("/map", "/nav2/map")],
     )
 
     navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(navigation_launch_path),
     )
-
-    
-
     
 
     rviz = Node(

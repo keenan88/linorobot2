@@ -39,30 +39,42 @@ class MecanumStateEstimator(Node):
         
         self.odometry_publisher = self.create_publisher(Odometry, '/nav2/odom', 10)
         
-        self.last_time = self.get_clock().now()
+        self.last_time = -1
+        self.last_time_set = False
 
     def joint_state_callback(self, msg):
-        # Assuming joint names are ordered: front_left, front_right, back_left, back_right
-        wheels_rad_vels = np.array(msg.velocity[0:4])
-        
-        vxytheta = self.inverse_kinematics(wheels_rad_vels)
-        self.vx, self.vy, self.vtheta = vxytheta
+        if not self.last_time_set:
+            self.last_time = self.get_clock().now()
+            self.last_time_set = True
+            self.x = 0.0 
+            self.y = 0.0
+            self.theta = 0.0
+            self.vx = 0.0
+            self.vy = 0.0
+            self.vtheta = 0.0
+        else:
+            # Assuming joint names are ordered: front_left, front_right, back_left, back_right
+            wheels_rad_vels = np.array(msg.velocity[0:4])
+            
+            vxytheta = self.inverse_kinematics(wheels_rad_vels)
+            self.vx, self.vy, self.vtheta = vxytheta
 
-        # Integrate velocities to update position
-        current_time = self.get_clock().now()
-        dt = (current_time - self.last_time).nanoseconds / 1e9  # Convert to seconds
-        self.last_time = current_time
+            # Integrate velocities to update position
+            current_time = self.get_clock().now()
+            dt = (current_time - self.last_time).nanoseconds / 1e9  # Convert to seconds
+            print(dt)
+            self.last_time = current_time
 
-        # Update the robot's position based on the velocities
-        delta_x = (self.vx * math.cos(self.theta) - self.vy * math.sin(self.theta)) * dt
-        delta_y = (self.vx * math.sin(self.theta) + self.vy * math.cos(self.theta)) * dt
-        delta_theta = self.vtheta * dt
+            # Update the robot's position based on the velocities
+            delta_x = (self.vx * math.cos(self.theta) - self.vy * math.sin(self.theta)) * dt
+            delta_y = (self.vx * math.sin(self.theta) + self.vy * math.cos(self.theta)) * dt
+            delta_theta = self.vtheta * dt
 
-        self.x += delta_x
-        self.y += delta_y
-        self.theta += delta_theta
+            self.x += delta_x
+            self.y += delta_y
+            self.theta += delta_theta
 
-        self.publish_odometry()
+            self.publish_odometry()
 
     def inverse_kinematics(self, wheels_rad_vels):
         # Kinematics source: https://www.researchgate.net/publication/308570348_Inverse_kinematic_implementation_of_four-wheels_mecanum_drive_mobile_robot_using_stepper_motors
@@ -81,7 +93,7 @@ class MecanumStateEstimator(Node):
         
         pseudo_inv = np.linalg.inv(np.matmul(A.T, A))
         pseudo_inv = np.matmul(pseudo_inv, A.T)
-        vxytheta = np.matmul(pseudo_inv, B) * r
+        vxytheta = 2 * np.matmul(pseudo_inv, B) * r
 
         return vxytheta
 
@@ -126,12 +138,11 @@ class MecanumStateEstimator(Node):
         self.odom_base_footprint_tf.header.stamp = self.get_clock().now().to_msg()
         self.tf_static_broadcaster.sendTransform(self.odom_base_footprint_tf)
 
-
-        asdf = TransformStamped()
-        asdf.header.frame_id = 'map'
-        asdf.child_frame_id = 'odom'
-        asdf.header.stamp = self.get_clock().now().to_msg()
-        self.tf_static_broadcaster.sendTransform(asdf)
+        # asdf = TransformStamped()
+        # asdf.header.frame_id = 'map'
+        # asdf.child_frame_id = 'odom'
+        # asdf.header.stamp = self.get_clock().now().to_msg()
+        # self.tf_static_broadcaster.sendTransform(asdf)
 
 
 

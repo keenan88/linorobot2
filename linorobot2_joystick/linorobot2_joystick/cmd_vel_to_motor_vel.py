@@ -40,7 +40,7 @@ class MecanumRobotController(Node):
     def cmd_vel_callback(self, msg):
         linear_x = msg.linear.x
         linear_y = msg.linear.y
-        angular_z = msg.angular.z
+        angular_z = 5 / 3 * msg.angular.z
 
         v_fl = linear_x - linear_y - (angular_z * 0.5)  # Front Left
         v_fr = linear_x + linear_y + (angular_z * 0.5)  # Front Right

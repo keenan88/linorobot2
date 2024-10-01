@@ -14,7 +14,7 @@
 /nav2/global_costmap:
   global_costmap:
     ros__parameters:
-      footprint_padding: 0.2
+      footprint_padding: 0.15
       footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
 
       update_frequency: 5.0
