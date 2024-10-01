@@ -9,7 +9,7 @@ def generate_launch_description():
     ld = launch.LaunchDescription()
 
 
-    for realsense_placement in ['front_rs', 'rear_rs', 'left_rs', 'right_rs']:
+    for realsense_placement in ['front_rs', 'left_rs', 'right_rs']:
 
         depth_to_scan = Node(
             package='pointcloud_to_laserscan',
@@ -25,6 +25,34 @@ def generate_launch_description():
         )
 
         ld.add_action(depth_to_scan)
+
+    realsense_placement = 'rear_rs'
+
+    depth_to_scan_rear_rs_left_side = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        name = realsense_placement + '_pointcloud_to_laserscan',
+        remappings=[
+            ('/cloud_in', '/' + realsense_placement + '/pointcloud_downsampled'),
+            ('/scan', '/' + realsense_placement + '_left/scan')
+        ],
+        parameters = [
+            '/home/humble_ws/src/antdrone_depth_to_laserscan/config/' + realsense_placement + '_pcl_to_laserscan_left.yaml'
+        ]
+    )
+    
+    depth_to_scan_rear_rs_right_side = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        name = realsense_placement + '_pointcloud_to_laserscan',
+        remappings=[
+            ('/cloud_in', '/' + realsense_placement + '/pointcloud_downsampled'),
+            ('/scan', '/' + realsense_placement + '_right/scan')
+        ],
+        parameters = [
+            '/home/humble_ws/src/antdrone_depth_to_laserscan/config/' + realsense_placement + '_pcl_to_laserscan_right.yaml'
+        ]
+    )
 
     scan_merger = Node(
         package='antdrone_depth_to_laserscan',
@@ -42,6 +70,10 @@ def generate_launch_description():
         arguments=['-d', '/home/humble_ws/src/antdrone_depth_to_laserscan/config/depth_to_laserscan.rviz'],
     )
 
-    ld.add_action(scan_merger)
+    ld.add_action(depth_to_scan_rear_rs_left_side)
+    ld.add_action(depth_to_scan_rear_rs_right_side)
+    ld.add_action(rviz_node)
+
+    # ld.add_action(scan_merger)
 
     return ld

@@ -1,8 +1,8 @@
 /right_rs_pointcloud_to_laserscan:
   ros__parameters:
     angle_increment: 0.0017453292519943295
-    angle_max: 3.141592653589793
-    angle_min: -3.141592653589793
+    angle_max: -0.785
+    angle_min: -2.355
     inf_epsilon: 1.0
     max_height: 1.5
     min_height: 0.0
@@ -13,4 +13,4 @@
     target_frame: 'base_link' # Transforming to target frame base_link puts scan in correct frame. Keeping it in original frame gets really messed up. Not sure why.
     transform_tolerance: 1.0
     use_inf: true
-    use_sim_time: false
+    use_sim_time: true
