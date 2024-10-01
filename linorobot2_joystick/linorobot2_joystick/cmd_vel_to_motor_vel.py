@@ -17,6 +17,13 @@ class MecanumRobotController(Node):
             10
         )
 
+        self.cmd_vel_subscriber = self.create_subscription(
+            Twist,
+            '/nav2/cmd_vel',
+            self.cmd_vel_callback,
+            10
+        )
+
         self.joint_state_publisher = self.create_publisher(
             JointState,
             'wheel_joints_command',

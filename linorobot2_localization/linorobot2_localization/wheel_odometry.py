@@ -127,6 +127,14 @@ class MecanumStateEstimator(Node):
         self.tf_static_broadcaster.sendTransform(self.odom_base_footprint_tf)
 
 
+        asdf = TransformStamped()
+        asdf.header.frame_id = 'map'
+        asdf.child_frame_id = 'odom'
+        asdf.header.stamp = self.get_clock().now().to_msg()
+        self.tf_static_broadcaster.sendTransform(asdf)
+
+
+
 def main(args=None):
     rclpy.init(args=args)
     mecanum_state_estimator = MecanumStateEstimator()

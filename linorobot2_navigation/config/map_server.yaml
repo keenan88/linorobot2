@@ -1,0 +1,7 @@
+/nav2/map_server:
+  ros__parameters:
+    /bond_disable_heartbeat_timeout: true
+    frame_id: map
+    topic_name: map
+    use_sim_time: false
+    yaml_filename: /home/humble_ws/src/linorobot2_navigation/maps/playground.yaml

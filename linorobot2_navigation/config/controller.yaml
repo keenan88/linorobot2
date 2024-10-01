@@ -1,0 +1,134 @@
+/nav2/controller_server:
+  ros__parameters:
+    controller_frequency: 20.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.0
+    min_theta_velocity_threshold: 0.001
+    progress_checker_plugins: ["progress_checker"] # progress_checker_plugin: "progress_checker" For Humble and older
+    goal_checker_plugins: ["goal_checker"]
+    controller_plugins: ["FollowPath"]
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.15 # Minimum distance robot must have traversed to succeed progress check.
+      movement_time_allowance: 2.0 # After x seconds, action server checks if required_movement_radius metres have been traversed toward goal
+    goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.05
+      yaw_goal_tolerance: 0.25
+      stateful: False
+    FollowPath:
+      plugin: "dwb_core::DWBLocalPlanner"
+      debug_trajectory_details: True
+      min_vel_x: -0.25 # min_vel_x is NOT absolute, backwards driving counts as negative velocity
+      max_vel_x: 0.25
+      min_vel_y: -0.25
+      max_vel_y: 0.25
+      min_speed_xy: 0.2
+      max_speed_xy: 0.25
+      max_vel_theta: 0.25
+      min_speed_theta: -0.25
+      acc_lim_x: 0.25
+      decel_lim_x: -0.25
+      acc_lim_y: 0.25
+      decel_lim_y: -0.25
+      acc_lim_theta: 0.25
+      decel_lim_theta: -0.25
+      vx_samples: 15
+      vy_samples: 15
+      vtheta_samples: 15
+
+      # Standard Trajectory Generator param docs: https://docs.nav2.org/configuration/packages/dwb-plugins/standard_traj_generator.html?highlight=sim_time
+      discretize_by_time: false
+      linear_granularity: 0.25
+      angular_granularity: 0.0
+
+      transform_tolerance: 0.2
+      xy_goal_tolerance: 0.05
+      trans_stopped_velocity: 0.25
+      short_circuit_trajectory_evaluation: True
+      stateful: True
+      publish_cost_grid_pc: True
+      critics: ["GoalDistCritic", "GoalAlign", "ObstacleFootprintCritic", "OscillationCritic"] 
+      GoalAlign.scale: 1.0 # GoalAign critic SHOULD be irrelevant, since all evaluated trajectories should just be perfectly straight since only x velocity is allowed in the trajectories
+      GoalAlign.forward_point_distance: 0.15
+
+      ObstacleFootprintCritic.scale: 10.0
+      ObstacleFootprintCritic.sum_scores: False
+
+      GoalDistCritic.scale: 1.0
+
+      OscillationCritic.oscillation_reset_dist: 0.2
+      OscillationCritic.x_only_threshold: 0.2
+      OscillationCritic.scale: 2.0
+      OscillationCritic.oscillation_reset_time: 3.5
+      
+
+/nav2/local_costmap/local_costmap:
+  ros__parameters:
+    footprint_padding: 0.1
+    footprint: "[ [0.7, 0.4], [-0.7, 0.4], [-0.7, -0.4], [0.7, -0.4] ]"
+    
+    update_frequency: 10.0
+    publish_frequency: 10.0
+    global_frame: map
+    robot_base_frame: base_link
+    rolling_window: true
+    resolution: 0.02
+
+    plugins: ["static_layer", "voxel_layer", "inflation_layer"]
+
+    static_layer:
+      plugin: "nav2_costmap_2d::StaticLayer"
+      map_subscribe_transient_local: True
+      enabled: true
+      subscribe_to_updates: true
+      transform_tolerance: 0.1
+
+    voxel_layer:
+      plugin: "nav2_costmap_2d::VoxelLayer"
+      enabled: True
+      footprint_clearing_enabled: true
+      max_obstacle_height: 2.0
+      publish_voxel_map: True
+      origin_z: 0.0
+      z_resolution: 0.05
+      z_voxels: 16
+      max_obstacle_height: 2.0
+      unknown_threshold: 15
+      mark_threshold: 0
+      observation_sources: pointcloud_front pointcloud_rear
+      combination_method: 1
+
+      pointcloud_front:  # no frame set, uses frame from message
+        topic: /front_rs/pointcloud_downsampled
+        max_obstacle_height: 2.0
+        min_obstacle_height: 0.15
+        obstacle_max_range: 2.5
+        obstacle_min_range: 0.0
+        raytrace_max_range: 3.0
+        raytrace_min_range: 0.0
+        clearing: True
+        marking: True
+        data_type: "PointCloud2"
+
+      pointcloud_rear:  # no frame set, uses frame from message
+        topic: /rear_rs/pointcloud_downsampled
+        max_obstacle_height: 2.0
+        min_obstacle_height: 0.15
+        obstacle_max_range: 2.5
+        obstacle_min_range: 0.0
+        raytrace_max_range: 3.0
+        raytrace_min_range: 0.0
+        clearing: True
+        marking: True
+        data_type: "PointCloud2"
+
+    inflation_layer:
+      plugin: "nav2_costmap_2d::InflationLayer"
+      enabled: true
+      inflation_radius: 0.1
+      cost_scaling_factor: 1.0
+      inflate_unknown: false
+      inflate_around_unknown: true
+
+

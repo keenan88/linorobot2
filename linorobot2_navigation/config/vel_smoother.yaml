@@ -1,0 +1,12 @@
+/nav2/velocity_smoother:
+  ros__parameters:
+    # Velocity smoother param docs: https://docs.nav2.org/configuration/packages/configuring-velocity-smoother.html?highlight=velocity%20smoother
+    smoothing_frequency: 20.0
+    scale_velocities: False
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.25, 0.0, 0.0] # max_velocity format is [v_x, v_y, v_th]
+    min_velocity: [-0.25, 0.0, 0.0] # min_velocity format is [v_x, v_y, v_th]
+    max_accel: [0.25, 0.0, 0.0] # max_accel format is [v_x, v_y, v_th]
+    max_decel: [-0.25, 0.0, 0.0] # max_decel format is [v_x, v_y, v_th]
+    deadband_velocity: [0.0, 0.0, 0.0] # deadband_velocity format is [v_x, v_y, v_th]
+    velocity_timeout: 1.0

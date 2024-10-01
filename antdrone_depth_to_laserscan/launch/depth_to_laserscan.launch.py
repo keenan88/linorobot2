@@ -74,6 +74,6 @@ def generate_launch_description():
     ld.add_action(depth_to_scan_rear_rs_right_side)
     # ld.add_action(rviz_node)
 
-    # ld.add_action(scan_merger)
+    ld.add_action(scan_merger)
 
     return ld
