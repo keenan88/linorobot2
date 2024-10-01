@@ -21,46 +21,59 @@ class LaserScanMerger(Node):
         self.subscriber_1 = self.create_subscription(
             LaserScan,
             '/front_rs/scan',  # Replace with your actual topic name
-            self.scan_callback_1,
+            self.record_front_scan,
             qos_best_effort
         )
         self.subscriber_2 = self.create_subscription(
             LaserScan,
-            'rear_rs/scan',  # Replace with your actual topic name
-            self.scan_callback_2,
+            'rear_rs/scan_left',  # Replace with your actual topic name
+            self.record_rear_left_scan,
             qos_best_effort
         )
+        
         self.subscriber_3 = self.create_subscription(
             LaserScan,
             '/left_rs/scan',  # Replace with your actual topic name
-            self.scan_callback_3,
+            self.record_left_scan,
             qos_best_effort
         )
+
         self.subscriber_4 = self.create_subscription(
             LaserScan,
             '/right_rs/scan',  # Replace with your actual topic name
-            self.scan_callback_4,
+            self.record_right_scan,
+            qos_best_effort
+        )
+
+        self.subscriber_5 = self.create_subscription(
+            LaserScan,
+            'rear_rs/scan_right',  # Replace with your actual topic name
+            self.record_rear_right_scan,
             qos_best_effort
         )
 
         self.publisher = self.create_publisher(LaserScan, 'scan', qos_best_effort)
 
-        self.scans = [None] * 4
+        self.scans = [None] * 5
 
-    def scan_callback_1(self, msg):
+    def record_front_scan(self, msg):
         self.scans[0] = msg
         self.merge_scans()
 
-    def scan_callback_2(self, msg):
+    def record_left_scan(self, msg):
         self.scans[1] = msg
         self.merge_scans()
 
-    def scan_callback_3(self, msg):
+    def record_rear_left_scan(self, msg):
         self.scans[2] = msg
         self.merge_scans()
 
-    def scan_callback_4(self, msg):
+    def record_rear_right_scan(self, msg):
         self.scans[3] = msg
+        self.merge_scans()
+
+    def record_right_scan(self, msg):
+        self.scans[4] = msg
         self.merge_scans()
 
     def merge_scans(self):
@@ -68,8 +81,9 @@ class LaserScanMerger(Node):
             merged_scan = LaserScan()
             merged_scan.header.stamp = self.get_clock().now().to_msg()
             merged_scan.header.frame_id = "base_link"
-            merged_scan.angle_min = min(scan.angle_min for scan in self.scans)
-            merged_scan.angle_max = max(scan.angle_max for scan in self.scans)
+            merged_scan.angle_min = -0.7850000262260437
+            merged_scan.angle_max = 5.49499997377
+
             merged_scan.angle_increment = min(scan.angle_increment for scan in self.scans)
             merged_scan.range_min = min(scan.range_min for scan in self.scans)
             merged_scan.range_max = max(scan.range_max for scan in self.scans)
@@ -78,7 +92,7 @@ class LaserScanMerger(Node):
             all_intensities = []
             for scan in self.scans:
                 all_ranges += scan.ranges
-                all_intensities += scan.intensities
+                #all_intensities += scan.intensities
                 # print(scan.ranges)
                 # for r, i in zip(scan.ranges, scan.intensities):
                 #     print(r, i)

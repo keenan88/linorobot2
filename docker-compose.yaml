@@ -106,7 +106,7 @@ services:
       - ./docker/linorobot2/entry_scripts/pcl_to_laserscan.sh:/pcl_to_laserscan.sh:rw
     environment:
       - DISPLAY=${DISPLAY}
-    # entrypoint: /pcl_to_laserscan.sh
+    entrypoint: /pcl_to_laserscan.sh
     command: sleep infinity
     stdin_open: true
     tty: true
