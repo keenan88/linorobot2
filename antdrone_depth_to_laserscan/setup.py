@@ -24,6 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'laser_scan_merger = antdrone_depth_to_laserscan.laser_scan_merger:main'
         ],
     },
 )

@@ -68,6 +68,8 @@ def generate_launch_description():
         ]
     )
 
+    
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -79,10 +81,11 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    ld.add_action(slam_toolbox)
+    # ld.add_action(slam_toolbox)
     # ld.add_action(navigation)
-    ld.add_action(wheel_odometry)
-    ld.add_action(wheel_unraveller)
+    # ld.add_action(wheel_odometry)
+    # ld.add_action(wheel_unraveller)
+    # ld.add_action(scan_merger)
     ld.add_action(rviz)
 
     return ld

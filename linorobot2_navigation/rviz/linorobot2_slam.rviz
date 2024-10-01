@@ -11,8 +11,8 @@ Panels:
         - /Left Scan1/Topic1
         - /Rear Scan1/Topic1
         - /Right Scan1/Topic1
-        - /LaserScan2
-        - /LaserScan2/Topic1
+        - /LaserScan1
+        - /LaserScan1/Topic1
       Splitter Ratio: 0.5
     Tree Height: 793
   - Class: rviz_common/Selection
@@ -142,8 +142,6 @@ Visualization Manager:
           Value: false
         left_rs_depth_optical_frame:
           Value: false
-        odom:
-          Value: true
         rear_left_drum:
           Value: false
         rear_left_plate1:
@@ -230,169 +228,168 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          base_footprint:
-            base_link:
-              back_channel:
+        base_footprint:
+          base_link:
+            back_channel:
+              {}
+            front_channel:
+              {}
+            front_left_wheel:
+              front_left_plate1:
                 {}
-              front_channel:
+              front_left_plate2:
                 {}
-              front_left_wheel:
-                front_left_plate1:
-                  {}
-                front_left_plate2:
-                  {}
-                front_left_roller1:
-                  {}
-                front_left_roller10:
-                  {}
-                front_left_roller11:
-                  {}
-                front_left_roller12:
-                  {}
-                front_left_roller13:
-                  {}
-                front_left_roller14:
-                  {}
-                front_left_roller15:
-                  {}
-                front_left_roller2:
-                  {}
-                front_left_roller3:
-                  {}
-                front_left_roller4:
-                  {}
-                front_left_roller5:
-                  {}
-                front_left_roller6:
-                  {}
-                front_left_roller7:
-                  {}
-                front_left_roller8:
-                  {}
-                front_left_roller9:
-                  {}
-              front_right_wheel:
-                front_right_drum:
-                  {}
-                front_right_plate1:
-                  {}
-                front_right_plate2:
-                  {}
-                front_right_roller1:
-                  {}
-                front_right_roller10:
-                  {}
-                front_right_roller11:
-                  {}
-                front_right_roller12:
-                  {}
-                front_right_roller13:
-                  {}
-                front_right_roller14:
-                  {}
-                front_right_roller15:
-                  {}
-                front_right_roller2:
-                  {}
-                front_right_roller3:
-                  {}
-                front_right_roller4:
-                  {}
-                front_right_roller5:
-                  {}
-                front_right_roller6:
-                  {}
-                front_right_roller7:
-                  {}
-                front_right_roller8:
-                  {}
-                front_right_roller9:
-                  {}
-              front_rs_depth_optical_frame:
+              front_left_roller1:
                 {}
-              left_channel:
+              front_left_roller10:
                 {}
-              left_rs_depth_optical_frame:
+              front_left_roller11:
                 {}
-              rear_left_wheel:
-                rear_left_drum:
-                  {}
-                rear_left_plate1:
-                  {}
-                rear_left_plate2:
-                  {}
-                rear_left_roller1:
-                  {}
-                rear_left_roller10:
-                  {}
-                rear_left_roller11:
-                  {}
-                rear_left_roller12:
-                  {}
-                rear_left_roller13:
-                  {}
-                rear_left_roller14:
-                  {}
-                rear_left_roller15:
-                  {}
-                rear_left_roller2:
-                  {}
-                rear_left_roller3:
-                  {}
-                rear_left_roller4:
-                  {}
-                rear_left_roller5:
-                  {}
-                rear_left_roller6:
-                  {}
-                rear_left_roller7:
-                  {}
-                rear_left_roller8:
-                  {}
-                rear_left_roller9:
-                  {}
-              rear_right_wheel:
-                rear_right_plate1:
-                  {}
-                rear_right_plate2:
-                  {}
-                rear_right_roller1:
-                  {}
-                rear_right_roller10:
-                  {}
-                rear_right_roller11:
-                  {}
-                rear_right_roller12:
-                  {}
-                rear_right_roller13:
-                  {}
-                rear_right_roller14:
-                  {}
-                rear_right_roller15:
-                  {}
-                rear_right_roller2:
-                  {}
-                rear_right_roller3:
-                  {}
-                rear_right_roller4:
-                  {}
-                rear_right_roller5:
-                  {}
-                rear_right_roller6:
-                  {}
-                rear_right_roller7:
-                  {}
-                rear_right_roller8:
-                  {}
-                rear_right_roller9:
-                  {}
-              rear_rs_depth_optical_frame:
+              front_left_roller12:
                 {}
-              right_channel:
+              front_left_roller13:
                 {}
-              right_rs_depth_optical_frame:
+              front_left_roller14:
                 {}
+              front_left_roller15:
+                {}
+              front_left_roller2:
+                {}
+              front_left_roller3:
+                {}
+              front_left_roller4:
+                {}
+              front_left_roller5:
+                {}
+              front_left_roller6:
+                {}
+              front_left_roller7:
+                {}
+              front_left_roller8:
+                {}
+              front_left_roller9:
+                {}
+            front_right_wheel:
+              front_right_drum:
+                {}
+              front_right_plate1:
+                {}
+              front_right_plate2:
+                {}
+              front_right_roller1:
+                {}
+              front_right_roller10:
+                {}
+              front_right_roller11:
+                {}
+              front_right_roller12:
+                {}
+              front_right_roller13:
+                {}
+              front_right_roller14:
+                {}
+              front_right_roller15:
+                {}
+              front_right_roller2:
+                {}
+              front_right_roller3:
+                {}
+              front_right_roller4:
+                {}
+              front_right_roller5:
+                {}
+              front_right_roller6:
+                {}
+              front_right_roller7:
+                {}
+              front_right_roller8:
+                {}
+              front_right_roller9:
+                {}
+            front_rs_depth_optical_frame:
+              {}
+            left_channel:
+              {}
+            left_rs_depth_optical_frame:
+              {}
+            rear_left_wheel:
+              rear_left_drum:
+                {}
+              rear_left_plate1:
+                {}
+              rear_left_plate2:
+                {}
+              rear_left_roller1:
+                {}
+              rear_left_roller10:
+                {}
+              rear_left_roller11:
+                {}
+              rear_left_roller12:
+                {}
+              rear_left_roller13:
+                {}
+              rear_left_roller14:
+                {}
+              rear_left_roller15:
+                {}
+              rear_left_roller2:
+                {}
+              rear_left_roller3:
+                {}
+              rear_left_roller4:
+                {}
+              rear_left_roller5:
+                {}
+              rear_left_roller6:
+                {}
+              rear_left_roller7:
+                {}
+              rear_left_roller8:
+                {}
+              rear_left_roller9:
+                {}
+            rear_right_wheel:
+              rear_right_plate1:
+                {}
+              rear_right_plate2:
+                {}
+              rear_right_roller1:
+                {}
+              rear_right_roller10:
+                {}
+              rear_right_roller11:
+                {}
+              rear_right_roller12:
+                {}
+              rear_right_roller13:
+                {}
+              rear_right_roller14:
+                {}
+              rear_right_roller15:
+                {}
+              rear_right_roller2:
+                {}
+              rear_right_roller3:
+                {}
+              rear_right_roller4:
+                {}
+              rear_right_roller5:
+                {}
+              rear_right_roller6:
+                {}
+              rear_right_roller7:
+                {}
+              rear_right_roller8:
+                {}
+              rear_right_roller9:
+                {}
+            rear_rs_depth_optical_frame:
+              {}
+            right_channel:
+              {}
+            right_rs_depth_optical_frame:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -441,40 +438,6 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /map_updates
       Use Timestamp: false
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10.232010841369629
-        Min Value: -10.241939544677734
-        Value: true
-      Axis: X
-      Channel Name: intensity
-      Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: AxisColor
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 0
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: LaserScan
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.10000000149011612
-      Style: Flat Squares
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /scan
-      Use Fixed Frame: true
-      Use rainbow: true
       Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
@@ -703,7 +666,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 117; 135; 133
-    Fixed Frame: odom
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -755,11 +718,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 72.08527374267578
+      Scale: 101.00067138671875
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.19605673849582672
-      Y: 0.47226178646087646
+      X: -0.14376521110534668
+      Y: 0.051229219883680344
     Saved: ~
 Window Geometry:
   Displays:

@@ -26,6 +26,14 @@ def generate_launch_description():
 
         ld.add_action(depth_to_scan)
 
+    scan_merger = Node(
+        package='antdrone_depth_to_laserscan',
+        executable='laser_scan_merger',
+        parameters=[
+            {'use_sim_time': True}
+        ]
+    )
+
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -33,5 +41,7 @@ def generate_launch_description():
         output='screen',
         arguments=['-d', '/home/humble_ws/src/antdrone_depth_to_laserscan/config/depth_to_laserscan.rviz'],
     )
+
+    ld.add_action(scan_merger)
 
     return ld

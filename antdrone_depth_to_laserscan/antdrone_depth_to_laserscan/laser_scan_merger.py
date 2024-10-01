@@ -4,6 +4,8 @@ from sensor_msgs.msg import LaserScan
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 import math
 
+
+# Assumes that all laser scan topics are updated fairly quickly
 class LaserScanMerger(Node):
     def __init__(self):
         super().__init__('laser_scan_merger')
@@ -41,10 +43,8 @@ class LaserScanMerger(Node):
             qos_best_effort
         )
 
-        # Publisher for the combined scan
         self.publisher = self.create_publisher(LaserScan, 'scan', qos_best_effort)
 
-        # Store laser scans
         self.scans = [None] * 4
 
     def scan_callback_1(self, msg):
@@ -74,14 +74,17 @@ class LaserScanMerger(Node):
             merged_scan.range_min = min(scan.range_min for scan in self.scans)
             merged_scan.range_max = max(scan.range_max for scan in self.scans)
 
-            # Merge the ranges and intensities
             all_ranges = []
             all_intensities = []
             for scan in self.scans:
-                for r, i in zip(scan.ranges, scan.intensities):
-                    if not math.isinf(r):
-                        all_ranges.append(r)
-                        all_intensities.append(i)
+                all_ranges += scan.ranges
+                all_intensities += scan.intensities
+                # print(scan.ranges)
+                # for r, i in zip(scan.ranges, scan.intensities):
+                #     print(r, i)
+                #     if not math.isinf(r):
+                #         all_ranges.append(r)
+                #         all_intensities.append(i)
 
             merged_scan.ranges = all_ranges
             merged_scan.intensities = all_intensities
