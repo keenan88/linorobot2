@@ -37,7 +37,7 @@ class MecanumStateEstimator(Node):
         self.odom_base_footprint_tf.header.frame_id = 'odom'
         self.odom_base_footprint_tf.child_frame_id = 'base_footprint'
         
-        self.odometry_publisher = self.create_publisher(Odometry, '/odom/wheels', 10)
+        self.odometry_publisher = self.create_publisher(Odometry, '/nav2/odom', 10)
         
         self.last_time = self.get_clock().now()
 
@@ -97,7 +97,7 @@ class MecanumStateEstimator(Node):
         odom_msg = Odometry()
         odom_msg.header.stamp = self.get_clock().now().to_msg()
         odom_msg.header.frame_id = 'odom'
-        odom_msg.child_frame_id = 'base_footprint'
+        odom_msg.child_frame_id = 'base_link'
 
         odom_msg.pose.pose.position.x = self.x
         odom_msg.pose.pose.position.y = self.y
