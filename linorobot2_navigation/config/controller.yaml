@@ -57,6 +57,9 @@
 
 /nav2/local_costmap/local_costmap:
   ros__parameters:
+
+    footprint_padding: 0.2
+    footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
     
     update_frequency: 10.0
     publish_frequency: 10.0
