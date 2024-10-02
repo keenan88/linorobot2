@@ -11,23 +11,27 @@ services:
       - DISPLAY=${DISPLAY}
       - SLAM_OR_NAV=${SLAM_OR_NAV}
       - LINOROBOT2_BASE=${LINOROBOT2_BASE}
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
-      # - ./linorobot2:/home/humble_ws/src/linorobot2
-      # - ./linorobot2_base:/home/humble_ws/src/linorobot2_base
-      # - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-      # - ./linorobot2_description:/home/humble_ws/src/linorobot2_description
-      # - ./linorobot2_gazebo:/home/humble_ws/src/linorobot2_gazebo
       - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
-      # - ./linorobot2_interfaces:/home/humble_ws/src/linorobot2_interfaces
       - ./linorobot2_localization:/home/humble_ws/src/linorobot2_localization
       - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
+      - /dev/dri/card0:/dev/dri/card0
     working_dir: /home/humble_ws
     # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host
     pid: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    runtime: nvidia
+    privileged: true
 
   linorobot2-joytick:
     container_name: linorobot2-joystick
@@ -40,11 +44,22 @@ services:
       - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
       - ./linorobot2_joystick:/home/humble_ws/src/linorobot2_joystick:rw
       - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+      - /dev/dri/card0:/dev/dri/card0
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
     privileged: true
     entrypoint: /joystick_entrypoint.sh
     network_mode: host
     ipc: host
     pid: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    runtime: nvidia
+    
 
   linorobot2-pcl:
     container_name: linorobot2-pcl
@@ -74,6 +89,7 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu]
+    runtime: nvidia
     
 
   antdrone_depth_to_laserscan:
@@ -85,6 +101,7 @@ services:
     volumes:
       - ./antdrone_depth_to_laserscan:/home/humble_ws/src/antdrone_depth_to_laserscan
       - ./docker/linorobot2/entry_scripts/pcl_to_laserscan.sh:/pcl_to_laserscan.sh:rw
+      - /dev/dri/card0:/dev/dri/card0
     environment:
       - DISPLAY=${DISPLAY}
       - NVIDIA_VISIBLE_DEVICES=all
@@ -100,6 +117,7 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu]
+    runtime: nvidia
   
 
   # linorobot2-keyboard-teleop:

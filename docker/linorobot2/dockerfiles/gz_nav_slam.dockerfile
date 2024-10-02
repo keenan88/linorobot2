@@ -38,7 +38,4 @@ RUN pip3 install -U trimesh
 COPY linorobot2_bringup /home/humble_ws/src/linorobot2_bringup
 COPY linorobot2_navigation /home/humble_ws/src/linorobot2_navigation
 
-ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
-
 RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
