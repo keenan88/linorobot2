@@ -132,6 +132,18 @@ def generate_launch_description():
         ]
     )
 
+    amcl = Node(
+        package='nav2_amcl',
+        executable='amcl',
+        namespace='nav2',
+        parameters=[
+            '/home/humble_ws/src/linorobot2_navigation/config/amcl.yaml',
+            {
+            'use_sim_time': True,
+            }
+        ]
+    )
+
     ekf = Node(
         package='robot_localization',
         executable='ekf_node',
@@ -167,11 +179,12 @@ def generate_launch_description():
     ld.add_action(planner)
     ld.add_action(behaviors)
     ld.add_action(bt)
-    # ld.add_action(map_server)
+    ld.add_action(map_server)
     ld.add_action(lifecycle_manager)
-    # ld.add_action(rviz)
+    ld.add_action(rviz)
     ld.add_action(wheel_unraveller)
     ld.add_action(wheel_odometry)
+    ld.add_action(amcl)
 
 
 

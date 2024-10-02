@@ -6,19 +6,18 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1
-        - /TF1/Frames1
         - /RobotModel1/Description Topic1
+        - /Map1
         - /Map1/Topic1
         - /LaserScan1
         - /LaserScan1/Topic1
-        - /LaserScan2
-        - /LaserScan2/Topic1
       Splitter Ratio: 0.5
     Tree Height: 793
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
     Expanded:
+      - /2D Pose Estimate1
       - /2D Goal Pose1
       - /Publish Point1
     Name: Tool Properties
@@ -233,170 +232,169 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          {}
-        odom:
-          base_footprint:
-            base_link:
-              back_channel:
-                {}
-              front_channel:
-                {}
-              front_left_wheel:
-                front_left_plate1:
+          odom:
+            base_footprint:
+              base_link:
+                back_channel:
+                  {}
+                front_channel:
+                  {}
+                front_left_wheel:
+                  front_left_plate1:
+                    {}
+                  front_left_plate2:
+                    {}
+                  front_left_roller1:
+                    {}
+                  front_left_roller10:
+                    {}
+                  front_left_roller11:
+                    {}
+                  front_left_roller12:
+                    {}
+                  front_left_roller13:
+                    {}
+                  front_left_roller14:
+                    {}
+                  front_left_roller15:
+                    {}
+                  front_left_roller2:
+                    {}
+                  front_left_roller3:
+                    {}
+                  front_left_roller4:
+                    {}
+                  front_left_roller5:
+                    {}
+                  front_left_roller6:
+                    {}
+                  front_left_roller7:
+                    {}
+                  front_left_roller8:
+                    {}
+                  front_left_roller9:
+                    {}
+                front_right_wheel:
+                  front_right_drum:
+                    {}
+                  front_right_plate1:
+                    {}
+                  front_right_plate2:
+                    {}
+                  front_right_roller1:
+                    {}
+                  front_right_roller10:
+                    {}
+                  front_right_roller11:
+                    {}
+                  front_right_roller12:
+                    {}
+                  front_right_roller13:
+                    {}
+                  front_right_roller14:
+                    {}
+                  front_right_roller15:
+                    {}
+                  front_right_roller2:
+                    {}
+                  front_right_roller3:
+                    {}
+                  front_right_roller4:
+                    {}
+                  front_right_roller5:
+                    {}
+                  front_right_roller6:
+                    {}
+                  front_right_roller7:
+                    {}
+                  front_right_roller8:
+                    {}
+                  front_right_roller9:
+                    {}
+                front_rs_depth_optical_frame:
+                  {}
+                left_channel:
+                  {}
+                left_rs_depth_optical_frame:
+                  {}
+                rear_left_wheel:
+                  rear_left_drum:
+                    {}
+                  rear_left_plate1:
+                    {}
+                  rear_left_plate2:
+                    {}
+                  rear_left_roller1:
+                    {}
+                  rear_left_roller10:
+                    {}
+                  rear_left_roller11:
+                    {}
+                  rear_left_roller12:
+                    {}
+                  rear_left_roller13:
+                    {}
+                  rear_left_roller14:
+                    {}
+                  rear_left_roller15:
+                    {}
+                  rear_left_roller2:
+                    {}
+                  rear_left_roller3:
+                    {}
+                  rear_left_roller4:
+                    {}
+                  rear_left_roller5:
+                    {}
+                  rear_left_roller6:
+                    {}
+                  rear_left_roller7:
+                    {}
+                  rear_left_roller8:
+                    {}
+                  rear_left_roller9:
+                    {}
+                rear_right_wheel:
+                  rear_right_plate1:
+                    {}
+                  rear_right_plate2:
+                    {}
+                  rear_right_roller1:
+                    {}
+                  rear_right_roller10:
+                    {}
+                  rear_right_roller11:
+                    {}
+                  rear_right_roller12:
+                    {}
+                  rear_right_roller13:
+                    {}
+                  rear_right_roller14:
+                    {}
+                  rear_right_roller15:
+                    {}
+                  rear_right_roller2:
+                    {}
+                  rear_right_roller3:
+                    {}
+                  rear_right_roller4:
+                    {}
+                  rear_right_roller5:
+                    {}
+                  rear_right_roller6:
+                    {}
+                  rear_right_roller7:
+                    {}
+                  rear_right_roller8:
+                    {}
+                  rear_right_roller9:
+                    {}
+                rear_rs_depth_optical_frame:
+                  {}
+                right_channel:
+                  {}
+                right_rs_depth_optical_frame:
                   {}
-                front_left_plate2:
-                  {}
-                front_left_roller1:
-                  {}
-                front_left_roller10:
-                  {}
-                front_left_roller11:
-                  {}
-                front_left_roller12:
-                  {}
-                front_left_roller13:
-                  {}
-                front_left_roller14:
-                  {}
-                front_left_roller15:
-                  {}
-                front_left_roller2:
-                  {}
-                front_left_roller3:
-                  {}
-                front_left_roller4:
-                  {}
-                front_left_roller5:
-                  {}
-                front_left_roller6:
-                  {}
-                front_left_roller7:
-                  {}
-                front_left_roller8:
-                  {}
-                front_left_roller9:
-                  {}
-              front_right_wheel:
-                front_right_drum:
-                  {}
-                front_right_plate1:
-                  {}
-                front_right_plate2:
-                  {}
-                front_right_roller1:
-                  {}
-                front_right_roller10:
-                  {}
-                front_right_roller11:
-                  {}
-                front_right_roller12:
-                  {}
-                front_right_roller13:
-                  {}
-                front_right_roller14:
-                  {}
-                front_right_roller15:
-                  {}
-                front_right_roller2:
-                  {}
-                front_right_roller3:
-                  {}
-                front_right_roller4:
-                  {}
-                front_right_roller5:
-                  {}
-                front_right_roller6:
-                  {}
-                front_right_roller7:
-                  {}
-                front_right_roller8:
-                  {}
-                front_right_roller9:
-                  {}
-              front_rs_depth_optical_frame:
-                {}
-              left_channel:
-                {}
-              left_rs_depth_optical_frame:
-                {}
-              rear_left_wheel:
-                rear_left_drum:
-                  {}
-                rear_left_plate1:
-                  {}
-                rear_left_plate2:
-                  {}
-                rear_left_roller1:
-                  {}
-                rear_left_roller10:
-                  {}
-                rear_left_roller11:
-                  {}
-                rear_left_roller12:
-                  {}
-                rear_left_roller13:
-                  {}
-                rear_left_roller14:
-                  {}
-                rear_left_roller15:
-                  {}
-                rear_left_roller2:
-                  {}
-                rear_left_roller3:
-                  {}
-                rear_left_roller4:
-                  {}
-                rear_left_roller5:
-                  {}
-                rear_left_roller6:
-                  {}
-                rear_left_roller7:
-                  {}
-                rear_left_roller8:
-                  {}
-                rear_left_roller9:
-                  {}
-              rear_right_wheel:
-                rear_right_plate1:
-                  {}
-                rear_right_plate2:
-                  {}
-                rear_right_roller1:
-                  {}
-                rear_right_roller10:
-                  {}
-                rear_right_roller11:
-                  {}
-                rear_right_roller12:
-                  {}
-                rear_right_roller13:
-                  {}
-                rear_right_roller14:
-                  {}
-                rear_right_roller15:
-                  {}
-                rear_right_roller2:
-                  {}
-                rear_right_roller3:
-                  {}
-                rear_right_roller4:
-                  {}
-                rear_right_roller5:
-                  {}
-                rear_right_roller6:
-                  {}
-                rear_right_roller7:
-                  {}
-                rear_right_roller8:
-                  {}
-                rear_right_roller9:
-                  {}
-              rear_rs_depth_optical_frame:
-                {}
-              right_channel:
-                {}
-              right_rs_depth_optical_frame:
-                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -588,44 +586,10 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /nav2/local_costmap/published_footprint
       Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: LaserScan
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Best Effort
-        Value: /right_rs/scan
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
   Enabled: true
   Global Options:
     Background Color: 117; 135; 133
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -645,7 +609,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /initialpose
+        Value: /nav2/initialpose
     - Class: rviz_default_plugins/SetGoal
       Topic:
         Depth: 5
@@ -667,7 +631,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -3.100006103515625
+      Angle: -1.530004858970642
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -677,11 +641,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 163.7709197998047
+      Scale: 69.97299194335938
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.4292786717414856
-      Y: -1.1713392734527588
+      X: 0.6103480458259583
+      Y: 1.5366076231002808
     Saved: ~
 Window Geometry:
   Displays:
@@ -697,5 +661,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 960
-  X: 960
+  X: 0
   Y: 27

@@ -38,6 +38,12 @@ class MecanumStateEstimator(Node):
         self.odom_base_footprint_tf.child_frame_id = 'base_footprint'
         
         self.odometry_publisher = self.create_publisher(Odometry, '/nav2/odom', 10)
+
+        # asdf = TransformStamped()
+        # asdf.header.frame_id = 'map'
+        # asdf.child_frame_id = 'odom'
+        # asdf.header.stamp = self.get_clock().now().to_msg()
+        # self.tf_static_broadcaster.sendTransform(asdf)
         
         self.last_time = -1
         self.first_time_set = False
@@ -140,10 +146,10 @@ class MecanumStateEstimator(Node):
         self.odom_base_footprint_tf.header.stamp = self.get_clock().now().to_msg()
         self.tf_static_broadcaster.sendTransform(self.odom_base_footprint_tf)
 
-        # asdf = TransformStamped()
-        # asdf.header.frame_id = 'map'
-        # asdf.child_frame_id = 'odom'
-        # asdf.header.stamp = self.get_clock().now().to_msg()
+        asdf = TransformStamped()
+        asdf.header.frame_id = 'map'
+        asdf.child_frame_id = 'odom'
+        asdf.header.stamp = self.get_clock().now().to_msg()
         # self.tf_static_broadcaster.sendTransform(asdf)
 
 

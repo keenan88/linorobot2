@@ -52,7 +52,9 @@ class LaserScanMerger(Node):
             qos_best_effort
         )
 
-        self.publisher = self.create_publisher(LaserScan, 'scan', qos_best_effort)
+        self.publisher = self.create_publisher(LaserScan, '/scan', qos_best_effort)
+
+        self.publisher2 = self.create_publisher(LaserScan, '/nav2/scan', qos_best_effort)
 
         self.scans = [None] * 5
 
@@ -105,6 +107,7 @@ class LaserScanMerger(Node):
             merged_scan.time_increment = sum(scan.time_increment for scan in self.scans) / len(self.scans)
 
             self.publisher.publish(merged_scan)
+            self.publisher2.publish(merged_scan)
 
 def main(args=None):
     rclpy.init(args=args)
