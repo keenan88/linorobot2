@@ -24,8 +24,8 @@
       yaw: 0.5
 
     scale_linear_turbo:
-      x: 0.25
-      y: 0.25
+      x: 0.5
+      y: 0.5
       z: 0.0
     scale_angular_turbo:
       pitch: 0.0

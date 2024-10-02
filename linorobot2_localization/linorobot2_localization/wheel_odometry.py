@@ -40,12 +40,12 @@ class MecanumStateEstimator(Node):
         self.odometry_publisher = self.create_publisher(Odometry, '/nav2/odom', 10)
         
         self.last_time = -1
-        self.last_time_set = False
+        self.first_time_set = False
 
     def joint_state_callback(self, msg):
-        if not self.last_time_set:
+        if not self.first_time_set:
             self.last_time = self.get_clock().now()
-            self.last_time_set = True
+            self.first_time_set = True
             self.x = 0.0 
             self.y = 0.0
             self.theta = 0.0
@@ -56,8 +56,7 @@ class MecanumStateEstimator(Node):
             # Assuming joint names are ordered: front_left, front_right, back_left, back_right
             wheels_rad_vels = np.array(msg.velocity[0:4])
             
-            vxytheta = self.inverse_kinematics(wheels_rad_vels)
-            self.vx, self.vy, self.vtheta = vxytheta
+            self.vx, self.vy, self.vtheta = self.inverse_kinematics(wheels_rad_vels)
 
             # Integrate velocities to update position
             current_time = self.get_clock().now()
@@ -89,11 +88,14 @@ class MecanumStateEstimator(Node):
                       [1, 1, -(l+w)],
                       [1, -1, (l+w)]])
         
-        B = np.array([fl, fr, bl, br])
+        w = np.array([fl, fr, bl, br])
         
-        pseudo_inv = np.linalg.inv(np.matmul(A.T, A))
-        pseudo_inv = np.matmul(pseudo_inv, A.T)
-        vxytheta = 2 * np.matmul(pseudo_inv, B) * r
+        pseudo_inv = np.linalg.pinv(A)
+        vxytheta = np.matmul(pseudo_inv, w) * r
+
+        vxytheta[1] /= 1.2 # Scaled y velocity, based on observations in simulation
+        vxytheta[2] *= 2 # Scaled angular velocity, based on observations in simulation
+
 
         return vxytheta
 
