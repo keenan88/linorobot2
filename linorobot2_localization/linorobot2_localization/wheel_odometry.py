@@ -93,8 +93,8 @@ class MecanumStateEstimator(Node):
         pseudo_inv = np.linalg.pinv(A)
         vxytheta = np.matmul(pseudo_inv, w) * r
 
-        vxytheta[1] /= 1.2 # Scaled y velocity, based on observations in simulation
-        vxytheta[2] *= 2 / 1.07 # Scaled angular velocity, based on observations in simulation
+        #vxytheta[1] /= 1.2 # Scaled y velocity, based on observations in simulation
+        vxytheta[2] *= 2 # Scaled angular velocity, based on observations in simulation
 
 
         return vxytheta
