@@ -21,11 +21,11 @@
     scale_angular:
       pitch: 0.0
       roll: 0.0
-      yaw: 0.5
+      yaw: 0.785
 
     scale_linear_turbo:
-      x: 0.5
-      y: 0.5
+      x: 0.75
+      y: 0.75
       z: 0.0
     scale_angular_turbo:
       pitch: 0.0
