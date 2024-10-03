@@ -24,8 +24,8 @@
     # Debugging and performance settings
     debug_logging: true             # Enables verbose logging for debugging
     throttle_scans: 1               # Use every nth scan for processing (1 means every scan is used)
-    transform_publish_period: 0.5  # Frequency of publishing map-to-odom transforms
-    map_update_interval: 1.5        # Interval in seconds for updating the map
+    transform_publish_period: 2.0  # Frequency of publishing map-to-odom transforms
+    map_update_interval: 4.0        # Interval in seconds for updating the map
     resolution: 0.025               # Resolution of the map in meters per pixel
     max_laser_range: 5.0            # Maximum range of the laser scanner for map rasterization
     minimum_time_interval: 0.2      # Minimum time between scans used in SLAM

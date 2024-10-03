@@ -223,7 +223,7 @@ Visualization Manager:
           Value: false
         right_rs_depth_optical_frame:
           Value: false
-      Marker Scale: 0.5
+      Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -628,7 +628,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -4.735004901885986
+      Angle: -4.660007476806641
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -638,11 +638,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -390.0143737792969
+      Scale: -210.29574584960938
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.2752527594566345
-      Y: -0.21843911707401276
+      X: -0.13950395584106445
+      Y: -0.40975669026374817
     Saved: ~
 Window Geometry:
   Displays:
