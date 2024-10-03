@@ -141,8 +141,10 @@ Visualization Manager:
           Value: false
         left_rs_depth_optical_frame:
           Value: false
+        map:
+          Value: true
         odom:
-          Value: false
+          Value: true
         rear_left_drum:
           Value: false
         rear_left_plate1:
@@ -229,6 +231,8 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
+        map:
+          {}
         odom:
           base_footprint:
             base_link:
@@ -628,7 +632,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -4.660007476806641
+      Angle: -4.600009441375732
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -638,11 +642,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -210.29574584960938
+      Scale: -109.08578491210938
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.13950395584106445
-      Y: -0.40975669026374817
+      X: -1.6297707557678223
+      Y: -0.6158574819564819
     Saved: ~
 Window Geometry:
   Displays:
