@@ -78,6 +78,7 @@ class LaserScanMerger(Node):
         self.scans[4] = msg
         self.merge_scans()
 
+    # TODO - account for deadzones on physical realsenses (if need be), and the impact on angle increment.
     def merge_scans(self):
         if all(scan is not None for scan in self.scans):
             merged_scan = LaserScan()

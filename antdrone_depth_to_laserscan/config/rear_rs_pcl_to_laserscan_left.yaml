@@ -1,6 +1,6 @@
 /rear_rs_pointcloud_to_laserscan:
   ros__parameters:
-    angle_increment: 0.01744444444
+    angle_increment: 0.00872664625
     angle_min: 2.355
     angle_max: 3.14  
     inf_epsilon: 1.0
