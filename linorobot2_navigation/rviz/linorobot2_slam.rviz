@@ -5,9 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
         - /RobotModel1/Description Topic1
-        - /Map1
         - /Map1/Topic1
         - /LaserScan1
         - /LaserScan1/Topic1
@@ -631,7 +629,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -1.530004858970642
+      Angle: -4.735004901885986
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -641,11 +639,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 69.97299194335938
+      Scale: -80.2181396484375
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.6103480458259583
-      Y: 1.5366076231002808
+      X: 3.0337071418762207
+      Y: -0.5000576376914978
     Saved: ~
 Window Geometry:
   Displays:
@@ -661,5 +659,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 960
-  X: 0
+  X: 960
   Y: 27

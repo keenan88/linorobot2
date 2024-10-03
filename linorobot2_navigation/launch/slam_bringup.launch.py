@@ -8,7 +8,7 @@ def generate_launch_description():
 
     slam_config_path = '/home/humble_ws/src/linorobot2_navigation/config/slam.yaml'
 
-    navigation_launch_path = '/home/humble_ws/src/linorobot2_navigation/launch/navigation.launch.py'
+    navigation_launch_path = '/home/humble_ws/src/linorobot2_navigation/launch/slam_navigation.launch.py'
 
     rviz_config_path = '/home/humble_ws/src/linorobot2_navigation/rviz/linorobot2_slam.rviz'
 
