@@ -23,10 +23,8 @@
 
     # Debugging and performance settings
     debug_logging: true             # Enables verbose logging for debugging
-    throttle_scans: 1               # Use every nth scan for processing (1 means every scan is used)
-    transform_publish_period: 2.0  # Frequency of publishing map-to-odom transforms
-    map_update_interval: 4.0        # Interval in seconds for updating the map
-    resolution: 0.025               # Resolution of the map in meters per pixel
+    
+    resolution: 0.05               # Resolution of the map in meters per pixel
     max_laser_range: 5.0            # Maximum range of the laser scanner for map rasterization
     minimum_time_interval: 0.2      # Minimum time between scans used in SLAM
     transform_timeout: 0.2          # Timeout for waiting on transform data
@@ -34,38 +32,41 @@
     stack_size_to_use: 4000000       # Increase stack size to handle large map serialization
     enable_interactive_mode: true   # Enable interactive mode for manual intervention and map manipulation
 
-    # General SLAM parameters
+    # Scan matching parameters
     use_scan_matching: true                   # Enable scan matching for pose estimation
     use_scan_barycenter: true                 # Use the barycenter (center of mass) of scan points for matching
-    minimum_travel_distance: 0.04             # Minimum travel distance before updating the map (0.0 means update immediately)
-    minimum_travel_heading: 0.15              # Minimum travel heading change before updating the map (0.0 means update immediately)
     scan_buffer_size: 10                      # Number of recent scans to keep in the buffer for matching
-    scan_buffer_maximum_scan_distance: 10.0   # Maximum distance for scans to be considered in the buffer (in meters)
-    link_match_minimum_response_fine: 0.1     # Minimum response threshold for fine scan matching (used in linking scan chains)
-    link_scan_maximum_distance: 1.5           # Maximum distance between scans for them to be linked
-    loop_search_maximum_distance: 3.0         # Maximum distance to search for loop closure candidates (in meters)
-    do_loop_closing: true                     # Enable loop closure (correcting accumulated drift by recognizing previously visited locations)
-    loop_match_minimum_chain_size: 10         # Minimum number of scans to match for detecting a loop closure
-    loop_match_maximum_variance_coarse: 3.0   # Maximum variance allowed for coarse matching during loop closure
-    loop_match_minimum_response_coarse: 0.35  # Minimum response threshold for coarse matching during loop closure
-    loop_match_minimum_response_fine: 0.45    # Minimum response threshold for fine matching during loop closure
+    scan_buffer_maximum_scan_distance: 5.0   # Maximum distance for scans to be considered in the buffer (in meters)
+    link_match_minimum_response_fine: 0.5     # Minimum response threshold for fine scan matching (used in linking scan chains)
+    link_scan_maximum_distance: 5.0           # Maximum distance between scans for them to be linked
 
-    # Parameters for scan correlation in SLAM
+    # Loop parameters
+    do_loop_closing: true                     # Enable loop closure (correcting accumulated drift by recognizing previously visited locations)
+    loop_search_maximum_distance: 3.0         # Maximum distance to search for loop closure candidates (in meters)
+    loop_match_minimum_chain_size: 10         # Minimum number of scans to match for detecting a loop closure
+    loop_match_maximum_variance_coarse: 1.0   # Maximum variance allowed for coarse matching during loop closure
+    loop_match_minimum_response_coarse: 0.75  # Minimum response threshold for coarse matching during loop closure
+    loop_match_minimum_response_fine: 0.9    # Minimum response threshold for fine matching during loop closure
+    loop_search_space_dimension: 3.0        
+    loop_search_space_resolution: 0.025       # Resolution of the loop closure search space (0.05 meters)
+    loop_search_space_smear_deviation: 0.03  # Deviation for smearing in loop closure search (for handling noisy data)
+
     correlation_search_space_dimension: 0.5        # Search space size for scan correlation in meters (0.5 means a 0.5x0.5 meter area)
     correlation_search_space_resolution: 0.01      # Resolution of the search space during scan correlation (0.01 meters)
     correlation_search_space_smear_deviation: 0.1  # Deviation for smearing in correlation search (for handling noisy data)
-
-    # Parameters for loop closure correlation
-    loop_search_space_dimension: 8.0         # Search space size for loop closure in meters (8x8 meter area)
-    loop_search_space_resolution: 0.05       # Resolution of the loop closure search space (0.05 meters)
-    loop_search_space_smear_deviation: 0.03  # Deviation for smearing in loop closure search (for handling noisy data)
-
-    # Parameters for scan matcher tuning
     distance_variance_penalty: 0.5     # Penalty factor for distance variance during scan matching
-    angle_variance_penalty: 1.0        # Penalty factor for angle variance during scan matching
-    fine_search_angle_offset: 0.00349  # Fine search angle offset in radians (about 0.2 degrees)
+    angle_variance_penalty: 3.0        # Penalty factor for angle variance during scan matching
+    fine_search_angle_offset: 0.01744  # Fine search angle offset in radians (about 0.2 degrees)
     coarse_search_angle_offset: 0.349  # Coarse search angle offset in radians (about 20 degrees)
     coarse_angle_resolution: 0.0349    # Resolution for coarse angle search in radians (about 2 degrees)
     minimum_angle_penalty: 0.9         # Minimum penalty applied for angular deviation
     minimum_distance_penalty: 0.5      # Minimum penalty applied for distance deviation
     use_response_expansion: true       # Enable response expansion to improve matching quality
+
+    # Update rate parameters
+    minimum_travel_distance: 0.05             # Minimum travel distance before updating the map (0.0 means update immediately)
+    minimum_travel_heading: 0.087             # Minimum travel heading change before updating the map (0.0 means update immediately)
+    throttle_scans: 1                         # Use every nth scan for processing (1 means every scan is used)
+    transform_publish_period: 0.0052          # Frequency of publishing map-to-odom transforms
+    map_update_interval: 1.0                  # Interval in seconds for updating the map
+  

@@ -1,40 +1,55 @@
 /nav2/amcl:
   ros__parameters:
-    use_sim_time: True
-    alpha1: 0.2
-    alpha2: 0.2
-    alpha3: 0.2
-    alpha4: 0.2
-    alpha5: 0.2
-    base_frame_id: "base_link"
-    beam_skip_distance: 0.5
-    beam_skip_error_threshold: 0.9
-    beam_skip_threshold: 0.3
-    do_beamskip: false
-    global_frame_id: "map"
-    lambda_short: 0.1
-    laser_likelihood_max_dist: 2.0
-    laser_max_range: 100.0
-    laser_min_range: -1.0
-    laser_model_type: "likelihood_field"
-    max_beams: 60
-    max_particles: 2000
-    min_particles: 500
-    odom_frame_id: "odom"
-    pf_err: 0.05
-    pf_z: 0.99
-    recovery_alpha_fast: 0.0
-    recovery_alpha_slow: 0.0
-    resample_interval: 1
-    robot_model_type: "nav2_amcl::DifferentialMotionModel"
-    save_pose_rate: 0.5
-    sigma_hit: 0.2
-    tf_broadcast: true
-    transform_tolerance: 1.0
-    update_min_a: 0.2
-    update_min_d: 0.25
-    z_hit: 0.5
-    z_max: 0.05
-    z_rand: 0.5
-    z_short: 0.05
-    scan_topic: scan
+    # Topics & frames
+    use_sim_time: True                  # Use simulated time (set to True for simulation environments)
+    base_frame_id: "base_link"           # Robot's base frame ID, used to link the robot to the map
+    scan_topic: /nav2/scan              # Topic name for the laser scan data
+    global_frame_id: "map"              # Global frame ID, typically set to "map" for localization
+    odom_frame_id: "odom"               # Odometry frame ID, used for robot localization
+
+    # Robot odometry parameters
+    alpha1: 0.05                         # AMCL parameter for odometry noise in rotation component of the motion model
+    alpha2: 0.05                        # AMCL parameter for odometry noise in translation during rotation
+    alpha3: 0.05                         # AMCL parameter for odometry noise in translation component of the motion model
+    alpha4: 0.05                        # AMCL parameter for odometry noise in rotation during translation
+    alpha5: 0.05                         # AMCL parameter for noise proportional to the velocity of the robot
+    robot_model_type: "nav2_amcl::OmniMotionModel"  # Robot model type
+
+    # Beam skipping parameters:
+    # https://docs.ros.org/en/jade/api/amcl/html/classamcl_1_1AMCLLaser.html
+    # https://docs.ros.org/en/jade/api/amcl/html/amcl__laser_8h_source.html
+    beam_skip_distance: 0.5             # Maximum distance from beam to nearest obstacle to be skipped
+    beam_skip_error_threshold: 0.9      # If more than this ratio of beams are skipped, all beams are integrated into likelihoods (this is an error condition)
+    beam_skip_threshold: 0.3            # Minimum fraction of particles with beam not matching map to skip beam
+    do_beamskip: false                  # Enable or disable beam skipping (set to false to disable)
+    
+    # Pointcloud parameters
+    max_particles: 250                  # Maximum number of particles in the particle filter
+    min_particles: 100                  # Minimum number of particles in the particle filter    
+    pf_err: 0.05                        # Error threshold for updating particle filter
+    pf_z: 0.99                          # Weighting factor for particle filter updates
+    recovery_alpha_fast: 0.5            # Fast recovery rate for particle filter during localization failure
+    recovery_alpha_slow: 0.1            # Slow recovery rate for particle filter during localization failure
+    resample_interval: 1                # Number of updates before resampling particles in the particle filter
+    save_pose_rate: 0.5                 # Frequency (in seconds) for saving the estimated pose
+    
+    # Pointcloud update parameters
+    tf_broadcast: true                  # Whether to broadcast the transform (True to enable broadcasting)
+    transform_tolerance: 1.0            # Time tolerance for transform lookups (seconds)
+    update_min_a: 0.087                 # Minimum angular movement required to trigger an AMCL update
+    update_min_d: 0.05                  # Minimum linear movement required to trigger an AMCL update
+
+    # Beam parameters
+    sigma_hit: 0.15                      # Standard deviation for laser hit sensor model
+    z_hit: 0.5                          # Weight for the probability of a sensor hit in the model
+    z_max: 0.05                         # Weight for the probability of maximum range readings
+    z_rand: 0.5                         # Weight for random measurements in the sensor model
+    z_short: 0.05                       # Weight for short-range measurements in the sensor model
+    lambda_short: 0.1                   # Weighting parameter for short-range sensor readings (for short range models)
+    laser_likelihood_max_dist: 5.0      # Maximum distance for laser readings to be considered for likelihood field
+    laser_max_range: 5.0                # Maximum range of the laser sensor (meters)
+    laser_min_range: 0.0                # Minimum range of the laser sensor (meters)
+    laser_model_type: "likelihood_field" # Laser model type, using likelihood field model
+    max_beams: 720                      # Maximum number of beams to be used for each laser scan
+
+    
