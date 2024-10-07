@@ -144,7 +144,7 @@ class MecanumStateEstimator(Node):
         asdf.header.frame_id = 'map'
         asdf.child_frame_id = 'odom'
         asdf.header.stamp = self.get_clock().now().to_msg()
-        self.tf_static_broadcaster.sendTransform(asdf)
+        # self.tf_static_broadcaster.sendTransform(asdf)
 
 
 

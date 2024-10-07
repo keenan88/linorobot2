@@ -173,6 +173,14 @@ def generate_launch_description():
         ]
     )
 
+    amcl_pointcloud = Node(
+        package='linorobot2_localization',
+        executable='amcl_visualizer',
+        parameters=[
+            {'use_sim_time': True}
+        ]
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(controller)
@@ -184,7 +192,8 @@ def generate_launch_description():
     ld.add_action(rviz)
     ld.add_action(wheel_unraveller)
     ld.add_action(wheel_odometry)
-    # ld.add_action(amcl)
+    ld.add_action(amcl)
+    ld.add_action(amcl_pointcloud)
 
 
 

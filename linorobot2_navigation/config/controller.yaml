@@ -22,26 +22,31 @@
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -0.5
-      min_vel_y: -0.05 # 0'd for isaacsim
-      max_vel_x: 0.5 
-      max_vel_y: 0.05 # 0'd for isaacsim
-      max_vel_theta: 0.5
+      min_vel_x: -0.3
+      min_vel_y: -0.0 # 0'd for isaacsim
+      max_vel_x: 0.3 
+      max_vel_y: 0.0 # 0'd for isaacsim
+      max_vel_theta: 0.25
       min_speed_theta: 0.0
       min_speed_xy: 0.0
-      max_speed_xy: 0.5
+      max_speed_xy: 0.3
       acc_lim_x: 0.05 # kept low for isaacsim
-      acc_lim_y: 0.01 # 0'd for isaacsim
+      acc_lim_y: 0.00 # 0'd for isaacsim
       acc_lim_theta: 0.25 # kept low for isaacsim
       decel_lim_x: -0.5 # kept low for isaacsim
-      decel_lim_y: -0.01 # 0'd for isaacsim
+      decel_lim_y: -0.0 # 0'd for isaacsim
       decel_lim_theta: -0.25 # kept low for isaacsim
-      vx_samples: 10
-      vy_samples: 5
-      vtheta_samples: 10
+
+      # Trajectory Generation params
+      discretize_by_time: true
       sim_time: 1.7
-      linear_granularity: 0.05
-      angular_granularity: 0.025
+      vx_samples: 10
+      vy_samples: 0
+      vtheta_samples: 10
+      # linear_granularity: 0.05
+      # angular_granularity: 0.025
+
+      # Trajectory critics
       transform_tolerance: 0.2
       xy_goal_tolerance: 0.1
       trans_stopped_velocity: 0.25
@@ -51,11 +56,11 @@
       critics: ["BaseObstacle", "PathDist", "GoalDist", "GoalAlign", "PathAlign", "OscillationCritic"]
       
       BaseObstacle.scale: 1.0
-      PathDist.scale: 0.0
+      PathDist.scale: 1.0
       GoalDist.scale: 1.0
       GoalAlign.scale: 1.0
       PathAlign.scale: 1.0
-      OscillationCritic.scale: 1.0
+      OscillationCritic.scale: 0.0
       
       
 
@@ -65,8 +70,8 @@
     footprint_padding: 0.05
     footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
     
-    update_frequency: 10.0
-    publish_frequency: 10.0
+    update_frequency: 1.0
+    publish_frequency: 1.0
     global_frame: map
     robot_base_frame: base_link
     rolling_window: true
