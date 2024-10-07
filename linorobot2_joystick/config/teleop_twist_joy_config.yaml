@@ -25,11 +25,11 @@
 
     scale_linear_turbo:
       x: 0.75
-      y: 0.75
+      y: 0.0 # IsaacSim launches robot from time to time when robot has transverse velocity, we will stick to forward and turning for now
       z: 0.0
     scale_angular_turbo:
       pitch: 0.0
       roll: 0.0
-      yaw: 0.0
+      yaw: 0.785
 
 

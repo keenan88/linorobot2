@@ -14,7 +14,7 @@
 /nav2/global_costmap:
   global_costmap:
     ros__parameters:
-      footprint_padding: 0.15
+      footprint_padding: 0.05
       footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
 
       update_frequency: 5.0
@@ -34,7 +34,7 @@
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: true
-        inflation_radius: 0.41
+        inflation_radius: 0.25
         cost_scaling_factor: 1.0
         inflate_unknown: false
         inflate_around_unknown: true
