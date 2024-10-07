@@ -57,8 +57,8 @@
 
       critics: ["GoalDist", "PathDist", "PathAlign", "BaseObstacle"]
       
-      BaseObstacle.scale: 1.0
-      PathDist.scale: 1.0
+      BaseObstacle.scale: 5.0
+      PathDist.scale: 3.0
       GoalDist.scale: 1.0
       # GoalAlign.scale: 1.0
       PathAlign.scale: 1.0
