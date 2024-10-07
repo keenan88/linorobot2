@@ -8,11 +8,11 @@
     odom_frame_id: "odom"               # Odometry frame ID, used for robot localization
 
     # Robot odometry parameters
-    alpha1: 0.05                         # AMCL parameter for odometry noise in rotation component of the motion model
-    alpha2: 0.05                        # AMCL parameter for odometry noise in translation during rotation
-    alpha3: 0.05                         # AMCL parameter for odometry noise in translation component of the motion model
-    alpha4: 0.05                        # AMCL parameter for odometry noise in rotation during translation
-    alpha5: 0.05                         # AMCL parameter for noise proportional to the velocity of the robot
+    alpha1: 0.5                          # AMCL parameter for odometry noise in rotation component of the motion model
+    alpha2: 0.5                        # AMCL parameter for odometry noise in translation during rotation
+    alpha3: 0.5                         # AMCL parameter for odometry noise in translation component of the motion model
+    alpha4: 0.5                        # AMCL parameter for odometry noise in rotation during translation
+    alpha5: 0.5                         # AMCL parameter for noise proportional to the velocity of the robot
     robot_model_type: "nav2_amcl::OmniMotionModel"  # Robot model type
 
     # Beam skipping parameters:
@@ -24,9 +24,9 @@
     do_beamskip: false                  # Enable or disable beam skipping (set to false to disable)
     
     # Pointcloud parameters
-    max_particles: 75                  # Maximum number of particles in the particle filter
-    min_particles: 50                  # Minimum number of particles in the particle filter    
-    pf_err: 0.05                        # Error threshold for updating particle filter
+    max_particles: 250                  # Maximum number of particles in the particle filter
+    min_particles: 200                  # Minimum number of particles in the particle filter    
+    pf_err: 0.025                        # Error threshold for updating particle filter
     pf_z: 0.99                          # Weighting factor for particle filter updates
     recovery_alpha_fast: 0.5            # Fast recovery rate for particle filter during localization failure
     recovery_alpha_slow: 0.1            # Slow recovery rate for particle filter during localization failure
@@ -36,7 +36,7 @@
     # Pointcloud update parameters
     tf_broadcast: true                  # Whether to broadcast the transform (True to enable broadcasting)
     transform_tolerance: 1.0            # Time tolerance for transform lookups (seconds)
-    update_min_a: 0.087                 # Minimum angular movement required to trigger an AMCL update
+    update_min_a: 0.0174                # Minimum angular movement required to trigger an AMCL update
     update_min_d: 0.05                  # Minimum linear movement required to trigger an AMCL update
 
     # Beam parameters

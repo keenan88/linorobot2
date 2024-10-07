@@ -13,7 +13,7 @@ Panels:
         - /PoseArray1/Topic1
         - /MarkerArray2/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 195
+    Tree Height: 373
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -675,11 +675,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -144.9521484375
+      Scale: -65.11328887939453
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -1.2275742292404175
-      Y: -0.739181637763977
+      X: 0.07274296879768372
+      Y: 0.2760750651359558
     Saved: ~
 Window Geometry:
   Displays:

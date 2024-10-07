@@ -53,16 +53,18 @@
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: False
       stateful: True
-      critics: ["BaseObstacle", "PathDist", "GoalDist", "GoalAlign", "PathAlign", "OscillationCritic", "RotateToGoalCritic"]
+      #critics: ["BaseObstacle", "PathDist", "GoalDist", "GoalAlign", "PathAlign", "OscillationCritic", "RotateToGoalCritic"]
+
+      critics: ["GoalDist", "PathDist", "PathAlign", "BaseObstacle"]
       
       BaseObstacle.scale: 1.0
       PathDist.scale: 1.0
       GoalDist.scale: 1.0
-      GoalAlign.scale: 1.0
+      # GoalAlign.scale: 1.0
       PathAlign.scale: 1.0
-      OscillationCritic.scale: 0.0
-      RotateToGoalCritic.scale: 1.0
-      RotateToGoalCritic.xy_goal_tolerance: 0.1
+      # OscillationCritic.scale: 0.0
+      # RotateToGoalCritic.scale: 1.0
+      # RotateToGoalCritic.xy_goal_tolerance: 0.1
       
       
 
