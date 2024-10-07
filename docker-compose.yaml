@@ -1,123 +1,123 @@
 services:
 
-  linorobot2-nav-slam:
-    container_name: linorobot2-nav-slam
-    build:
-      context: .
-      dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
-    stdin_open: true
-    tty: true
-    environment:
-      - DISPLAY=${DISPLAY}
-      - SLAM_OR_NAV=${SLAM_OR_NAV}
-      - LINOROBOT2_BASE=${LINOROBOT2_BASE}
-      - NVIDIA_VISIBLE_DEVICES=all
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
-      - ./linorobot2_localization:/home/humble_ws/src/linorobot2_localization
-      - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
-      - /dev/dri/card0:/dev/dri/card0
-    working_dir: /home/humble_ws
-    # entrypoint: /slam_nav_entrypoint.sh
-    command: sleep infinity
-    network_mode: host
-    ipc: host
-    pid: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-    runtime: nvidia
-    privileged: true
+  # linorobot2-nav-slam:
+  #   container_name: linorobot2-nav-slam
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/gz_nav_slam.dockerfile
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #     - SLAM_OR_NAV=${SLAM_OR_NAV}
+  #     - LINOROBOT2_BASE=${LINOROBOT2_BASE}
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./linorobot2_navigation:/home/humble_ws/src/linorobot2_navigation
+  #     - ./linorobot2_localization:/home/humble_ws/src/linorobot2_localization
+  #     - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
+  #     - /dev/dri/card0:/dev/dri/card0
+  #   working_dir: /home/humble_ws
+  #   # entrypoint: /slam_nav_entrypoint.sh
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             capabilities: [gpu]
+  #   runtime: nvidia
+  #   privileged: true
 
-  linorobot2-joytick:
-    container_name: linorobot2-joystick
-    build:
-      context: .
-      dockerfile: ./docker/linorobot2/dockerfiles/joystick.dockerfile
-    tty: true
-    stdin_open: true
-    volumes:
-      - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
-      - ./linorobot2_joystick:/home/humble_ws/src/linorobot2_joystick:rw
-      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
-      - /dev/dri/card0:/dev/dri/card0
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-    privileged: true
-    entrypoint: /joystick_entrypoint.sh
-    network_mode: host
-    ipc: host
-    pid: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-    runtime: nvidia
+  # linorobot2-joytick:
+  #   container_name: linorobot2-joystick
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/linorobot2/dockerfiles/joystick.dockerfile
+  #   tty: true
+  #   stdin_open: true
+  #   volumes:
+  #     - ./docker/linorobot2/entry_scripts/joystick_entrypoint.sh:/joystick_entrypoint.sh:rw
+  #     - ./linorobot2_joystick:/home/humble_ws/src/linorobot2_joystick:rw
+  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup
+  #     - /dev/dri/card0:/dev/dri/card0
+  #   environment:
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #   privileged: true
+  #   entrypoint: /joystick_entrypoint.sh
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             capabilities: [gpu]
+  #   runtime: nvidia
     
 
-  linorobot2-pcl:
-    container_name: linorobot2-pcl
-    build:
-      context: .
-      dockerfile: ./docker/linorobot2/dockerfiles/pointcloud.dockerfile
-    tty: true
-    stdin_open: true
-    environment:
-      - use_sim=True
-      - NVIDIA_VISIBLE_DEVICES=all
-    volumes:
-      - ./docker/linorobot2/entry_scripts/pointcloud_entrypoint.sh:/pointcloud_entrypoint.sh:rw
-      - ./linorobot2_pcl:/home/humble_ws/src/linorobot2_pcl:rw
-      - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup:rw
-      - ./perception_pcl:/home/humble_ws/src/perception_pcl
-      - /dev/dri/card0:/dev/dri/card0
-    privileged: true
-    entrypoint: /pointcloud_entrypoint.sh
-    command: sleep infinity
-    network_mode: host
-    ipc: host
-    pid: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-    runtime: nvidia
+  # linorobot2-pcl:
+  #   container_name: linorobot2-pcl
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/linorobot2/dockerfiles/pointcloud.dockerfile
+  #   tty: true
+  #   stdin_open: true
+  #   environment:
+  #     - use_sim=True
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #   volumes:
+  #     - ./docker/linorobot2/entry_scripts/pointcloud_entrypoint.sh:/pointcloud_entrypoint.sh:rw
+  #     - ./linorobot2_pcl:/home/humble_ws/src/linorobot2_pcl:rw
+  #     - ./linorobot2_bringup:/home/humble_ws/src/linorobot2_bringup:rw
+  #     - ./perception_pcl:/home/humble_ws/src/perception_pcl
+  #     - /dev/dri/card0:/dev/dri/card0
+  #   privileged: true
+  #   entrypoint: /pointcloud_entrypoint.sh
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             capabilities: [gpu]
+  #   runtime: nvidia
     
 
-  antdrone_depth_to_laserscan:
-    container_name: antdrone-depth-to-laserscan
-    build:
-      context: .
-      dockerfile: docker/linorobot2/dockerfiles/depth_to_laserscan.Dockerfile
-    network_mode: host
-    volumes:
-      - ./antdrone_depth_to_laserscan:/home/humble_ws/src/antdrone_depth_to_laserscan
-      - ./docker/linorobot2/entry_scripts/pcl_to_laserscan.sh:/pcl_to_laserscan.sh:rw
-      - /dev/dri/card0:/dev/dri/card0
-    environment:
-      - DISPLAY=${DISPLAY}
-      - NVIDIA_VISIBLE_DEVICES=all
-    entrypoint: /pcl_to_laserscan.sh
-    command: sleep infinity
-    stdin_open: true
-    tty: true
-    ipc: host
-    pid: host
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-    runtime: nvidia
+  # antdrone_depth_to_laserscan:
+  #   container_name: antdrone-depth-to-laserscan
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/depth_to_laserscan.Dockerfile
+  #   network_mode: host
+  #   volumes:
+  #     - ./antdrone_depth_to_laserscan:/home/humble_ws/src/antdrone_depth_to_laserscan
+  #     - ./docker/linorobot2/entry_scripts/pcl_to_laserscan.sh:/pcl_to_laserscan.sh:rw
+  #     - /dev/dri/card0:/dev/dri/card0
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #     - NVIDIA_VISIBLE_DEVICES=all
+  #   entrypoint: /pcl_to_laserscan.sh
+  #   command: sleep infinity
+  #   stdin_open: true
+  #   tty: true
+  #   ipc: host
+  #   pid: host
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             capabilities: [gpu]
+  #   runtime: nvidia
   
 
   # linorobot2-keyboard-teleop:
@@ -136,3 +136,23 @@ services:
   #   network_mode: host
   #   ipc: host
   #   pid: host
+
+  linorobot2-traffic-gui:
+    container_name: linorobot2-traffic-gui
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/traffic_gui.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./rmf_traffic_editor:/home/humble_ws/src/rmf_traffic_editor
+      - ./linorobot2_navigation/maps:/home/humble_ws/src/linorobot2_navigation/maps
+    working_dir: /home/humble_ws
+    # entrypoint: /slam_nav_entrypoint.sh
+    command: sleep infinity
+    network_mode: host
+    ipc: host
+    pid: host

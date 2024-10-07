@@ -13,3 +13,6 @@
 [submodule "laser_filters"]
 	path = laser_filters
 	url = https://github.com/ros-perception/laser_filters
+[submodule "rmf_traffic_editor"]
+	path = rmf_traffic_editor
+	url = https://github.com/open-rmf/rmf_traffic_editor.git
