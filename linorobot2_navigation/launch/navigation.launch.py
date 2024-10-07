@@ -1,5 +1,7 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
 
@@ -75,41 +77,7 @@ def generate_launch_description():
         ]
     )
 
-    keepout_filter_mask_server = Node(
-        package='nav2_map_server',
-        executable='map_server',
-        name='filter_mask_server',
-        parameters=[
-            '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml',
-            {
-                'use_sim_time': True,
-            }
-        ]
-    )
-
-    keepout_filter_map_server = Node(
-        package='nav2_map_server',
-        executable='costmap_filter_info_server',
-        name='costmap_filter_info_server',
-        parameters=[
-            '/home/humble_ws/src/linorobot2_navigation/config/filter_mask_server.yaml',
-            {
-                'use_sim_time': True,
-            }
-        ]
-    )
-
-    keepout_filter_lifecycle_manager = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        name='lifecycle_manager_costmap_filters',
-        parameters=[
-            {
-                'use_sim_time': True,
-            },
-            '/home/humble_ws/src/linorobot2_navigation/config/lifecycle_manager_costmap_filters.yaml'
-        ]
-    )
+    
 
     navigate_to_named_pos_server = Node(
         package='linorobot2_navigation',
@@ -181,6 +149,12 @@ def generate_launch_description():
         ]
     )
 
+    keepout_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            '/home/humble_ws/src/linorobot2_navigation/launch/keepout.launch.py'
+        )
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(controller)
@@ -194,6 +168,7 @@ def generate_launch_description():
     ld.add_action(wheel_odometry)
     ld.add_action(amcl)
     ld.add_action(amcl_pointcloud)
+    ld.add_action(keepout_launch)
 
 
 
