@@ -16,3 +16,4 @@
 [submodule "rmf_traffic_editor"]
 	path = rmf_traffic_editor
 	url = https://github.com/open-rmf/rmf_traffic_editor.git
+

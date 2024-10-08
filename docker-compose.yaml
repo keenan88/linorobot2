@@ -146,13 +146,19 @@ services:
     tty: true
     environment:
       - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
+      - /dev/dri/card0:/dev/dri/card0
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./rmf_traffic_editor:/home/humble_ws/src/rmf_traffic_editor
       - ./linorobot2_navigation/maps:/home/humble_ws/src/linorobot2_navigation/maps
     working_dir: /home/humble_ws
     # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity
     network_mode: host
-    ipc: host
-    pid: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    runtime: nvidia

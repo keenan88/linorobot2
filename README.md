@@ -1,5 +1,18 @@
 # linorobot2
 
+https://github.com/open-rmf/rmf_demos/tree/humble
+
+sudo ufw allow from any to any port 11345 proto tcp
+sudo ufw allow from any to any port 8080 proto tcp
+sudo ufw allow from any to any port 55443 proto tcp
+
+
+sudo ufw allow in proto udp to 224.0.0.0/4
+sudo ufw allow in proto udp to 255.255.255.255
+
+
+
+
 Forked from [linorobot2](https://github.com/linorobot/linorobot2).
 
 ## Startup Instructions
