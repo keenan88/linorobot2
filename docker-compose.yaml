@@ -17,7 +17,7 @@ services:
       - ./linorobot2_localization:/home/humble_ws/src/linorobot2_localization
       - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
     working_dir: /home/humble_ws
-    entrypoint: /slam_nav_entrypoint.sh
+    # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host
@@ -116,40 +116,40 @@ services:
   #   ipc: host
   #   pid: host
 
-  ant-queen-rmf:
-    container_name: ant-queen-rmf
-    build:
-      context: .
-      dockerfile: docker/linorobot2/dockerfiles/ant_queen_rmf.dockerfile
-    stdin_open: true
-    tty: true
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./rmf_demos:/home/humble_ws/src/rmf_demos
-    working_dir: /home/humble_ws
-    # entrypoint: /slam_nav_entrypoint.sh
-    command: sleep infinity
-    network_mode: host
-    ipc: host
-    pid: host
+  # ant-queen-rmf:
+  #   container_name: ant-queen-rmf
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/ant_queen_rmf.dockerfile
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./rmf_demos:/home/humble_ws/src/rmf_demos
+  #   working_dir: /home/humble_ws
+  #   # entrypoint: /slam_nav_entrypoint.sh
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
 
-  linorobot2-rmf:
-    container_name: linorobot2-rmf
-    build:
-      context: .
-      dockerfile: docker/linorobot2/dockerfiles/drone_rmf.dockerfile
-    stdin_open: true
-    tty: true
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./linorobot2_rmf:/home/humble_ws/src/linorobot2_rmf
-    working_dir: /home/humble_ws
-    # entrypoint: /slam_nav_entrypoint.sh
-    command: sleep infinity
-    network_mode: host
-    ipc: host
-    pid: host
+  # linorobot2-rmf:
+  #   container_name: linorobot2-rmf
+  #   build:
+  #     context: .
+  #     dockerfile: docker/linorobot2/dockerfiles/drone_rmf.dockerfile
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./linorobot2_rmf:/home/humble_ws/src/linorobot2_rmf
+  #   working_dir: /home/humble_ws
+  #   # entrypoint: /slam_nav_entrypoint.sh
+  #   command: sleep infinity
+  #   network_mode: host
+  #   ipc: host
+  #   pid: host
