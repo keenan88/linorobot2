@@ -22,6 +22,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
+            'linorobot2_rmf = linorobot2_rmf.linorobot2_rmf:main',
         ],
     },
 )

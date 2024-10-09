@@ -1,25 +1,9 @@
-[submodule "m-explore-ros2"]
-	path = m-explore-ros2
-	url = https://github.com/robo-friends/m-explore-ros2.git
-[submodule "ros2_explorer"]
-	path = ros2_explorer
-	url = https://github.com/DaniGarciaLopez/ros2_explorer
-[submodule "nav2_wavefront_frontier_exploration"]
-	path = nav2_wavefront_frontier_exploration
-	url = https://github.com/SeanReg/nav2_wavefront_frontier_exploration.git
 [submodule "perception_pcl"]
 	path = perception_pcl
 	url = https://github.com/ros-perception/perception_pcl.git
 [submodule "laser_filters"]
 	path = laser_filters
 	url = https://github.com/ros-perception/laser_filters
-[submodule "rmf_traffic_editor"]
-	path = rmf_traffic_editor
-	url = https://github.com/open-rmf/rmf_traffic_editor.git
-
 [submodule "rmf_demos"]
 	path = rmf_demos
 	url = https://github.com/open-rmf/rmf_demos.git
-[submodule "fleet_adapter_template"]
-	path = fleet_adapter_template
-	url = https://github.com/open-rmf/fleet_adapter_template.git
