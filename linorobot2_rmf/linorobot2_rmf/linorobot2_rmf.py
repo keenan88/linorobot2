@@ -25,13 +25,15 @@ class Linorobot2RMF(Node):
         super().__init__('linorobot2_rmf')
 
         # TODO - change robot naming to read from a yaml file
-        self.fleet_name = 'fleet1'
-        self.robot_name = 'george'
+        self.fleet_name = 'tinyRobot'
+        self.robot_name = 'tinyRobot1'
+        self.seq = 0
 
         self.robot_state = RobotState()
-        self.robot_state.battery_percent = 1.0 # TODO - implement hardware checking for battery percent
+        self.robot_state.battery_percent = 100.0 # TODO - implement hardware checking for battery percent
         self.robot_state.location.level_name = "L1" # TODO - implement level updating later, if need be
         self.robot_state.location.index = 0
+        self.robot_state.name = self.robot_name
 
         # TODO - add a bridge to bridge in and out robot_state and robot_path_requests from queen DOMAIN ID to individual robot DOMAIN ID
 
@@ -69,12 +71,14 @@ class Linorobot2RMF(Node):
 
         if path_request.fleet_name == self.fleet_name:
             if path_request.robot_name == self.robot_name:
+
+                print("Executing path")
                 
                 self.robot_state.path = path_request.path
 
                 self.robot_state.task_id = path_request.task_id
 
-                self.robot_state.mode_request_id = MODE_MOVING
+                self.robot_state.mode.mode_request_id = MODE_MOVING
 
                 # TODO - make call to move_through_poses nav2 action server (async?)
 
@@ -82,7 +86,13 @@ class Linorobot2RMF(Node):
     
     def publish_state(self):
 
+        self.robot_state.seq = self.seq
+
         self.rmf_robot_state_publisher.publish(self.robot_state)
+
+        self.seq += 1
+
+        # print("Published state")
 
 
 
