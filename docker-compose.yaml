@@ -151,6 +151,7 @@ services:
       - /dev/dri/card0:/dev/dri/card0
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ./linorobot2_navigation/maps:/home/humble_ws/src/linorobot2_navigation/maps
+      - ./rmf_demos:/home/humble_ws/src/rmf_demos
     working_dir: /home/humble_ws
     # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity

@@ -17,3 +17,9 @@
 	path = rmf_traffic_editor
 	url = https://github.com/open-rmf/rmf_traffic_editor.git
 
+[submodule "rmf_demos"]
+	path = rmf_demos
+	url = https://github.com/open-rmf/rmf_demos.git
+[submodule "fleet_adapter_template"]
+	path = fleet_adapter_template
+	url = https://github.com/open-rmf/fleet_adapter_template.git
