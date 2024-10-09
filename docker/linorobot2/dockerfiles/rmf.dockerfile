@@ -16,6 +16,7 @@ RUN apt-get update && \
     python3-flask \
     python3-flask-cors \
     python3-websockets \
+    ros-humble-nav2-bringup \
     ros-humble-ros-ign-bridge
 
 RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'

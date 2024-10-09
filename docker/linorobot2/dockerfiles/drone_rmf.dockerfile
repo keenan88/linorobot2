@@ -16,7 +16,9 @@ RUN apt-get update && \
     python3-flask \
     python3-flask-cors \
     python3-websockets \
-    ros-humble-ros-ign-bridge
+    ros-humble-ros-ign-bridge \ 
+    ros-humble-nav2-bringup \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install flask-socketio fastapi uvicorn setuptools==58.2.0
 

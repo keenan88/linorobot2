@@ -4,7 +4,11 @@ import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
 from rmf_fleet_msgs.msg import RobotState, PathRequest
+from geometry_msgs.msg import PoseStamped
 import math
+from rclpy.action import ActionClient
+from nav2_msgs.action import NavigateThroughPoses
+
 
 # Intended to run on each individual robot
 
@@ -53,6 +57,9 @@ class Linorobot2RMF(Node):
             10
         )
 
+        self._action_client = ActionClient(
+            self, NavigateThroughPoses, '/nav2/navigate_through_poses')
+
         self.state_timer = self.create_timer(0.1, self.publish_state)
 
     def record_odometry(self, odom_msg):
@@ -67,6 +74,55 @@ class Linorobot2RMF(Node):
         z = odom_msg.pose.pose.orientation.z
         self.robot_state.location.yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
 
+    def send_navigate_through_poses_goal(self, poses):
+        """
+        Send a NavigateThroughPoses action goal to the nav2 action server.
+        """
+        self._action_client.wait_for_server()
+
+        # Create the NavigateThroughPoses Goal
+        goal_msg = NavigateThroughPoses.Goal()
+        goal_msg.poses = poses
+
+        self.get_logger().info(f'Sending {len(poses)} poses to Nav2')
+
+        # Send goal asynchronously
+        self._send_goal_future = self._action_client.send_goal_async(
+            goal_msg,
+            feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        """
+        Callback to handle goal acceptance or rejection.
+        """
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('NavigateThroughPoses goal was rejected.')
+            return
+
+        self.get_logger().info('NavigateThroughPoses goal accepted.')
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def feedback_callback(self, feedback_msg):
+        """
+        Feedback callback to handle feedback from the NavigateThroughPoses action.
+        """
+        feedback = feedback_msg.feedback
+        self.get_logger().info(f'Received feedback: {feedback.current_pose}')
+
+    def get_result_callback(self, future):
+        """
+        Callback to handle the result of the NavigateThroughPoses action.
+        """
+        result = future.result().result
+        if result.success:
+            self.get_logger().info('NavigateThroughPoses succeeded!')
+        else:
+            self.get_logger().info('NavigateThroughPoses failed.')
+
     def execute_path(self, path_request):
 
         if path_request.fleet_name == self.fleet_name:
@@ -80,7 +136,25 @@ class Linorobot2RMF(Node):
 
                 self.robot_state.mode.mode_request_id = MODE_MOVING
 
-                # TODO - make call to move_through_poses nav2 action server (async?)
+                poses = []
+
+                for waypoint in path_request.path:
+                    pose = PoseStamped()
+                    pose.header.frame_id = 'map'  # Assuming map frame, adjust if necessary
+                    pose.header.stamp = self.get_clock().now().to_msg()
+
+                    # Assign position and orientation
+                    pose.pose.position.x = waypoint.x
+                    pose.pose.position.y = waypoint.y
+                    pose.pose.orientation.x = 0.0
+                    pose.pose.orientation.y = 0.0
+                    pose.pose.orientation.z = math.sin(waypoint.yaw / 2.0)
+                    pose.pose.orientation.w = math.cos(waypoint.yaw / 2.0)
+
+
+                    poses.append(pose)
+
+                self.send_navigate_through_poses_goal(poses)
 
 
     
