@@ -39,7 +39,7 @@ class NavigateThroughPosesClient(Node):
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
-        self.get_logger().info(f'Received feedback: {feedback.current_pose}')
+        self.get_logger().info(f'Received feedback: {feedback.current_pose.pose.position.x}, {feedback.current_pose.pose.position.y}')
 
     def get_result_callback(self, future):
         result = future.result().result
@@ -59,28 +59,21 @@ def main(args=None):
     pose1 = PoseStamped()
     pose1.header.frame_id = 'map'
     pose1.header.stamp = node.get_clock().now().to_msg()
-    pose1.pose.position.x = 6.0
-    pose1.pose.position.y = -1.0
+    pose1.pose.position.x = 13.7
+    pose1.pose.position.y = -7.6
     pose1.pose.orientation.w = 1.0
 
     pose2 = PoseStamped()
     pose2.header.frame_id = 'map'
     pose2.header.stamp = node.get_clock().now().to_msg()
-    pose2.pose.position.x = 5.0
-    pose2.pose.position.y = -2.0
+    pose2.pose.position.x = 13.7
+    pose2.pose.position.y = -6.0
     pose2.pose.orientation.w = 1.0
 
-    pose3 = PoseStamped()
-    pose3.header.frame_id = 'map'
-    pose3.header.stamp = node.get_clock().now().to_msg()
-    pose3.pose.position.x = 3.0
-    pose3.pose.position.y = 3.0
-    pose3.pose.orientation.w = 1.0
 
     # Add the poses to the list
     poses.append(pose1)
     poses.append(pose2)
-    poses.append(pose3)
 
     # Send goal to navigate through poses
     node.send_goal(poses)

@@ -5,13 +5,12 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1/Frames1
+        - /TF1/Status1
         - /Static Map1/Topic1
         - /LaserScan1/Topic1
         - /Particle Cloud1/Topic1
         - /Map1/Topic1
         - /Map2/Topic1
-        - /Fleet Markers1
         - /Fleet Markers1/Topic1
         - /Schedule Markers1
         - /Map Markers1
@@ -148,9 +147,9 @@ Visualization Manager:
         left_rs_depth_optical_frame:
           Value: false
         map:
-          Value: false
+          Value: true
         odom:
-          Value: false
+          Value: true
         rear_left_drum:
           Value: false
         rear_left_plate1:
@@ -231,6 +230,12 @@ Visualization Manager:
           Value: false
         right_rs_depth_optical_frame:
           Value: false
+        tinyRobot1/base_link:
+          Value: true
+        tinyRobot2/base_link:
+          Value: true
+        world:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -621,7 +626,9 @@ Visualization Manager:
       Enabled: true
       Name: Fleet Markers
       Namespaces:
-        {}
+        body: true
+        name: true
+        nose: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -633,7 +640,8 @@ Visualization Manager:
       Enabled: true
       Name: Schedule Markers
       Namespaces:
-        {}
+        participant 0: true
+        participant location 0: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -645,7 +653,9 @@ Visualization Manager:
       Enabled: true
       Name: Map Markers
       Namespaces:
-        {}
+        tinyRobot/labels/L1: true
+        tinyRobot/lanes/L1: true
+        tinyRobot/waypoints/L1: true
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -698,7 +708,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.005000009201467037
+      Angle: 0.00999999139457941
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -708,11 +718,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 105.4381103515625
+      Scale: 106.95036315917969
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.685310959815979
-      Y: -0.20079804956912994
+      X: -0.15843644738197327
+      Y: -0.7763936519622803
     Saved: ~
 Window Geometry:
   Displays:
