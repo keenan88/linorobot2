@@ -2,12 +2,14 @@
 
 import rclpy
 from rclpy.node import Node
-from nav_msgs.msg import Odometry
 from rmf_fleet_msgs.msg import RobotState, PathRequest
 from geometry_msgs.msg import PoseStamped
 import math
+from tf2_ros import Buffer, TransformListener
 from rclpy.action import ActionClient
 from nav2_msgs.action import NavigateThroughPoses
+from geometry_msgs.msg import TransformStamped
+
 
 
 # Intended to run on each individual robot
@@ -50,29 +52,36 @@ class Linorobot2RMF(Node):
             10
         )
 
-        self.odom_subscription = self.create_subscription( # Assumed that robot is operating in its own ros domain ID, so there is only 1 odom topic
-            Odometry,
-            '/nav2/odom',
-            self.record_odometry,
-            10
-        )
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+        self.timer = self.create_timer(0.5, self.get_transform)
+        self.first_tf_set = False
 
         self._action_client = ActionClient(
             self, NavigateThroughPoses, '/nav2/navigate_through_poses')
 
         self.state_timer = self.create_timer(0.1, self.publish_state)
 
-    def record_odometry(self, odom_msg):
 
-        self.robot_state.location.t = odom_msg.header.stamp
-        self.robot_state.location.x = odom_msg.pose.pose.position.x
-        self.robot_state.location.y = odom_msg.pose.pose.position.y
+    def get_transform(self):
+        try:
+            now = rclpy.time.Time()
+            transform: TransformStamped = self.tf_buffer.lookup_transform(
+                'map', 'base_link', now
+            )
 
-        w = odom_msg.pose.pose.orientation.w
-        x = odom_msg.pose.pose.orientation.x
-        y = odom_msg.pose.pose.orientation.y
-        z = odom_msg.pose.pose.orientation.z
-        self.robot_state.location.yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+            x = transform.transform.rotation.x
+            y = transform.transform.rotation.y
+            z = transform.transform.rotation.z
+            w = transform.transform.rotation.w
+
+            self.robot_state.location.x = transform.transform.translation.x
+            self.robot_state.location.y = transform.transform.translation.y
+            self.robot_state.location.yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+            self.first_tf_set = True
+
+        except Exception as e:
+            self.get_logger().error(f"Could not get transform: {e}")
 
     def send_navigate_through_poses_goal(self, poses):
         """
@@ -115,7 +124,7 @@ class Linorobot2RMF(Node):
         Feedback callback to handle feedback from the NavigateThroughPoses action.
         """
         feedback = feedback_msg.feedback
-        self.get_logger().info(f'Position: {round(feedback.current_pose.pose.position.x, 2)}, {round(feedback.current_pose.pose.position.y, 2)} ')
+        # self.get_logger().info(f'Position: {round(feedback.current_pose.pose.position.x, 2)}, {round(feedback.current_pose.pose.position.y, 2)} ')
 
     def get_result_callback(self, future):
         """
@@ -164,13 +173,15 @@ class Linorobot2RMF(Node):
     
     def publish_state(self):
 
-        self.robot_state.seq = self.seq
+        if self.first_tf_set:
 
-        self.rmf_robot_state_publisher.publish(self.robot_state)
+            self.robot_state.seq = self.seq
 
-        self.seq += 1
+            self.rmf_robot_state_publisher.publish(self.robot_state)
 
-        # print("Published state")
+            print("publishing pose: ", self.robot_state.location.x, ", ", self.robot_state.location.y)
+
+            self.seq += 1
 
 
 
