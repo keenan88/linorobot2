@@ -84,7 +84,11 @@ class Linorobot2RMF(Node):
         goal_msg = NavigateThroughPoses.Goal()
         goal_msg.poses = poses
 
-        self.get_logger().info(f'Sending {len(poses)} poses to Nav2')
+        self.get_logger().info(f'Sending {len(poses)} poses to Nav2: ')
+
+        for pos in poses:
+            self.get_logger().info(f'Goal: {round(pos.pose.position.x, 2)}, {round(pos.pose.position.y, 2)} ')
+
 
         # Send goal asynchronously
         self._send_goal_future = self._action_client.send_goal_async(
@@ -111,14 +115,14 @@ class Linorobot2RMF(Node):
         Feedback callback to handle feedback from the NavigateThroughPoses action.
         """
         feedback = feedback_msg.feedback
-        self.get_logger().info(f'Received feedback: {feedback.current_pose}')
+        self.get_logger().info(f'Position: {round(feedback.current_pose.pose.position.x, 2)}, {round(feedback.current_pose.pose.position.y, 2)} ')
 
     def get_result_callback(self, future):
         """
         Callback to handle the result of the NavigateThroughPoses action.
         """
         result = future.result().result
-        if result.success:
+        if result:
             self.get_logger().info('NavigateThroughPoses succeeded!')
         else:
             self.get_logger().info('NavigateThroughPoses failed.')
