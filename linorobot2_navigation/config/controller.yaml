@@ -3,8 +3,8 @@
     # controller server parameters (see Controller Server for more info)
     use_sim_time: True
     controller_frequency: 20.0
-    min_x_velocity_threshold: 0.01
-    min_y_velocity_threshold: 0.01
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
     progress_checker_plugins: ["progress_checker"] # progress_checker_plugin: "progress_checker" For Humble and older
     goal_checker_plugins: ["goal_checker"]
@@ -15,36 +15,37 @@
       movement_time_allowance: 10.0
     goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.15
-      yaw_goal_tolerance: 0.174
+      xy_goal_tolerance: 0.1
+      yaw_goal_tolerance: 0.1
       stateful: True
     # DWB controller parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -0.3
-      min_vel_y: -0.0 # 0'd for isaacsim
-      max_vel_x: 0.3 
-      max_vel_y: 0.0 # 0'd for isaacsim
-      max_vel_theta: 0.25
+      min_vel_x: -0.0
+      min_vel_y: -0.15 # 0'd for isaacsim
+      max_vel_x: 0.26 
+      max_vel_y: 0.26 # 0'd for isaacsim
+      max_vel_theta: 0.5
       min_speed_theta: 0.0
       min_speed_xy: 0.0
-      max_speed_xy: 0.3
-      acc_lim_x: 0.05 # kept low for isaacsim
-      acc_lim_y: 0.00 # 0'd for isaacsim
-      acc_lim_theta: 0.25 # kept low for isaacsim
+      max_speed_xy: 0.26
+      acc_lim_x: 0.5 # kept low for isaacsim
+      acc_lim_y: 0.1 # 0'd for isaacsim
+      acc_lim_theta: 0.5 # kept low for isaacsim
       decel_lim_x: -0.5 # kept low for isaacsim
-      decel_lim_y: -0.0 # 0'd for isaacsim
-      decel_lim_theta: -0.25 # kept low for isaacsim
+      decel_lim_y: -0.1 # 0'd for isaacsim
+      decel_lim_theta: -0.5 # kept low for isaacsim
 
       # Trajectory Generation params
       discretize_by_time: true
       sim_time: 1.7
-      vx_samples: 10
-      vy_samples: 0
-      vtheta_samples: 10
+      vx_samples: 15
+      vy_samples: 5
+      vtheta_samples: 15
+
       # linear_granularity: 0.05
-      # angular_granularity: 0.025
+      # angular_granularity: 0.2512
 
       # Trajectory critics
       transform_tolerance: 0.2
@@ -53,18 +54,17 @@
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: False
       stateful: True
-      #critics: ["BaseObstacle", "PathDist", "GoalDist", "GoalAlign", "PathAlign", "OscillationCritic", "RotateToGoalCritic"]
-
-      critics: ["GoalDist", "PathDist", "PathAlign", "BaseObstacle"]
-      
-      BaseObstacle.scale: 5.0
-      PathDist.scale: 3.0
-      GoalDist.scale: 1.0
-      # GoalAlign.scale: 1.0
-      PathAlign.scale: 1.0
-      # OscillationCritic.scale: 0.0
-      # RotateToGoalCritic.scale: 1.0
-      # RotateToGoalCritic.xy_goal_tolerance: 0.1
+      critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathDist", "GoalDist"] # "PathAlign",
+      BaseObstacle.scale: 0.02
+      # PathAlign.scale: 32.0
+      GoalAlign.scale: 32.0
+      # PathAlign.forward_point_distance: 0.1
+      GoalAlign.forward_point_distance: 0.1
+      PathDist.scale: 32.0
+      GoalDist.scale: 24.0
+      RotateToGoal.scale: 32.0
+      RotateToGoal.slowing_factor: 5.0
+      RotateToGoal.lookahead_time: -1.0
       
       
 

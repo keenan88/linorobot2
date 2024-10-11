@@ -30,12 +30,12 @@
     pf_z: 0.99                          # Weighting factor for particle filter updates
     recovery_alpha_fast: 0.5            # Fast recovery rate for particle filter during localization failure
     recovery_alpha_slow: 0.1            # Slow recovery rate for particle filter during localization failure
-    resample_interval: 1                # Number of updates before resampling particles in the particle filter
+    resample_interval: 3                # Number of updates before resampling particles in the particle filter
     save_pose_rate: 1.0                 # Frequency (in seconds) for saving the estimated pose
     
     # Pointcloud update parameters
     tf_broadcast: true                  # Whether to broadcast the transform (True to enable broadcasting)
-    transform_tolerance: 1.0            # Time tolerance for transform lookups (seconds)
+    transform_tolerance: 0.1           # Time tolerance for transform lookups (seconds)
     update_min_a: 0.0174                # Minimum angular movement required to trigger an AMCL update
     update_min_d: 0.05                  # Minimum linear movement required to trigger an AMCL update
 
