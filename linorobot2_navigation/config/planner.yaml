@@ -42,7 +42,7 @@
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: true
-        inflation_radius: 0.4  # Increase the inflation radius to provide more clearance
+        inflation_radius: 0.5  # Increase the inflation radius to provide more clearance
         cost_scaling_factor: 2.0  # Higher cost scaling factor to heavily penalize keepout zones and obstacles
         inflate_unknown: false
         inflate_around_unknown: true
