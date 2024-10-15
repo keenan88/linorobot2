@@ -9,9 +9,8 @@ Panels:
         - /TF1/Frames1
         - /TF1/Tree1
         - /Static Map1/Topic1
+        - /LaserScan1
         - /LaserScan1/Topic1
-        - /Global Footprint1
-        - /Local Footprint1
         - /Particle Cloud1/Topic1
         - /Traffic Map1/Topic1
         - /Fleet Markers1/Topic1
@@ -721,11 +720,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -36.69233703613281
+      Scale: -73.4923095703125
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -1.9577387571334839
-      Y: 0.16172431409358978
+      X: 0.06006994470953941
+      Y: -0.22995972633361816
     Saved: ~
 Window Geometry:
   Displays:
