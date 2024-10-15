@@ -10,12 +10,11 @@ Panels:
         - /TF1/Tree1
         - /Static Map1/Topic1
         - /LaserScan1/Topic1
+        - /Global Footprint1
+        - /Local Footprint1
         - /Particle Cloud1/Topic1
         - /Traffic Map1/Topic1
         - /Fleet Markers1/Topic1
-        - /Schedule Markers1
-        - /Map Markers1
-        - /MarkerArray1
         - /MarkerArray1/Topic1
       Splitter Ratio: 0.5029411911964417
     Tree Height: 263
@@ -553,7 +552,7 @@ Visualization Manager:
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/Polygon
-      Color: 170; 85; 127
+      Color: 255; 170; 127
       Enabled: true
       Name: Global Footprint
       Topic:
@@ -566,7 +565,7 @@ Visualization Manager:
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/Polygon
-      Color: 170; 85; 127
+      Color: 170; 0; 0
       Enabled: true
       Name: Local Footprint
       Topic:
@@ -722,11 +721,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -67.03367614746094
+      Scale: -36.69233703613281
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.9636650085449219
-      Y: -0.35628095269203186
+      X: -1.9577387571334839
+      Y: 0.16172431409358978
     Saved: ~
 Window Geometry:
   Displays:

@@ -58,7 +58,7 @@
       critics: ["GoalAlign", "PathDist", "GoalDist", "ObstacleFootprint"]
       GoalAlign.scale: 32.0 # /100
       GoalAlign.forward_point_distance: 0.01
-      PathDist.scale: 32.0 # /100
+      PathDist.scale: 64.0 # /100
       GoalDist.scale: 32.0 # /100
       ObstacleFootprint.scale: 500.0 # /50.0
       ObstacleFootprint.sum_scores: True
