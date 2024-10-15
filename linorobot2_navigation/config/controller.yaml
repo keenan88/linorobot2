@@ -55,13 +55,13 @@
       limit_vel_cmd_in_traj: False
       stateful: True
       # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
-      critics: ["GoalAlign", "PathDist", "GoalDist", "BaseObstacleCritic"]
+      critics: ["GoalAlign", "PathDist", "GoalDist", "ObstacleFootprint"]
       GoalAlign.scale: 32.0 # /100
       GoalAlign.forward_point_distance: 0.01
       PathDist.scale: 32.0 # /100
       GoalDist.scale: 32.0 # /100
-      BaseObstacleCritic.scale: 10.0 # /1.0
-      BaseObstacleCritic.sum_scores: True
+      ObstacleFootprint.scale: 500.0 # /50.0
+      ObstacleFootprint.sum_scores: True
       
 
 /nav2/local_costmap/local_costmap:
@@ -75,14 +75,14 @@
     global_frame: map
     robot_base_frame: base_link
     rolling_window: true
-    resolution: 0.02
+    resolution: 0.02  
 
-    # filters: ["keepout_filter", "inflation_layer"]
+    filters: ["keepout_filter", "inflation_layer"]
       
-    # keepout_filter:
-    #   plugin: "nav2_costmap_2d::KeepoutFilter"
-    #   enabled: True
-    #   filter_info_topic: "/costmap_filter_info"
+    keepout_filter:
+      plugin: "nav2_costmap_2d::KeepoutFilter"
+      enabled: True
+      filter_info_topic: "/costmap_filter_info"
 
     plugins: ["static_layer", "inflation_layer", "obstacle_layer"]
 
@@ -116,7 +116,7 @@
     inflation_layer:
       plugin: "nav2_costmap_2d::InflationLayer"
       enabled: true
-      inflation_radius: 0.6
+      inflation_radius: 0.2
       cost_scaling_factor: 1.0
       inflate_unknown: false
       inflate_around_unknown: true

@@ -18,7 +18,7 @@ Panels:
         - /MarkerArray1
         - /MarkerArray1/Topic1
       Splitter Ratio: 0.5029411911964417
-    Tree Height: 378
+    Tree Height: 263
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -149,6 +149,8 @@ Visualization Manager:
           Value: false
         left_rs_depth_optical_frame:
           Value: false
+        map:
+          Value: true
         odom:
           Value: true
         rear_left_drum:
@@ -237,14 +239,177 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                back_channel:
+                  {}
+                front_channel:
+                  {}
+                front_left_wheel:
+                  front_left_plate1:
+                    {}
+                  front_left_plate2:
+                    {}
+                  front_left_roller1:
+                    {}
+                  front_left_roller10:
+                    {}
+                  front_left_roller11:
+                    {}
+                  front_left_roller12:
+                    {}
+                  front_left_roller13:
+                    {}
+                  front_left_roller14:
+                    {}
+                  front_left_roller15:
+                    {}
+                  front_left_roller2:
+                    {}
+                  front_left_roller3:
+                    {}
+                  front_left_roller4:
+                    {}
+                  front_left_roller5:
+                    {}
+                  front_left_roller6:
+                    {}
+                  front_left_roller7:
+                    {}
+                  front_left_roller8:
+                    {}
+                  front_left_roller9:
+                    {}
+                front_right_wheel:
+                  front_right_drum:
+                    {}
+                  front_right_plate1:
+                    {}
+                  front_right_plate2:
+                    {}
+                  front_right_roller1:
+                    {}
+                  front_right_roller10:
+                    {}
+                  front_right_roller11:
+                    {}
+                  front_right_roller12:
+                    {}
+                  front_right_roller13:
+                    {}
+                  front_right_roller14:
+                    {}
+                  front_right_roller15:
+                    {}
+                  front_right_roller2:
+                    {}
+                  front_right_roller3:
+                    {}
+                  front_right_roller4:
+                    {}
+                  front_right_roller5:
+                    {}
+                  front_right_roller6:
+                    {}
+                  front_right_roller7:
+                    {}
+                  front_right_roller8:
+                    {}
+                  front_right_roller9:
+                    {}
+                front_rs_depth_optical_frame:
+                  {}
+                left_channel:
+                  {}
+                left_rs_depth_optical_frame:
+                  {}
+                rear_left_wheel:
+                  rear_left_drum:
+                    {}
+                  rear_left_plate1:
+                    {}
+                  rear_left_plate2:
+                    {}
+                  rear_left_roller1:
+                    {}
+                  rear_left_roller10:
+                    {}
+                  rear_left_roller11:
+                    {}
+                  rear_left_roller12:
+                    {}
+                  rear_left_roller13:
+                    {}
+                  rear_left_roller14:
+                    {}
+                  rear_left_roller15:
+                    {}
+                  rear_left_roller2:
+                    {}
+                  rear_left_roller3:
+                    {}
+                  rear_left_roller4:
+                    {}
+                  rear_left_roller5:
+                    {}
+                  rear_left_roller6:
+                    {}
+                  rear_left_roller7:
+                    {}
+                  rear_left_roller8:
+                    {}
+                  rear_left_roller9:
+                    {}
+                rear_right_wheel:
+                  rear_right_plate1:
+                    {}
+                  rear_right_plate2:
+                    {}
+                  rear_right_roller1:
+                    {}
+                  rear_right_roller10:
+                    {}
+                  rear_right_roller11:
+                    {}
+                  rear_right_roller12:
+                    {}
+                  rear_right_roller13:
+                    {}
+                  rear_right_roller14:
+                    {}
+                  rear_right_roller15:
+                    {}
+                  rear_right_roller2:
+                    {}
+                  rear_right_roller3:
+                    {}
+                  rear_right_roller4:
+                    {}
+                  rear_right_roller5:
+                    {}
+                  rear_right_roller6:
+                    {}
+                  rear_right_roller7:
+                    {}
+                  rear_right_roller8:
+                    {}
+                  rear_right_roller9:
+                    {}
+                rear_rs_depth_optical_frame:
+                  {}
+                right_channel:
+                  {}
+                right_rs_depth_optical_frame:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 0.4000000059604645
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Static Map
       Topic:
         Depth: 5
@@ -260,7 +425,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /nav2/map_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: map
@@ -307,7 +472,7 @@ Visualization Manager:
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Keepout Zone
       Topic:
         Depth: 5
@@ -323,7 +488,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /global_costmap/keepout_filter_mask_updates
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -547,7 +712,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -3.13000226020813
+      Angle: -3.135002374649048
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -557,21 +722,21 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -38.71998596191406
+      Scale: -66.64041900634766
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.8968346118927002
-      Y: -1.3181147575378418
+      X: 0.022957928478717804
+      Y: -0.42021384835243225
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 523
+  Height: 408
   Hide Left Dock: false
   Hide Right Dock: true
   Navigation 2:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000001b5fc020000000afb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000001b5000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300ffffff000000010000023e000003a2fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b000003a2000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000001dd000001b500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000015600000142fc020000000afb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b00000142000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300ffffff000000010000023e000003a2fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b000003a2000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000001dd0000014200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Tool Properties:
@@ -580,4 +745,4 @@ Window Geometry:
     collapsed: true
   Width: 825
   X: 0
-  Y: 520
+  Y: 635
