@@ -41,7 +41,7 @@ class LocalPlanEvaluator(Node):
             marker.id = idx
             marker.type = Marker.LINE_STRIP
             marker.action = Marker.ADD
-            marker.scale.x = 0.001  # Line width
+            marker.scale.x = 0.01  # Line width
             marker.color.a = 0.1  # Transparency
             
             # Color based on the evaluation index
@@ -63,8 +63,10 @@ class LocalPlanEvaluator(Node):
                 point.y = pose.y
                 point.z = 0.0
                 marker.points.append(point)
-            
-            marker_array.markers.append(marker)
+
+            if idx == msg.best_index:
+        
+                marker_array.markers.append(marker)
 
             # Log the trajectory score for each twist (optional)
             # self.log_trajectory_score(idx, traj)

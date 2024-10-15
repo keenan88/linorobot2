@@ -176,7 +176,7 @@ global_costmap:
   global_costmap:
     ros__parameters:
       use_sim_time: true
-      footprint_padding: 0.03
+      footprint_padding: 0.0
       update_frequency: 1.0
       publish_frequency: 1.0
       global_frame: map

@@ -54,24 +54,20 @@
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: False
       stateful: True
-      critics: ["Oscillation", "ObstacleFootprintCritic", "GoalAlign", "PathDist", "GoalDist"] # "PathAlign", RotateToGoal
-      ObstacleFootprintCritic.scale: 20.0
-      # PathAlign.scale: 32.0
-      GoalAlign.scale: 32.0
-      # PathAlign.forward_point_distance: 0.1
-      GoalAlign.forward_point_distance: 0.1
-      PathDist.scale: 32.0
-      GoalDist.scale: 24.0
-      #RotateToGoal.scale: 32.0
-      #RotateToGoal.slowing_factor: 5.0
-      #RotateToGoal.lookahead_time: -1.0
-      
+      # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
+      critics: ["GoalAlign", "PathDist", "GoalDist", "BaseObstacleCritic"]
+      GoalAlign.scale: 32.0 # /100
+      GoalAlign.forward_point_distance: 0.01
+      PathDist.scale: 32.0 # /100
+      GoalDist.scale: 32.0 # /100
+      BaseObstacleCritic.scale: 10.0 # /1.0
+      BaseObstacleCritic.sum_scores: True
       
 
 /nav2/local_costmap/local_costmap:
   ros__parameters:
 
-    footprint_padding: 0.05
+    footprint_padding: 0.0
     footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
     
     update_frequency: 1.0
@@ -80,6 +76,13 @@
     robot_base_frame: base_link
     rolling_window: true
     resolution: 0.02
+
+    # filters: ["keepout_filter", "inflation_layer"]
+      
+    # keepout_filter:
+    #   plugin: "nav2_costmap_2d::KeepoutFilter"
+    #   enabled: True
+    #   filter_info_topic: "/costmap_filter_info"
 
     plugins: ["static_layer", "inflation_layer", "obstacle_layer"]
 
@@ -113,7 +116,7 @@
     inflation_layer:
       plugin: "nav2_costmap_2d::InflationLayer"
       enabled: true
-      inflation_radius: 0.25
+      inflation_radius: 0.6
       cost_scaling_factor: 1.0
       inflate_unknown: false
       inflate_around_unknown: true

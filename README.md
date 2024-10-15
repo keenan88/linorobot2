@@ -10,7 +10,9 @@ sudo ufw allow from any to any port 55443 proto tcp
 sudo ufw allow in proto udp to 224.0.0.0/4
 sudo ufw allow in proto udp to 255.255.255.255
 
-If a vertex is not connected to a lane, IT WILL NOT BE INCLUDED IN THE NAV GRAPH!!
+RMF traffic: If a vertex is not connected to a lane, IT WILL NOT BE INCLUDED IN THE NAV GRAPH!!
+
+Nav2 critic scale: https://robotics.stackexchange.com/questions/105749/dwb-planner-in-nav2-does-not-properly-set-scale-for-critics
 
 
 Forked from [linorobot2](https://github.com/linorobot/linorobot2).

@@ -14,7 +14,7 @@
 /nav2/global_costmap:
   global_costmap:
     ros__parameters:
-      footprint_padding: 0.05  # Extra padding around the footprint
+      footprint_padding: 0.0  # Extra padding around the footprint
       footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"  # Full footprint dimensions of the robot
 
       update_frequency: 1.0

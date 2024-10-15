@@ -31,7 +31,7 @@ def generate_launch_description():
     depth_to_scan_rear_rs_left_side = Node(
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
-        name = realsense_placement + '_pointcloud_to_laserscan',
+        name = realsense_placement + '_left_pointcloud_to_laserscan',
         remappings=[
             ('/cloud_in', '/' + realsense_placement + '/pointcloud_downsampled'),
             ('/scan', '/' + realsense_placement + '/scan_left')
@@ -44,7 +44,7 @@ def generate_launch_description():
     depth_to_scan_rear_rs_right_side = Node(
         package='pointcloud_to_laserscan',
         executable='pointcloud_to_laserscan_node',
-        name = realsense_placement + '_pointcloud_to_laserscan',
+        name = realsense_placement + '_right_pointcloud_to_laserscan',
         remappings=[
             ('/cloud_in', '/' + realsense_placement + '/pointcloud_downsampled'),
             ('/scan', '/' + realsense_placement + '/scan_right')
