@@ -9,6 +9,7 @@ from tf2_ros import Buffer, TransformListener
 from rclpy.action import ActionClient
 from nav2_msgs.action import NavigateThroughPoses
 from geometry_msgs.msg import TransformStamped
+from copy import deepcopy
 
 
 
@@ -43,6 +44,7 @@ class Linorobot2RMF(Node):
         self.robot_state.location.level_name = "L1" # TODO - implement level updating later, if need be
         self.robot_state.location.index = 0
         self.robot_state.name = self.robot_name
+        self.robot_state.mode.mode = MODE_CHARGING
 
         # TODO - add a bridge to bridge in and out robot_state and robot_path_requests from queen DOMAIN ID to individual robot DOMAIN ID
 
@@ -57,18 +59,17 @@ class Linorobot2RMF(Node):
 
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
-        self.timer = self.create_timer(0.5, self.get_transform)
+        self.timer = self.create_timer(0.01, self.get_transform)
         self.first_tf_set = False
 
         self._action_client = ActionClient(
             self, NavigateThroughPoses, '/nav2/navigate_through_poses')
 
-        self.state_timer = self.create_timer(0.1, self.publish_state)
+        self.state_timer = self.create_timer(0.01, self.publish_state)
 
         self.path_requests = []
         self.completed_tasks_IDs = []
 
-        self.execute_path_timer = self.create_timer(0.1, self.execute_path)
 
 
     def get_transform(self):
@@ -87,21 +88,17 @@ class Linorobot2RMF(Node):
             self.robot_state.location.x = transform.transform.translation.x
             self.robot_state.location.y = transform.transform.translation.y
             self.robot_state.location.yaw = math.atan2(2.0 * (w * z + x * y), 1.0 - 2.0 * (y * y + z * z))
+            self.robot_state.location.t = transform.header.stamp
             self.first_tf_set = True
 
         except Exception as e:
-            self.get_logger().error(f"Could not get transform: {e}")
+            print(f"Could not get transform: {e}")
 
     def send_navigate_through_poses_goal(self, poses):
         self._action_client.wait_for_server()
 
         goal_msg = NavigateThroughPoses.Goal()
         goal_msg.poses = poses
-
-        self.get_logger().info(f'Sending {len(poses)} poses to Nav2: ')
-
-        for pos in poses:
-            self.get_logger().info(f'Goal: {round(pos.pose.position.x, 2)}, {round(pos.pose.position.y, 2)} ')
 
         self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
 
@@ -110,11 +107,12 @@ class Linorobot2RMF(Node):
     def goal_response_callback(self, future):
         goal_handle = future.result()
         if not goal_handle.accepted:
-            self.get_logger().info('NavigateThroughPoses goal was rejected.')
-            self.robot_state.mode.mode_request_id = MODE_IDLE
+            print('NavigateThroughPoses goal was rejected.')
+            self.robot_state.mode.mode = MODE_IDLE
+            self.robot_state.path = []
             return
 
-        self.get_logger().info('NavigateThroughPoses goal accepted.')
+        print('NavigateThroughPoses goal accepted.')
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
 
@@ -124,68 +122,33 @@ class Linorobot2RMF(Node):
 
     def get_result_callback(self, future):
         result = future.result().result
+
         if result: 
-            self.get_logger().info('NavigateThroughPoses succeeded!')
+            print('NavigateThroughPoses succeeded!')
             self.completed_tasks_IDs.append(self.robot_state.task_id)
-        else: self.get_logger().info('NavigateThroughPoses failed.')
-        self.robot_state.mode.mode_request_id = MODE_IDLE
+        else: 
+            print('NavigateThroughPoses failed.')
+
+        self.robot_state.mode.mode = MODE_IDLE
+        self.robot_state.path = []
 
     def add_path_to_queue(self, path_request):
         if path_request.fleet_name == self.fleet_name:
 
             if path_request.robot_name == self.robot_name:
 
-                if path_request.task_id != self.robot_state.task_id:
-
-                    if path_request.task_id not in self.completed_tasks_IDs:
-
-                        if path_request.task_id not in [queued_path.task_id for queued_path in self.path_requests]:
-
-                            self.path_requests.append(path_request)
-                            print("Queued task: ", path_request.task_id)
-                            print(round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2))
-                            print(round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2))
-
-                        else:
-
-                            print("Recieved request to do already-queued task: ", path_request.task_id)
-                            print(round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2))
-                            print(round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2))
-
-                    else:
-
-                        print("Recieved request to do already-completed task: ", path_request.task_id)
-                        print(round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2))
-                        print(round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2))
-
-                else:
-
-                    print("Recieved request to do current task: ", path_request.task_id)
-                    print(round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2))
-                    print(round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2))
-
-    def execute_path(self):
-
-        if self.robot_state.mode.mode == MODE_IDLE:
-
-            if len(self.path_requests) > 0:
-
                 self.robot_state.mode.mode == MODE_MOVING
-
-                path_request = self.path_requests.pop(0)
                 
-                self.robot_state.path = path_request.path
+                self.robot_state.path = [path_request.path[1]]
 
                 self.robot_state.task_id = path_request.task_id
-
-                self.robot_state.mode.mode_request_id = MODE_MOVING
 
                 poses = []
 
                 for waypoint in path_request.path:
                     pose = PoseStamped()
                     pose.header.frame_id = 'map'  # Assuming map frame, adjust if necessary
-                    pose.header.stamp = self.get_clock().now().to_msg()
+                    pose.header.stamp = waypoint.t
 
                     # Assign position and orientation
                     pose.pose.position.x = waypoint.x
@@ -197,8 +160,18 @@ class Linorobot2RMF(Node):
 
                     poses.append(pose)
 
+                    print(f'Goal: {round(waypoint.x, 2), round(waypoint.y, 2), round(waypoint.yaw, 2)} ')
+
                 self.send_navigate_through_poses_goal(poses)
-            
+
+
+                print(
+                    "Sent to nav2: ", path_request.task_id, ": (", \
+                    round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
+                    round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
+                )
+
+
     
     def publish_state(self):
 

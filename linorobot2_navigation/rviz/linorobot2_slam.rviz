@@ -9,12 +9,12 @@ Panels:
         - /TF1/Frames1
         - /TF1/Tree1
         - /Static Map1/Topic1
-        - /LaserScan1
         - /LaserScan1/Topic1
+        - /Path1
         - /Particle Cloud1/Topic1
         - /Traffic Map1/Topic1
         - /Fleet Markers1/Topic1
-        - /MarkerArray1/Topic1
+        - /Local Plan1/Topic1
       Splitter Ratio: 0.5029411911964417
     Tree Height: 263
   - Class: rviz_common/Selection
@@ -524,7 +524,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz_default_plugins/Path
-      Color: 255; 170; 0
+      Color: 255; 85; 0
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
@@ -621,7 +621,9 @@ Visualization Manager:
       Enabled: true
       Name: Fleet Markers
       Namespaces:
-        {}
+        body: true
+        name: true
+        nose: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -633,7 +635,8 @@ Visualization Manager:
       Enabled: true
       Name: Schedule Markers
       Namespaces:
-        {}
+        participant 0: true
+        participant location 0: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -645,7 +648,9 @@ Visualization Manager:
       Enabled: true
       Name: Map Markers
       Namespaces:
-        {}
+        tinyRobot/labels/L1: true
+        tinyRobot/lanes/L1: true
+        tinyRobot/waypoints/L1: true
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -655,7 +660,7 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
-      Name: MarkerArray
+      Name: Local Plan
       Namespaces:
         {}
       Topic:
@@ -710,7 +715,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -3.135002374649048
+      Angle: -3.1750152111053467
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -720,11 +725,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -73.4923095703125
+      Scale: -66.50867462158203
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.06006994470953941
-      Y: -0.22995972633361816
+      X: 0.2319788932800293
+      Y: 0.055890168994665146
     Saved: ~
 Window Geometry:
   Displays:
