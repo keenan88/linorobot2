@@ -69,7 +69,7 @@
       PathAlign.scale: 2.0
       PathAlign.aggregation_type: "sum"
 
-      GoalDist.scale: 0.8 # /100
+      GoalDist.scale: 1.6 # /100
       GoalDist.aggregation_type: "sum"
       
       ObstacleFootprint.scale: 260.0 # /50.0
