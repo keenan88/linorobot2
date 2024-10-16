@@ -1,20 +1,20 @@
 /nav2/planner_server:
   ros__parameters:
+    expected_planner_frequency: 20.0
+    use_sim_time: True
+    planner_plugins: ["GridBased"]
     GridBased:
-      allow_unknown: true
-      plugin: nav2_navfn_planner/NavfnPlanner
-      tolerance: 0.5
-      use_astar: false
-      use_final_approach_orientation: false
-    expected_planner_frequency: 1.0
-    planner_plugins:
-    - GridBased
+      plugin: "nav2_theta_star_planner/ThetaStarPlanner" # In Iron and older versions, "/" was used instead of "::"
+      how_many_corners: 8
+      w_euc_cost: 1.0
+      w_traversal_cost: 2.0
+      w_heuristic_cost: 1.0
 
 
 /nav2/global_costmap:
   global_costmap:
     ros__parameters:
-      footprint_padding: 0.15  # Extra padding around the footprint, added so planner only sends robot where it has space to move
+      footprint_padding: 0.0  # Extra padding around the footprint, added so planner only sends robot where it has space to move
       footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"  # Full footprint dimensions of the robot
 
       update_frequency: 1.0
@@ -42,8 +42,8 @@
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: true
-        inflation_radius: 0.9  # Increase the inflation radius to provide more clearance
-        cost_scaling_factor: 3.0  # Higher cost scaling factor to heavily penalize keepout zones and obstacles
+        inflation_radius: 0.8  # Robot radius is 0.48m, planner plans with base link, so set to local costmap inflation radius + robot radius
+        cost_scaling_factor: 2.0  # Higher cost scaling factor to heavily penalize keepout zones and obstacles
         inflate_unknown: false
         inflate_around_unknown: true
 

@@ -2,7 +2,7 @@
   ros__parameters:
     # controller server parameters (see Controller Server for more info)
     use_sim_time: True
-    controller_frequency: 20.0
+    controller_frequency: 12.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -22,7 +22,7 @@
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
       debug_trajectory_details: True
-      min_vel_x: -0.0
+      min_vel_x: -0.15
       min_vel_y: -0.15 # 0'd for isaacsim
       max_vel_x: 0.15 
       max_vel_y: 0.15 # 0'd for isaacsim
@@ -39,10 +39,10 @@
 
       # Trajectory Generation params
       discretize_by_time: true
-      sim_time: 1.7
-      vx_samples: 15
-      vy_samples: 5
-      vtheta_samples: 15
+      sim_time: 1.0
+      vx_samples: 10
+      vy_samples: 10
+      vtheta_samples: 25
 
       # linear_granularity: 0.05
       # angular_granularity: 0.2512
@@ -55,21 +55,27 @@
       limit_vel_cmd_in_traj: False
       stateful: True
       # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
-      critics: ["GoalAlign", "PathDist", "GoalDist", "ObstacleFootprint", "PathAlign"]
-      GoalAlign.scale: 128.0 # /100
-      GoalAlign.forward_point_distance: 0.1
-      GoalAlign.aggregation_type: "last"
+      critics: ["PathDist", "PathAlign", "GoalDist", "ObstacleFootprint", "RotateToGoal"]
 
-      PathDist.scale: 32.0 # /100
+      RotateToGoal.scale: 15.0
+      RotateToGoal.slowing_factor: 1.0
+      RotateToGoal.lookahead_time: -1.0
+      RotateToGoal.xy_goal_tolerance: 0.2
+      RotateToGoal.trans_stopped_velocity: 0.25
 
-      GoalDist.scale: 32.0 # /100
+      PathDist.scale: 2.0 # /100
+      PathDist.aggregation_type: "sum"
+
+      PathAlign.scale: 2.0
+      PathAlign.aggregation_type: "sum"
+
+      GoalDist.scale: 0.8 # /100
+      GoalDist.aggregation_type: "sum"
       
-      ObstacleFootprint.scale: 1.0 # /50.0
+      ObstacleFootprint.scale: 260.0 # /50.0
       ObstacleFootprint.sum_scores: False
 
-      PathAlign.scale: 32.0
-      PathAlign.forward_point_distance: 0.1
-      PathAlign.aggregation_type: "last"
+      
       
 
 /nav2/local_costmap/local_costmap:
@@ -78,8 +84,8 @@
     footprint_padding: 0.0
     footprint: "[ [0.41, 0.25], [-0.41, 0.25], [-0.41, -0.25], [0.41, -0.25] ]"
     
-    update_frequency: 1.0
-    publish_frequency: 1.0
+    update_frequency: 10.0
+    publish_frequency: 10.0
     global_frame: map
     robot_base_frame: base_link
     rolling_window: true
@@ -125,7 +131,7 @@
       plugin: "nav2_costmap_2d::InflationLayer"
       enabled: true
       inflation_radius: 0.2
-      cost_scaling_factor: 0.1
+      cost_scaling_factor: 10.0
       inflate_unknown: false
       inflate_around_unknown: true
 
