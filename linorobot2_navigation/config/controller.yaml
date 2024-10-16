@@ -24,16 +24,16 @@
       debug_trajectory_details: True
       min_vel_x: -0.0
       min_vel_y: -0.15 # 0'd for isaacsim
-      max_vel_x: 0.26 
-      max_vel_y: 0.26 # 0'd for isaacsim
+      max_vel_x: 0.15 
+      max_vel_y: 0.15 # 0'd for isaacsim
       max_vel_theta: 0.5
       min_speed_theta: 0.0
       min_speed_xy: 0.0
-      max_speed_xy: 0.26
-      acc_lim_x: 0.5 # kept low for isaacsim
+      max_speed_xy: 0.15
+      acc_lim_x: 0.1 # kept low for isaacsim
       acc_lim_y: 0.1 # 0'd for isaacsim
       acc_lim_theta: 0.5 # kept low for isaacsim
-      decel_lim_x: -0.5 # kept low for isaacsim
+      decel_lim_x: -0.1 # kept low for isaacsim
       decel_lim_y: -0.1 # 0'd for isaacsim
       decel_lim_theta: -0.5 # kept low for isaacsim
 
@@ -55,13 +55,21 @@
       limit_vel_cmd_in_traj: False
       stateful: True
       # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
-      critics: ["GoalAlign", "PathDist", "GoalDist", "ObstacleFootprint"]
-      GoalAlign.scale: 64.0 # /100
-      GoalAlign.forward_point_distance: 0.01
-      PathDist.scale: 64.0 # /100
+      critics: ["GoalAlign", "PathDist", "GoalDist", "ObstacleFootprint", "PathAlign"]
+      GoalAlign.scale: 128.0 # /100
+      GoalAlign.forward_point_distance: 0.1
+      GoalAlign.aggregation_type: "last"
+
+      PathDist.scale: 32.0 # /100
+
       GoalDist.scale: 32.0 # /100
-      ObstacleFootprint.scale: 500.0 # /50.0
-      ObstacleFootprint.sum_scores: True
+      
+      ObstacleFootprint.scale: 1.0 # /50.0
+      ObstacleFootprint.sum_scores: False
+
+      PathAlign.scale: 32.0
+      PathAlign.forward_point_distance: 0.1
+      PathAlign.aggregation_type: "last"
       
 
 /nav2/local_costmap/local_costmap:
@@ -117,7 +125,7 @@
       plugin: "nav2_costmap_2d::InflationLayer"
       enabled: true
       inflation_radius: 0.2
-      cost_scaling_factor: 1.0
+      cost_scaling_factor: 0.1
       inflate_unknown: false
       inflate_around_unknown: true
 

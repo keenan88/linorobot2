@@ -14,6 +14,8 @@ RMF traffic: If a vertex is not connected to a lane, IT WILL NOT BE INCLUDED IN 
 
 Nav2 critic scale: https://robotics.stackexchange.com/questions/105749/dwb-planner-in-nav2-does-not-properly-set-scale-for-critics
 
+To get RMF fleet manager to recognize completed task, robot state must have empty path, and mode set to idle or charging
+
 
 Forked from [linorobot2](https://github.com/linorobot/linorobot2).
 

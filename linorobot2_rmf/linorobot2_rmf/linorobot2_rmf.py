@@ -7,7 +7,7 @@ from geometry_msgs.msg import PoseStamped
 import math
 from tf2_ros import Buffer, TransformListener
 from rclpy.action import ActionClient
-from nav2_msgs.action import NavigateThroughPoses
+from nav2_msgs.action import NavigateThroughPoses, NavigateToPose
 from geometry_msgs.msg import TransformStamped
 from copy import deepcopy
 
@@ -57,13 +57,15 @@ class Linorobot2RMF(Node):
             10
         )
 
+        self.execute_path_timer = self.create_timer(0.01, self.execute_path)
+
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
         self.timer = self.create_timer(0.01, self.get_transform)
         self.first_tf_set = False
 
         self._action_client = ActionClient(
-            self, NavigateThroughPoses, '/nav2/navigate_through_poses')
+            self, NavigateToPose, '/nav2/navigate_to_pose')
 
         self.state_timer = self.create_timer(0.01, self.publish_state)
 
@@ -94,11 +96,11 @@ class Linorobot2RMF(Node):
         except Exception as e:
             print(f"Could not get transform: {e}")
 
-    def send_navigate_through_poses_goal(self, poses):
+    def send_navigate_through_poses_goal(self, pose):
         self._action_client.wait_for_server()
 
-        goal_msg = NavigateThroughPoses.Goal()
-        goal_msg.poses = poses
+        goal_msg = NavigateToPose.Goal()
+        goal_msg.pose = pose
 
         self._send_goal_future = self._action_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
 
@@ -132,46 +134,60 @@ class Linorobot2RMF(Node):
         self.robot_state.mode.mode = MODE_IDLE
         self.robot_state.path = []
 
+    def execute_path(self):
+
+        if len(self.path_requests) > 0:
+
+            if self.robot_state.mode.mode in [MODE_IDLE, MODE_WAITING, MODE_CHARGING]:
+
+                self.robot_state.mode.mode == MODE_MOVING
+
+                path_request = self.path_requests.pop(0)
+                        
+                self.robot_state.path = [path_request.path[1]]
+                self.robot_state.task_id = path_request.task_id
+
+                waypoint = path_request.path[1]
+
+                pose = PoseStamped()
+                pose.header.frame_id = 'map'
+                pose.header.stamp = waypoint.t
+
+                pose.pose.position.x = waypoint.x
+                pose.pose.position.y = waypoint.y
+                pose.pose.orientation.x = 0.0
+                pose.pose.orientation.y = 0.0
+                pose.pose.orientation.z = math.sin(waypoint.yaw / 2.0)
+                pose.pose.orientation.w = math.cos(waypoint.yaw / 2.0)
+
+                self.send_navigate_through_poses_goal(pose)
+
+                print(
+                    "Sent:   ", path_request.task_id, ": (", \
+                    round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
+                    round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
+                )
+
     def add_path_to_queue(self, path_request):
         if path_request.fleet_name == self.fleet_name:
 
             if path_request.robot_name == self.robot_name:
 
-                self.robot_state.mode.mode == MODE_MOVING
-                
-                self.robot_state.path = [path_request.path[1]]
+                if not (path_request.task_id == self.robot_state.task_id and self.robot_state.mode.mode == MODE_MOVING):
 
-                self.robot_state.task_id = path_request.task_id
+                    if path_request.task_id not in [path_request.task_id for path_request in self.path_requests]:
 
-                poses = []
+                        if path_request.task_id not in self.completed_tasks_IDs:
 
-                for waypoint in path_request.path:
-                    pose = PoseStamped()
-                    pose.header.frame_id = 'map'  # Assuming map frame, adjust if necessary
-                    pose.header.stamp = waypoint.t
+                            self.path_requests.append(path_request)
 
-                    # Assign position and orientation
-                    pose.pose.position.x = waypoint.x
-                    pose.pose.position.y = waypoint.y
-                    pose.pose.orientation.x = 0.0
-                    pose.pose.orientation.y = 0.0
-                    pose.pose.orientation.z = math.sin(waypoint.yaw / 2.0)
-                    pose.pose.orientation.w = math.cos(waypoint.yaw / 2.0)
+                            print(
+                                "Queued: ", path_request.task_id, ": (", \
+                                round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
+                                round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
+                            )
 
-                    poses.append(pose)
-
-                    print(f'Goal: {round(waypoint.x, 2), round(waypoint.y, 2), round(waypoint.yaw, 2)} ')
-
-                self.send_navigate_through_poses_goal(poses)
-
-
-                print(
-                    "Sent to nav2: ", path_request.task_id, ": (", \
-                    round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
-                    round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
-                )
-
-
+            
     
     def publish_state(self):
 
