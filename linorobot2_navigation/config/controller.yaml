@@ -2,7 +2,7 @@
   ros__parameters:
     # controller server parameters (see Controller Server for more info)
     use_sim_time: True
-    controller_frequency: 12.0
+    controller_frequency: 8.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -57,7 +57,7 @@
       limit_vel_cmd_in_traj: False
       stateful: True
       # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
-      critics: ["PathDist", "PathAlign", "ObstacleFootprint", "GoalDist"]
+      critics: ["RotateToGoal", "PathDist", "PathAlign", "ObstacleFootprint", "GoalDist", "TwirlingCritic"]
 
       PathDist.scale: 2.0 # /100
       PathDist.aggregation_type: "last"
@@ -72,6 +72,11 @@
       
       ObstacleFootprint.scale: 260.0 # /50.0
       ObstacleFootprint.sum_scores: False
+
+      TwirlingCritic.scale: 0.025
+
+      RotateToGoal.scale: 0.5
+      RotateToGoal.xy_goal_tolerance: 0.15
 
       
       
