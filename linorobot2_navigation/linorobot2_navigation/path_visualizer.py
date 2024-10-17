@@ -31,7 +31,7 @@ class PathVisualizer(Node):
             marker.ns = 'path_visualization'
             marker.id = idx
             marker.type = Marker.SPHERE
-            marker.action = Marker.ADD
+            marker.action = Marker.MODIFY
             marker.pose = pose.pose
             marker.scale.x = 0.025
             marker.scale.y = 0.025

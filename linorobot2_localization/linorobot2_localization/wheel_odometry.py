@@ -146,7 +146,7 @@ class MecanumStateEstimator(Node):
         asdf.header.stamp = self.get_clock().now().to_msg()
         asdf.transform.translation.x = 5.0
         asdf.transform.translation.y = -3.5
-        self.tf_static_broadcaster.sendTransform(asdf)
+        # self.tf_static_broadcaster.sendTransform(asdf)
 
 
 
