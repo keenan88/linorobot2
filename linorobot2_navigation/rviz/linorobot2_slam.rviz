@@ -5,7 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
+        - /Grid1
         - /TF1/Frames1
         - /TF1/Tree1
         - /Static Map1/Topic1
@@ -35,10 +35,10 @@ Panels:
 Visualization Manager:
   Class: ""
   Displays:
-    - Alpha: 0.9900000095367432
-      Cell Size: 0.20000000298023224
+    - Alpha: 0.8999999761581421
+      Cell Size: 0.10000000149011612
       Class: rviz_default_plugins/Grid
-      Color: 32; 74; 135
+      Color: 0; 0; 0
       Enabled: true
       Line Style:
         Line Width: 0.029999999329447746
@@ -604,8 +604,7 @@ Visualization Manager:
       Enabled: true
       Name: Schedule Markers
       Namespaces:
-        participant 0: true
-        participant location 0: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -617,9 +616,7 @@ Visualization Manager:
       Enabled: true
       Name: Map Markers
       Namespaces:
-        tinyRobot/labels/L1: true
-        tinyRobot/lanes/L1: true
-        tinyRobot/waypoints/L1: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -631,7 +628,30 @@ Visualization Manager:
       Enabled: true
       Name: Local Plan
       Namespaces:
-        {}
+        trajectory_1053: true
+        trajectory_1077: true
+        trajectory_1287: true
+        trajectory_1315: true
+        trajectory_1316: true
+        trajectory_1396: true
+        trajectory_1402: true
+        trajectory_1449: true
+        trajectory_1527: true
+        trajectory_1610: true
+        trajectory_1657: true
+        trajectory_1683: true
+        trajectory_1782: true
+        trajectory_1783: true
+        trajectory_1843: true
+        trajectory_1869: true
+        trajectory_1918: true
+        trajectory_2018: true
+        trajectory_2073: true
+        trajectory_2156: true
+        trajectory_2228: true
+        trajectory_584: true
+        trajectory_586: true
+        trajectory_821: true
       Topic:
         Depth: 1
         Durability Policy: Volatile
@@ -666,6 +686,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /nav2/plan
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        path_visualization: true
+        twist_visualization: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /path_visualization
       Value: true
   Enabled: true
   Global Options:
@@ -712,7 +745,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -6.2500224113464355
+      Angle: -6.2400221824646
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -722,11 +755,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 77.30631256103516
+      Scale: 246.2398681640625
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.7554720640182495
-      Y: 0.8053514957427979
+      X: 0.28836607933044434
+      Y: 0.3438301086425781
     Saved: ~
 Window Geometry:
   Displays:

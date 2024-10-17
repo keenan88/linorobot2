@@ -15,6 +15,9 @@ def generate_launch_description():
             {'use_sim_time': True}, 
             '/home/humble_ws/src/linorobot2_navigation/config/controller.yaml'
         ],
+        remappings=[
+                ('/nav2/plan', '/nav2/plan_with_orientations'),
+        ]
     )
 
     planner = Node(

@@ -40,12 +40,14 @@
       # Trajectory Generation params
       discretize_by_time: true
       sim_time: 1.0
+      time_granularity: 0.083
+      # linear_granularity: 0.05
+      # angular_granularity: 0.25
       vx_samples: 10
       vy_samples: 10
-      vtheta_samples: 25
+      vtheta_samples: 15
 
-      # linear_granularity: 0.05
-      # angular_granularity: 0.2512
+      
 
       # Trajectory critics
       transform_tolerance: 0.2
@@ -55,22 +57,18 @@
       limit_vel_cmd_in_traj: False
       stateful: True
       # Nav2 divides all critic scales by 100, except oscillation (not divided) and ObstacleBaseFootprint (divided by 50), and BaseObstacleCritic (not divided)
-      critics: ["PathDist", "PathAlign", "GoalDist", "ObstacleFootprint", "RotateToGoal"]
-
-      RotateToGoal.scale: 15.0
-      RotateToGoal.slowing_factor: 1.0
-      RotateToGoal.lookahead_time: -1.0
-      RotateToGoal.xy_goal_tolerance: 0.2
-      RotateToGoal.trans_stopped_velocity: 0.25
+      critics: ["PathDist", "PathAlign", "ObstacleFootprint", "GoalDist"]
 
       PathDist.scale: 2.0 # /100
-      PathDist.aggregation_type: "sum"
+      PathDist.aggregation_type: "last"
 
       PathAlign.scale: 2.0
-      PathAlign.aggregation_type: "sum"
+      PathAlign.aggregation_type: "last"
 
-      GoalDist.scale: 1.6 # /100
-      GoalDist.aggregation_type: "sum"
+      # GoalDist.scale Must be large enough so that robot reaches goal. As dist to goal decreases, goal critic is weaker, and slightly imperfect paths will be
+      # devalued by PathDist and PathAlign, and the best path becomes 0-velocity, so the robot stops when 50-60cm away from its goal.
+      GoalDist.scale: 1.25 
+      GoalDist.aggregation_type: "last"
       
       ObstacleFootprint.scale: 260.0 # /50.0
       ObstacleFootprint.sum_scores: False
