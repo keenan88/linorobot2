@@ -67,7 +67,7 @@
 
       # GoalDist.scale Must be large enough so that robot reaches goal. As dist to goal decreases, goal critic is weaker, and slightly imperfect paths will be
       # devalued by PathDist and PathAlign, and the best path becomes 0-velocity, so the robot stops when 50-60cm away from its goal.
-      GoalDist.scale: 2.0 
+      GoalDist.scale: 2.5 
       GoalDist.aggregation_type: "last"
       
       ObstacleFootprint.scale: 100.0 # /50.0
