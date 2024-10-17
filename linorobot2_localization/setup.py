@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             'wheel_odometry = linorobot2_localization.wheel_odometry:main',
             'wheel_unraveller = linorobot2_localization.sim_wheel_rotation_unraveller:main',
-            'amcl_visualizer = linorobot2_localization.amcl_visualizer:main'
+            'amcl_visualizer = linorobot2_localization.amcl_visualizer:main',
+            'path_orientation_updater = linorobot2_localization.path_orientation_updater:main'
         ],
     },
 )

@@ -159,6 +159,14 @@ def generate_launch_description():
         )
     )
 
+    path_orientation_updater = Node(
+        package='linorobot2_localization',
+        executable='path_orientation_updater',
+        parameters=[
+            {'use_sim_time': True}
+        ]
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(controller)
@@ -173,6 +181,7 @@ def generate_launch_description():
     ld.add_action(amcl)
     ld.add_action(amcl_pointcloud)
     ld.add_action(keepout_launch)
+    ld.add_action(path_orientation_updater)
 
 
 
