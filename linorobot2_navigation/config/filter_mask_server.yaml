@@ -15,5 +15,5 @@
     use_sim_time: true
     frame_id: "map"
     topic_name: "/global_costmap/keepout_filter_mask"
-    yaml_filename: "/home/humble_ws/src/linorobot2_navigation/maps/warehouse_keepout.yaml"
+    yaml_filename: "/home/humble_ws/src/linorobot2_navigation/maps/greenhouse.yaml"
 

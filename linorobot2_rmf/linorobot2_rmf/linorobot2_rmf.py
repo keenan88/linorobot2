@@ -44,7 +44,7 @@ class Linorobot2RMF(Node):
         self.robot_state.location.level_name = "L1" # TODO - implement level updating later, if need be
         self.robot_state.location.index = 0
         self.robot_state.name = self.robot_name
-        self.robot_state.mode.mode = MODE_CHARGING
+        self.robot_state.mode.mode = MODE_IDLE
 
         # TODO - add a bridge to bridge in and out robot_state and robot_path_requests from queen DOMAIN ID to individual robot DOMAIN ID
 
@@ -111,6 +111,7 @@ class Linorobot2RMF(Node):
         if not goal_handle.accepted:
             print('NavigateThroughPoses goal was rejected.')
             self.robot_state.mode.mode = MODE_IDLE
+            print('goal_response_callback: set to idle')
             self.robot_state.path = []
             return
 
@@ -132,6 +133,7 @@ class Linorobot2RMF(Node):
             print('NavigateThroughPoses failed.')
 
         self.robot_state.mode.mode = MODE_IDLE
+        print('get_result_callback: set to idle')
         self.robot_state.path = []
 
     def execute_path(self):
@@ -140,7 +142,8 @@ class Linorobot2RMF(Node):
 
             if self.robot_state.mode.mode in [MODE_IDLE, MODE_WAITING, MODE_CHARGING]:
 
-                self.robot_state.mode.mode == MODE_MOVING
+                self.robot_state.mode.mode = MODE_MOVING
+                print('execute_path: set to idle')
 
                 path_request = self.path_requests.pop(0)
                         
