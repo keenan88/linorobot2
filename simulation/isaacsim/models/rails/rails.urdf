@@ -1,56 +1,144 @@
-<?xml version="1.0" ?>
-<robot name="rails">
-  <link name="rail1">
+<?xml version="1.0"?>
+<robot name="greenhouse_piperail">
 
+  <!-- Define the rail dimensions -->
+
+  <link name="base_link">
     <visual>
-      <origin xyz="0 0 0"/>
-      <geometry>
-        <box size="30 0.05 0.05"/>
-      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </visual>
-
-    <collision>
-      <origin xyz="0 0 0"/>
-      <geometry>
-        <box size="30 0.05 0.05"/>
-      </geometry>
-    </collision>
-
-    <inertial>
-      <mass value="588"/>
-    </inertial>
-
   </link>
 
-  <link name="rail2">
-
+  <link name="rail_1">
     <visual>
-      <origin xyz="0 0 0"/>
       <geometry>
-        <box size="30 0.05 0.05"/>
+        <!-- Pipe is a cylinder with diameter of 6cm (radius = 0.03m) -->
+        <cylinder radius="0.03" length="21.76"/>
       </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
     </visual>
-
-    <collision>
-      <origin xyz="0 0 0"/>
-      <geometry>
-        <box size="30 0.05 0.05"/>
-      </geometry>
-    </collision>
-
-    <inertial>
-      <mass value="588"/>
-    </inertial>
   </link>
 
-  <joint name="rails_joint" type="fixed">
-    <parent link="rail1"/>
-    <child link="rail2"/>
-    <origin rpy="0 0 0" xyz="0 0.6 0"/>
+  <link name="rail_2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="21.76"/>
+      </geometry>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="end_rail_1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.39"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="end_rail_2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.39"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="fillet_1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="fillet_2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="fillet_3">
+    <visual>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <link name="fillet_4">
+    <visual>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </visual>
+  </link>
+
+  <!-- Joints to connect end pipes to the long rails -->
+  <joint name="base_link_to_rail_1" type="fixed">
+    <parent link="base_link"/>
+    <child link="rail_1"/>
+    <origin xyz="0 0.3 0" rpy="0 1.57 0"/>
+  </joint>
+
+  <joint name="base_link_to_rail_2" type="fixed">
+    <parent link="base_link"/>
+    <child link="rail_2"/>
+    <origin xyz="0.0 -0.3 0" rpy="0 1.57 0"/>
+  </joint>
+
+  <joint name="base_link_to_end_rail_1" type="fixed">
+    <parent link="base_link"/>
+    <child link="end_rail_1"/>
+    <origin xyz="-11 0 0" rpy="1.57 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_end_rail_2" type="fixed">
+    <parent link="base_link"/>
+    <child link="end_rail_2"/>
+    <origin xyz="11 0 0" rpy="1.57 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_fillet_1" type="fixed">
+    <parent link="base_link"/>
+    <child link="fillet_1"/>
+    <origin xyz="-10.91 -0.21 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_fillet_2" type="fixed">
+    <parent link="base_link"/>
+    <child link="fillet_2"/>
+    <origin xyz="-10.91 0.21 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_fillet_3" type="fixed">
+    <parent link="base_link"/>
+    <child link="fillet_3"/>
+    <origin xyz="10.91 -0.21 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_fillet_4" type="fixed">
+    <parent link="base_link"/>
+    <child link="fillet_4"/>
+    <origin xyz="10.91 0.21 0" rpy="0 0 0"/>
   </joint>
 
   
-
-
 
 </robot>
