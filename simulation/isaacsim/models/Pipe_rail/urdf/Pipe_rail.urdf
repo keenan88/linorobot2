@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Pipe_rail">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-1.14976028191951E-14 -8.55273791102518E-14 -0.03"
+        rpy="0 0 0" />
+      <mass
+        value="126.983286098977" />
+      <inertia
+        ixx="5327.53707798158"
+        ixy="1.60065410182207E-14"
+        ixz="-4.33680868994202E-16"
+        iyy="11.6509884351795"
+        iyz="6.89782344576173E-14"
+        izz="5339.13092393801" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Pipe_rail/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Pipe_rail/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
