@@ -10,7 +10,7 @@
     range_max: 5.0
     range_min: 0.0
     scan_time: 0.03333333333333333
-    target_frame: 'base_link' # Transforming to target frame base_link puts scan in correct frame. Keeping it in original frame gets really messed up. Not sure why.
+    target_frame: 'base_footprint' # Transforming to target frame base_link puts scan in correct frame. Keeping it in original frame gets really messed up. Not sure why.
     transform_tolerance: 1.0
     use_inf: true
     use_sim_time: true

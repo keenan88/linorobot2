@@ -8,11 +8,11 @@
     
     max_x: 5.0 # Set max_x large enough to cover view in front of robot
     max_y: 0.13 # Set max_y low enough to remove floor, but high enough to still include pipe rails. 
-    max_z: 5.0
+    max_z: 3.0
     
     min_x: -5.0
     min_y: -0.5
-    min_z: 0.0
+    min_z: 0.3
     min_points_per_voxel: 2
     negative: false
     transient_local_indices: false
