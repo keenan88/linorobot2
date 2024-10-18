@@ -18,6 +18,15 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+
+    <collision>
+      <geometry>
+        <!-- Pipe is a cylinder with diameter of 6cm (radius = 0.03m) -->
+        <cylinder radius="0.03" length="21.76"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="rail_2">
@@ -28,6 +37,13 @@
       <origin xyz="0.0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="21.76"/>
+      </geometry>
+      <origin xyz="0.0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="end_rail_1">
@@ -38,6 +54,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.39"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="end_rail_2">
@@ -48,6 +71,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.39"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="fillet_1">
@@ -58,6 +88,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="fillet_2">
@@ -68,6 +105,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="fillet_3">
@@ -78,6 +122,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <link name="fillet_4">
@@ -88,6 +139,13 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="metal"/>
     </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="metal"/>
+    </collision>
   </link>
 
   <!-- Joints to connect end pipes to the long rails -->

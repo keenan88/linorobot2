@@ -63,13 +63,348 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        back_channel:
+          Value: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        front_channel:
+          Value: true
+        front_left_plate1:
+          Value: true
+        front_left_plate2:
+          Value: true
+        front_left_roller1:
+          Value: true
+        front_left_roller10:
+          Value: true
+        front_left_roller11:
+          Value: true
+        front_left_roller12:
+          Value: true
+        front_left_roller13:
+          Value: true
+        front_left_roller14:
+          Value: true
+        front_left_roller15:
+          Value: true
+        front_left_roller2:
+          Value: true
+        front_left_roller3:
+          Value: true
+        front_left_roller4:
+          Value: true
+        front_left_roller5:
+          Value: true
+        front_left_roller6:
+          Value: true
+        front_left_roller7:
+          Value: true
+        front_left_roller8:
+          Value: true
+        front_left_roller9:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_drum:
+          Value: true
+        front_right_plate1:
+          Value: true
+        front_right_plate2:
+          Value: true
+        front_right_roller1:
+          Value: true
+        front_right_roller10:
+          Value: true
+        front_right_roller11:
+          Value: true
+        front_right_roller12:
+          Value: true
+        front_right_roller13:
+          Value: true
+        front_right_roller14:
+          Value: true
+        front_right_roller15:
+          Value: true
+        front_right_roller2:
+          Value: true
+        front_right_roller3:
+          Value: true
+        front_right_roller4:
+          Value: true
+        front_right_roller5:
+          Value: true
+        front_right_roller6:
+          Value: true
+        front_right_roller7:
+          Value: true
+        front_right_roller8:
+          Value: true
+        front_right_roller9:
+          Value: true
+        front_right_wheel:
+          Value: true
+        front_rs_depth_optical_frame:
+          Value: true
+        left_channel:
+          Value: true
+        left_rs_depth_optical_frame:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+        rear_left_drum:
+          Value: true
+        rear_left_plate1:
+          Value: true
+        rear_left_plate2:
+          Value: true
+        rear_left_roller1:
+          Value: true
+        rear_left_roller10:
+          Value: true
+        rear_left_roller11:
+          Value: true
+        rear_left_roller12:
+          Value: true
+        rear_left_roller13:
+          Value: true
+        rear_left_roller14:
+          Value: true
+        rear_left_roller15:
+          Value: true
+        rear_left_roller2:
+          Value: true
+        rear_left_roller3:
+          Value: true
+        rear_left_roller4:
+          Value: true
+        rear_left_roller5:
+          Value: true
+        rear_left_roller6:
+          Value: true
+        rear_left_roller7:
+          Value: true
+        rear_left_roller8:
+          Value: true
+        rear_left_roller9:
+          Value: true
+        rear_left_wheel:
+          Value: true
+        rear_right_plate1:
+          Value: true
+        rear_right_plate2:
+          Value: true
+        rear_right_roller1:
+          Value: true
+        rear_right_roller10:
+          Value: true
+        rear_right_roller11:
+          Value: true
+        rear_right_roller12:
+          Value: true
+        rear_right_roller13:
+          Value: true
+        rear_right_roller14:
+          Value: true
+        rear_right_roller15:
+          Value: true
+        rear_right_roller2:
+          Value: true
+        rear_right_roller3:
+          Value: true
+        rear_right_roller4:
+          Value: true
+        rear_right_roller5:
+          Value: true
+        rear_right_roller6:
+          Value: true
+        rear_right_roller7:
+          Value: true
+        rear_right_roller8:
+          Value: true
+        rear_right_roller9:
+          Value: true
+        rear_right_wheel:
+          Value: true
+        rear_rs_depth_optical_frame:
+          Value: true
+        right_channel:
+          Value: true
+        right_rs_depth_optical_frame:
+          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                back_channel:
+                  {}
+                front_channel:
+                  {}
+                front_left_wheel:
+                  front_left_plate1:
+                    {}
+                  front_left_plate2:
+                    {}
+                  front_left_roller1:
+                    {}
+                  front_left_roller10:
+                    {}
+                  front_left_roller11:
+                    {}
+                  front_left_roller12:
+                    {}
+                  front_left_roller13:
+                    {}
+                  front_left_roller14:
+                    {}
+                  front_left_roller15:
+                    {}
+                  front_left_roller2:
+                    {}
+                  front_left_roller3:
+                    {}
+                  front_left_roller4:
+                    {}
+                  front_left_roller5:
+                    {}
+                  front_left_roller6:
+                    {}
+                  front_left_roller7:
+                    {}
+                  front_left_roller8:
+                    {}
+                  front_left_roller9:
+                    {}
+                front_right_wheel:
+                  front_right_drum:
+                    {}
+                  front_right_plate1:
+                    {}
+                  front_right_plate2:
+                    {}
+                  front_right_roller1:
+                    {}
+                  front_right_roller10:
+                    {}
+                  front_right_roller11:
+                    {}
+                  front_right_roller12:
+                    {}
+                  front_right_roller13:
+                    {}
+                  front_right_roller14:
+                    {}
+                  front_right_roller15:
+                    {}
+                  front_right_roller2:
+                    {}
+                  front_right_roller3:
+                    {}
+                  front_right_roller4:
+                    {}
+                  front_right_roller5:
+                    {}
+                  front_right_roller6:
+                    {}
+                  front_right_roller7:
+                    {}
+                  front_right_roller8:
+                    {}
+                  front_right_roller9:
+                    {}
+                front_rs_depth_optical_frame:
+                  {}
+                left_channel:
+                  {}
+                left_rs_depth_optical_frame:
+                  {}
+                rear_left_wheel:
+                  rear_left_drum:
+                    {}
+                  rear_left_plate1:
+                    {}
+                  rear_left_plate2:
+                    {}
+                  rear_left_roller1:
+                    {}
+                  rear_left_roller10:
+                    {}
+                  rear_left_roller11:
+                    {}
+                  rear_left_roller12:
+                    {}
+                  rear_left_roller13:
+                    {}
+                  rear_left_roller14:
+                    {}
+                  rear_left_roller15:
+                    {}
+                  rear_left_roller2:
+                    {}
+                  rear_left_roller3:
+                    {}
+                  rear_left_roller4:
+                    {}
+                  rear_left_roller5:
+                    {}
+                  rear_left_roller6:
+                    {}
+                  rear_left_roller7:
+                    {}
+                  rear_left_roller8:
+                    {}
+                  rear_left_roller9:
+                    {}
+                rear_right_wheel:
+                  rear_right_plate1:
+                    {}
+                  rear_right_plate2:
+                    {}
+                  rear_right_roller1:
+                    {}
+                  rear_right_roller10:
+                    {}
+                  rear_right_roller11:
+                    {}
+                  rear_right_roller12:
+                    {}
+                  rear_right_roller13:
+                    {}
+                  rear_right_roller14:
+                    {}
+                  rear_right_roller15:
+                    {}
+                  rear_right_roller2:
+                    {}
+                  rear_right_roller3:
+                    {}
+                  rear_right_roller4:
+                    {}
+                  rear_right_roller5:
+                    {}
+                  rear_right_roller6:
+                    {}
+                  rear_right_roller7:
+                    {}
+                  rear_right_roller8:
+                    {}
+                  rear_right_roller9:
+                    {}
+                rear_rs_depth_optical_frame:
+                  {}
+                right_channel:
+                  {}
+                right_rs_depth_optical_frame:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 0.4000000059604645
@@ -528,7 +863,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.112905979156494
+      Distance: 4.606454849243164
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -543,10 +878,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.469795823097229
+      Pitch: 0.4497958719730377
       Target Frame: base_link
       Value: Orbit (rviz_default_plugins)
-      Yaw: 2.5613651275634766
+      Yaw: 4.296365737915039
     Saved: ~
 Window Geometry:
   Displays:
