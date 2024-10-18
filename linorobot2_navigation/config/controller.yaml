@@ -70,7 +70,7 @@
       GoalDist.scale: 2.5 
       GoalDist.aggregation_type: "last"
       
-      ObstacleFootprint.scale: 100.0 # /50.0
+      ObstacleFootprint.scale: 150.0 # /50.0
       ObstacleFootprint.sum_scores: False
 
       TwirlingCritic.scale: 0.01
