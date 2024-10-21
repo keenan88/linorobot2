@@ -2,7 +2,7 @@
   ros__parameters:
     # controller server parameters (see Controller Server for more info)
     use_sim_time: True
-    controller_frequency: 8.0
+    controller_frequency: 7.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -15,8 +15,8 @@
       movement_time_allowance: 10.0
     goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.1
-      yaw_goal_tolerance: 0.025
+      xy_goal_tolerance: 0.05
+      yaw_goal_tolerance: 0.05
       stateful: True
     # DWB controller parameters
     FollowPath:
@@ -43,15 +43,15 @@
       time_granularity: 0.2
       # linear_granularity: 0.05
       # angular_granularity: 0.25
-      vx_samples: 5
-      vy_samples: 5
-      vtheta_samples: 30
+      vx_samples: 15
+      vy_samples: 15
+      vtheta_samples: 25
 
       
 
       # Trajectory critics
       transform_tolerance: 0.2
-      xy_goal_tolerance: 0.1
+      xy_goal_tolerance: 0.05
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       limit_vel_cmd_in_traj: False
@@ -76,7 +76,7 @@
       TwirlingCritic.scale: 0.01
 
       RotateToGoal.scale: 5.0
-      RotateToGoal.xy_goal_tolerance: 0.25 # Let rotate to goal start impacting trajectories a bit ahead of xy goal tolerance so robot smoothly rotates into position as it approaches goal
+      RotateToGoal.xy_goal_tolerance: 0.2 # Let rotate to goal start impacting trajectories a bit ahead of xy goal tolerance so robot smoothly rotates into position as it approaches goal
       RotateToGoal.trans_stopped_velocity: 0.25
 
       
