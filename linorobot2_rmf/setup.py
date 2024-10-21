@@ -23,6 +23,9 @@ setup(
     entry_points={
         "console_scripts": [
             'linorobot2_rmf = linorobot2_rmf.linorobot2_rmf:main',
+            'fleet_adapter=linorobot2_rmf.fleet_adapter:main',
+            'fleet_manager=linorobot2_rmf.fleet_manager:main',
+            'simple_api_server=linorobot2_rmf.simple_api_server:main'
         ],
     },
 )
