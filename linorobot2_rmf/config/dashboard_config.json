@@ -14,13 +14,12 @@
     },
     "Loop": {
       "places": [
-        "coe",
-        "pantry",
-        "lounge",
-        "supplies",
-        "hardware_2",
-        "tinyRobot1_charger",
-        "tinyRobot2_charger"
+        "johns_charger",
+        "L1",
+        "L2",
+        "L12",
+        "R1",
+        "R2"
       ]
     },
     "Clean": {

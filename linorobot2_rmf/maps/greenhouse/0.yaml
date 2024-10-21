@@ -53,28 +53,28 @@ levels:
     vertices:
     - - 4.8500000000000005
       - -2.5
-      - {is_charger: true, is_holding_point: true, is_parking_spot: true, name: tinyRobot1_charger}
+      - {is_charger: true, is_holding_point: true, is_parking_spot: true, name: johns_charger}
     - - 4.8500000000000005
       - -3.4000000000000004
       - {name: ''}
     - - 4.3500000000000005
       - -3.4000000000000004
-      - {name: pantry}
+      - {name: L1}
     - - 5.3500000000000005
       - -3.4000000000000004
-      - {is_holding_point: true, is_parking_spot: true, name: hardware_2}
+      - {is_holding_point: false, is_parking_spot: false, name: R1}
     - - 4.8500000000000005
       - -4.65
       - {name: ''}
     - - 5.3500000000000005
       - -4.65
-      - {name: lounge}
+      - {name: R2}
     - - 4.3500000000000005
       - -4.65
-      - {is_holding_point: true, name: coe}
+      - {is_holding_point: false, name: L2}
     - - 4.8500000000000005
       - -17.150000000000002
       - {name: ''}
     - - 4.3500000000000005
       - -17.150000000000002
-      - {is_holding_point: true, is_parking_spot: true, name: supplies}
+      - {is_holding_point: false, is_parking_spot: false, name: L12}
