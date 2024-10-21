@@ -5,9 +5,9 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /Grid1
         - /TF1
         - /TF1/Frames1
-        - /TF1/Frames1/base_link1
         - /Static Map1/Topic1
         - /LaserScan1/Topic1
         - /Particle Cloud1/Topic1
@@ -37,7 +37,7 @@ Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 0.10000000149011612
-      Cell Size: 1
+      Cell Size: 0.25
       Class: rviz_default_plugins/Grid
       Color: 0; 0; 0
       Enabled: true
@@ -602,7 +602,7 @@ Visualization Manager:
         Value: /fleet_markers
       Value: false
     - Class: rviz_default_plugins/MarkerArray
-      Enabled: true
+      Enabled: false
       Name: Schedule Markers
       Namespaces:
         {}
@@ -612,14 +612,12 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /schedule_markers
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: Map Markers
       Namespaces:
-        drone_fleet/labels/L1: true
-        drone_fleet/lanes/L1: true
-        drone_fleet/waypoints/L1: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -904,11 +902,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 168.899169921875
+      Scale: 202.7870635986328
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.2124883234500885
-      Y: -0.3468676805496216
+      X: -0.2798077166080475
+      Y: -0.5011944770812988
     Saved: ~
 Window Geometry:
   Displays:
