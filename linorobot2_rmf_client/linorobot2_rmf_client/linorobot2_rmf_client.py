@@ -35,8 +35,8 @@ class Linorobot2RMF(Node):
 
 
         # TODO - change robot naming to read from a yaml file
-        self.fleet_name = 'tinyRobot'
-        self.robot_name = 'tinyRobot1'
+        self.fleet_name = 'drone_fleet'
+        self.robot_name = 'john_the_drone'
         self.seq = 0
 
         self.robot_state = RobotState()

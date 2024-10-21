@@ -147,6 +147,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ./linorobot2_rmf:/home/humble_ws/src/linorobot2_rmf
+      - ./linorobot2_rmf_client:/home/humble_ws/src/linorobot2_rmf_client
     working_dir: /home/humble_ws
     # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity

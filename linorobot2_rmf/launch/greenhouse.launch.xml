@@ -18,7 +18,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       
       <arg name="nav_graph_file" value="/home/humble_ws/src/linorobot2_rmf/maps/greenhouse/0.yaml" />
-      <arg name="config_file"    value="/home/humble_ws/src/linorobot2_rmf/config/tinyRobot_config.yaml"/>
+      <arg name="config_file"    value="/home/humble_ws/src/linorobot2_rmf/config/drone_fleet.yaml"/>
       
     </include>
   </group>
