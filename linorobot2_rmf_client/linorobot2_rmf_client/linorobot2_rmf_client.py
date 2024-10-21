@@ -94,7 +94,7 @@ class Linorobot2RMF(Node):
             self.first_tf_set = True
 
         except Exception as e:
-            print(f"Could not get transform: {e}")
+            self.get_logger().info(f"Could not get transform: {e}")
 
     def send_navigate_through_poses_goal(self, pose):
         self._action_client.wait_for_server()
@@ -109,13 +109,13 @@ class Linorobot2RMF(Node):
     def goal_response_callback(self, future):
         goal_handle = future.result()
         if not goal_handle.accepted:
-            print('NavigateThroughPoses goal was rejected.')
+            self.get_logger().info('NavigateThroughPoses goal was rejected.')
             self.robot_state.mode.mode = MODE_IDLE
-            print('goal_response_callback: set to idle')
+            self.get_logger().info('goal_response_callback: set to idle')
             self.robot_state.path = []
             return
 
-        print('NavigateThroughPoses goal accepted.')
+        self.get_logger().info('NavigateThroughPoses goal accepted.')
         self._get_result_future = goal_handle.get_result_async()
         self._get_result_future.add_done_callback(self.get_result_callback)
 
@@ -127,13 +127,13 @@ class Linorobot2RMF(Node):
         result = future.result().result
 
         if result: 
-            print('NavigateThroughPoses succeeded!')
+            self.get_logger().info('NavigateThroughPoses succeeded!')
             self.completed_tasks_IDs.append(self.robot_state.task_id)
         else: 
-            print('NavigateThroughPoses failed.')
+            self.get_logger().info('NavigateThroughPoses failed.')
 
         self.robot_state.mode.mode = MODE_IDLE
-        print('get_result_callback: set to idle')
+        self.get_logger().info('get_result_callback: set to idle')
         self.robot_state.path = []
 
     def execute_path(self):
@@ -143,7 +143,7 @@ class Linorobot2RMF(Node):
             if self.robot_state.mode.mode in [MODE_IDLE, MODE_WAITING, MODE_CHARGING]:
 
                 self.robot_state.mode.mode = MODE_MOVING
-                print('execute_path: set to idle')
+                self.get_logger().info('execute_path: set to idle')
 
                 path_request = self.path_requests.pop(0)
                         
@@ -165,10 +165,10 @@ class Linorobot2RMF(Node):
 
                 self.send_navigate_through_poses_goal(pose)
 
-                print(
-                    "Sent:   ", path_request.task_id, ": (", \
-                    round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
-                    round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
+                self.get_logger().info(f"Sent:  {path_request.task_id} : \
+                    {round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2)} \
+                    ) -> ( \
+                    {round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2)}"
                 )
 
     def add_path_to_queue(self, path_request):
@@ -184,10 +184,10 @@ class Linorobot2RMF(Node):
 
                             self.path_requests.append(path_request)
 
-                            print(
-                                "Queued: ", path_request.task_id, ": (", \
-                                round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2), ") -> (", \
-                                round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2), ")" \
+                            self.get_logger().info(f"Queued:  {path_request.task_id} : \
+                                {round(path_request.path[0].x, 2), round(path_request.path[0].y, 2), round(path_request.path[0].yaw, 2)} \
+                                ) -> ( \
+                                {round(path_request.path[1].x, 2), round(path_request.path[1].y, 2), round(path_request.path[1].yaw, 2)}"
                             )
 
             
