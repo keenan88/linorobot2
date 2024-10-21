@@ -5,9 +5,9 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Grid1
         - /TF1
         - /TF1/Frames1
+        - /TF1/Frames1/base_link1
         - /Static Map1/Topic1
         - /LaserScan1/Topic1
         - /Particle Cloud1/Topic1
@@ -617,7 +617,9 @@ Visualization Manager:
       Enabled: true
       Name: Map Markers
       Namespaces:
-        {}
+        drone_fleet/labels/L1: true
+        drone_fleet/lanes/L1: true
+        drone_fleet/waypoints/L1: true
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -902,11 +904,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 202.7870635986328
+      Scale: 164.0402374267578
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.2798077166080475
-      Y: -0.5011944770812988
+      X: -0.37870755791664124
+      Y: -0.6300469040870667
     Saved: ~
 Window Geometry:
   Displays:
