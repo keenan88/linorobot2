@@ -1,14 +1,14 @@
 {
-  "world_name" : "Office World",  
+  "world_name" : "Greenhouse World",  
   "valid_task": ["Delivery", "Loop"],
   "task": {
     "Delivery": {
       "option": {
-        "coke": {
-          "pickup_place_name": "pantry",
-          "pickup_dispenser": "coke_dispenser",
-          "dropoff_place_name": "hardware_2",
-          "dropoff_ingestor": "coke_ingestor"
+        "demo_worker_PU_DO": {
+          "pickup_place_name": "R1",
+          "pickup_dispenser": "worker_pickup_R1",
+          "dropoff_place_name": "L1",
+          "dropoff_ingestor": "worker_dropoff_L1"
         }
       }
     },

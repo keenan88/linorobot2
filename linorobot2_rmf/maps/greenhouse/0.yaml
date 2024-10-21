@@ -59,10 +59,10 @@ levels:
       - {name: ''}
     - - 4.3500000000000005
       - -3.4000000000000004
-      - {name: L1}
+      - {dropoff_ingestor: worker_dropoff_L1, name: L1}
     - - 5.3500000000000005
       - -3.4000000000000004
-      - {is_holding_point: false, is_parking_spot: false, name: R1}
+      - {is_holding_point: false, is_parking_spot: false, name: R1, pickup_dispenser: worker_pickup_R1}
     - - 4.8500000000000005
       - -4.65
       - {name: ''}
