@@ -47,11 +47,20 @@ def generate_launch_description():
         ]
     )
 
+    dynamic_obstacle_xy_recorder = Node(
+        package='linorobot2_localization',
+        executable='dynamic_obstacle_xy_recorder',
+        parameters=[
+            {'use_sim_time': False}
+        ]
+    )
+
     ld = LaunchDescription()
 
     ld.add_action(map_server)
     ld.add_action(lifecycle_manager)
     ld.add_action(tf_image_publisher)
     ld.add_action(rviz)
+    ld.add_action(dynamic_obstacle_xy_recorder)
 
     return ld
