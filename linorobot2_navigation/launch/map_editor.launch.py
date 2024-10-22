@@ -10,7 +10,7 @@ def generate_launch_description():
 
     tf_image_publisher = Node(
         package='linorobot2_localization',
-        executable='transform_image_publisher',
+        executable='slam_recording_publisher',
         parameters=[
             {'use_sim_time': False}
         ]

@@ -2,9 +2,9 @@ import rclpy
 from rclpy.node import Node
 import csv
 import os
-import time
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import TransformStamped
+from std_msgs.msg import Int32
 import tf2_ros
 from cv_bridge import CvBridge
 import cv2
@@ -32,8 +32,13 @@ class TransformImagePublisher(Node):
         self.tf_broadcaster = tf2_ros.TransformBroadcaster(self)
 
         # Publish each transform and the nearest images every second
-        self.current_transform_idx = 0
-        self.timer = self.create_timer(1.0, self.publish_next_transform_and_images)
+        self.slam_step_subscriber = self.create_subscription(Int32, '/slam_step', self.update_slam_step, 10)
+
+    def update_slam_step(self, msg):
+
+        self.publish_transform_and_images(msg.data)
+
+        
 
     def load_transforms(self):
         """
@@ -57,24 +62,21 @@ class TransformImagePublisher(Node):
                 transforms.append(transform)
         return transforms
 
-    def publish_next_transform_and_images(self):
+    def publish_transform_and_images(self, idx):
         """
         Publish the next transform and the nearest corresponding images.
         """
-        if self.current_transform_idx >= len(self.transforms):
+        if idx >= len(self.transforms):
             self.get_logger().info("No more transforms to publish.")
             return
 
         # Get the current transform to publish
-        transform = self.transforms[self.current_transform_idx]
+        transform = self.transforms[idx]
         self.publish_transform(transform)
 
         # Find and publish the nearest images based on the timestamp
         timestamp = transform['timestamp']
         self.publish_nearest_images(timestamp)
-
-        # Move to the next transform for the next iteration
-        self.current_transform_idx += 1
 
     def publish_transform(self, transform):
         """
