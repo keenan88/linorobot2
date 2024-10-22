@@ -7,6 +7,7 @@ from geometry_msgs.msg import TransformStamped
 import cv2
 import os
 import csv
+from time import sleep
 
 class MultiCameraListener(Node):
     def __init__(self):
@@ -45,7 +46,7 @@ class MultiCameraListener(Node):
         os.makedirs(self.save_dir, exist_ok=True)
 
         # Set timer to periodically query and save the transform
-        self.timer = self.create_timer(1.0, self.save_transform)
+        self.timer = self.create_timer(0.5, self.save_transform)
 
     def front_cb(self, msg):
         self.front_image_msg = msg
@@ -75,8 +76,6 @@ class MultiCameraListener(Node):
         img_filename = os.path.join(self.save_dir, f'{camera_name}_{timestamp}.png')
         cv2.imwrite(img_filename, cv_image)
         self.get_logger().info(f"Saved image from {camera_name} at {img_filename}")
-
-    import csv
 
     def save_transform(self):
         """

@@ -24,6 +24,16 @@ def generate_launch_description():
         remappings=[("/map", "/nav2/map")],
     )
 
+    image_recorder = Node(
+        package='linorobot2_localization',
+        executable='slam_image_recorder',
+        parameters=[
+            {'use_sim_time': True}
+        ]
+    )
+
+
+
     navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(navigation_launch_path),
     )
@@ -42,6 +52,7 @@ def generate_launch_description():
 
     ld.add_action(slam_toolbox)
     ld.add_action(navigation)
+    ld.add_action(image_recorder)
     
     
     ld.add_action(rviz)

@@ -23,7 +23,9 @@ setup(
             'wheel_odometry = linorobot2_localization.wheel_odometry:main',
             'wheel_unraveller = linorobot2_localization.sim_wheel_rotation_unraveller:main',
             'amcl_visualizer = linorobot2_localization.amcl_visualizer:main',
-            'path_orientation_updater = linorobot2_localization.path_orientation_updater:main'
+            'path_orientation_updater = linorobot2_localization.path_orientation_updater:main',
+            'slam_image_recorder = linorobot2_localization.slam_image_recorder:main',
+            'transform_image_publisher = linorobot2_localization.transform_image_publisher:main'
         ],
     },
 )
