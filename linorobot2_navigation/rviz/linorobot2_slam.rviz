@@ -5,9 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
         - /TF1/Frames1
-        - /TF1/Frames1/base_link1
         - /Static Map1/Topic1
         - /LaserScan1/Topic1
         - /Particle Cloud1/Topic1
@@ -15,8 +13,14 @@ Panels:
         - /Fleet Markers1/Topic1
         - /Local Plan1/Topic1
         - /front scan1/Topic1
+        - /FrontRGB1/Status1
+        - /FrontRGB1/Visibility1
+        - /FrontRGB1/Topic1
+        - /LeftRGB1/Visibility1
+        - /RearRGB1/Visibility1
+        - /RightRGB1/Visibility1
       Splitter Ratio: 0.5029411911964417
-    Tree Height: 272
+    Tree Height: 871
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -33,6 +37,13 @@ Panels:
     Splitter Ratio: 0.5
   - Class: nav2_rviz_plugins/Navigation 2
     Name: Navigation 2
+  - Class: rviz_common/Displays
+    Help Height: 70
+    Name: Displays
+    Property Tree Widget:
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 167
 Visualization Manager:
   Class: ""
   Displays:
@@ -428,7 +439,7 @@ Visualization Manager:
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Global Costmap
       Topic:
         Depth: 5
@@ -444,12 +455,12 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /nav2/global_costmap/costmap_updates
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: Local Costmap
       Topic:
         Depth: 5
@@ -465,7 +476,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /nav2/local_costmap/costmap_updates
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.5
       Class: rviz_default_plugins/Map
       Color Scheme: map
@@ -617,9 +628,7 @@ Visualization Manager:
       Enabled: true
       Name: Map Markers
       Namespaces:
-        drone_fleet/labels/L1: true
-        drone_fleet/lanes/L1: true
-        drone_fleet/waypoints/L1: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -731,7 +740,7 @@ Visualization Manager:
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan
+      Name: rear left scan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -765,7 +774,7 @@ Visualization Manager:
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan
+      Name: rear right scan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -799,7 +808,7 @@ Visualization Manager:
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan
+      Name: right scan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -833,7 +842,7 @@ Visualization Manager:
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan
+      Name: right scan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -849,6 +858,166 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Class: rviz_default_plugins/Camera
+      Enabled: true
+      Far Plane Distance: 100
+      Image Rendering: background and overlay
+      Name: FrontRGB
+      Overlay Alpha: 0.5
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /front_rs/front_rs/depth/image_rect_raw
+      Value: true
+      Visibility:
+        Fleet Markers: true
+        Global Costmap: true
+        Global Footprint: true
+        Grid: true
+        Keepout Zone: true
+        LaserScan: true
+        LeftRGB: true
+        Local Costmap: true
+        Local Footprint: true
+        Local Plan: true
+        Map Markers: true
+        Particle Cloud: true
+        Path: true
+        Path Visualization: true
+        RearRGB: true
+        RightRGB: true
+        Schedule Markers: true
+        Static Map: true
+        TF: false
+        Traffic Map: true
+        Value: true
+        front scan: true
+        rear left scan: true
+        rear right scan: true
+        right scan: true
+      Zoom Factor: 1
+    - Class: rviz_default_plugins/Camera
+      Enabled: true
+      Far Plane Distance: 100
+      Image Rendering: background and overlay
+      Name: LeftRGB
+      Overlay Alpha: 0.5
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /left_rs/left_rs/depth/image_rect_raw
+      Value: true
+      Visibility:
+        Fleet Markers: true
+        FrontRGB: true
+        Global Costmap: true
+        Global Footprint: true
+        Grid: true
+        Keepout Zone: true
+        LaserScan: true
+        Local Costmap: true
+        Local Footprint: true
+        Local Plan: true
+        Map Markers: true
+        Particle Cloud: true
+        Path: true
+        Path Visualization: true
+        RearRGB: true
+        RightRGB: true
+        Schedule Markers: true
+        Static Map: true
+        TF: false
+        Traffic Map: true
+        Value: true
+        front scan: true
+        rear left scan: true
+        rear right scan: true
+        right scan: true
+      Zoom Factor: 1
+    - Class: rviz_default_plugins/Camera
+      Enabled: true
+      Far Plane Distance: 100
+      Image Rendering: background and overlay
+      Name: RearRGB
+      Overlay Alpha: 0.5
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rear_rs/rear_rs/depth/image_rect_raw
+      Value: true
+      Visibility:
+        Fleet Markers: true
+        FrontRGB: true
+        Global Costmap: true
+        Global Footprint: true
+        Grid: true
+        Keepout Zone: true
+        LaserScan: true
+        LeftRGB: true
+        Local Costmap: true
+        Local Footprint: true
+        Local Plan: true
+        Map Markers: true
+        Particle Cloud: true
+        Path: true
+        Path Visualization: true
+        RightRGB: true
+        Schedule Markers: true
+        Static Map: true
+        TF: false
+        Traffic Map: true
+        Value: true
+        front scan: true
+        rear left scan: true
+        rear right scan: true
+        right scan: true
+      Zoom Factor: 1
+    - Class: rviz_default_plugins/Camera
+      Enabled: true
+      Far Plane Distance: 100
+      Image Rendering: background and overlay
+      Name: RightRGB
+      Overlay Alpha: 0.5
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /right_rs/right_rs/depth/image_rect_raw
+      Value: true
+      Visibility:
+        Fleet Markers: true
+        FrontRGB: true
+        Global Costmap: true
+        Global Footprint: true
+        Grid: true
+        Keepout Zone: true
+        LaserScan: true
+        LeftRGB: true
+        Local Costmap: true
+        Local Footprint: true
+        Local Plan: true
+        Map Markers: true
+        Particle Cloud: true
+        Path: true
+        Path Visualization: true
+        RearRGB: true
+        Schedule Markers: true
+        Static Map: true
+        TF: false
+        Traffic Map: true
+        Value: true
+        front scan: true
+        rear left scan: true
+        rear right scan: true
+        right scan: true
+      Zoom Factor: 1
   Enabled: true
   Global Options:
     Background Color: 117; 135; 133
@@ -894,7 +1063,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.005000066943466663
+      Angle: 0
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -904,27 +1073,35 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 164.0402374267578
+      Scale: 109.2937240600586
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.37870755791664124
-      Y: -0.6300469040870667
+      X: 0.36598625779151917
+      Y: -0.6313263177871704
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 417
+  FrontRGB:
+    collapsed: false
+  Height: 1016
   Hide Left Dock: false
-  Hide Right Dock: true
+  Hide Right Dock: false
+  LeftRGB:
+    collapsed: false
   Navigation 2:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000014bfc020000000afb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b0000014b000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300ffffff00000001000001900000014bfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b0000014b000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000001e60000014b00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001af000003a2fc020000000bfb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000003a2000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300fffffffb000000100044006900730070006c00610079007300000002b500000128000000c700ffffff0000000100000190000003a2fc020000000bfb0000001000460072006f006e0074005200470042000000003b000000b60000000000000000fc0000003b000000d80000000000fffffffa000000000100000002fb00000010005200690067006800740052004700420000000000ffffffff0000000000000000fb0000000e004c00650066007400520047004200000005f0000001900000000000000000fb000000100052006900670068007400520047004200000001710000008a0000000000000000fc0000003b000000ec0000002800fffffffa000000010100000002fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000001000460072006f006e007400520047004201000005f0000001900000006d00fffffffb0000000e004c006500660074005200470042010000012d000000dc0000002800fffffffb0000001000520069006700680074005200470042010000020f000000e20000002800fffffffb0000000e005200650061007200520047004201000002f7000000e60000002800fffffffb0000000e005200650061007200520047004200000002b5000001280000000000000000fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000214000001c9000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000780000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d0065010000000000000450000000000000000000000435000003a200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  RearRGB:
+    collapsed: false
+  RightRGB:
+    collapsed: false
   Selection:
     collapsed: false
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 834
+    collapsed: false
+  Width: 1920
   X: 0
-  Y: 626
+  Y: 27
