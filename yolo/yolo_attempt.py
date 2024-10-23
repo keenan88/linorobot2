@@ -2,82 +2,96 @@ import torch
 from PIL import Image, ImageDraw
 import matplotlib.pyplot as plt
 import os
+import cv2, sys
+import numpy as np
+from ultralytics import YOLO
+from math import floor
+from pathlib import Path
 import cv2
-
+import random
 
 
 depth_image_path = '/home/slam_images/0.0/' + 'front_32FC1_22.988889445.tiff'
 depth_image = cv2.imread(depth_image_path, cv2.IMREAD_UNCHANGED)
 
-
-
-
-# if depth_image is None:
-#     print("Error: Could not load depth image.")
-#     exit()
-
-# # Print the shape of the depth image
-# print(f"Depth image shape: {depth_image.shape}")
-
-# # Example: Get depth values at specific pixel coordinates
-# # Replace with your specific coordinates
-# pixels = [
-#     (0, 0),   # Top-left corner
-#     (0, depth_image.shape[1] - 1),  # Top-right corner
-#     (depth_image.shape[0] - 1, 0),  # Bottom-left corner
-#     (depth_image.shape[0] - 1, depth_image.shape[1] - 1),  # Bottom-right corner
-#     (depth_image.shape[0] // 2, depth_image.shape[1] // 2)  # Center pixel
-# ]
-
-# # Access and print the depth values at the specified pixel locations
-# for pixel in pixels:
-#     y, x = pixel
-#     depth_value = depth_image[y, x]
-#     print(f"Depth at pixel ({x}, {y}): {depth_value} meters")
-
 color_image_path = '/home/slam_images/0.0/' + 'front_rgb8_22.988889445.png'
 color_image = Image.open(color_image_path)
 
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+# model = YOLO("yolov8n-seg.pt")
+model = YOLO("yolo11n-seg.pt")
 
-# Perform object detection
-results = model(color_image)
+# Perform segmentation
+results = model(color_image_path)
 
-# Extract bounding boxes, labels, and confidence scores
-detections = results.xyxy[0].numpy()  # Bounding boxes and other details
 
-# Draw bounding boxes on the original image
-draw = ImageDraw.Draw(color_image)
+for r in results:
+    img = np.copy(r.orig_img)
+    img_name = Path(r.path).stem  # source image base-name
 
-# Create a directory to save cropped images
-output_dir = 'cropped_humans'
-os.makedirs(output_dir, exist_ok=True)
+    # Iterate each object contour (multiple detections)
+    for ci, c in enumerate(r):
+        #  Get detection class name
+        label = c.names[c.boxes.cls.tolist().pop()]
 
-human_count = 0
 
-for det in detections:
-    x1, y1, x2, y2, confidence, class_id = det
-    label = results.names[int(class_id)]
 
-    if label == 'person':  # Filter for humans only
-        # Draw the rectangle on the original image
-        draw.rectangle([x1, y1, x2, y2], outline="red", width=3)
-        draw.text((x1, y1), f'{label} {confidence:.2f}', fill="red")
+# Create binary mask
+b_mask = np.zeros(img.shape[:2], np.uint8)
 
-        # Crop the image based on the bounding box
-        cropped_image = color_image.crop((x1, y1, x2, y2))
+#  Extract contour result
+contour = c.masks.xy.pop()
+#  Changing the type
+contour = contour.astype(np.int32)
+#  Reshaping
+contour = contour.reshape(-1, 1, 2)
 
-        # Save the cropped image with a unique filename
-        cropped_image_path = os.path.join(output_dir, f'human_{human_count}.png')
-        cropped_image.save(cropped_image_path)
-        
-        print(f"Saved cropped image: {cropped_image_path}")
-        human_count += 1
+# Draw contour onto mask
+_ = cv2.drawContours(b_mask, [contour], -1, (255, 255, 255), cv2.FILLED)
 
-# Show the original image with all bounding boxes
-plt.imshow(color_image)
-plt.axis('off')
-plt.show()
 
-# Optionally save the original image with bounding boxes
-color_image.save('human_detected_image.png')
+# mask3ch = cv2.cvtColor(b_mask, cv2.COLOR_GRAY2BGR)
+
+# # Isolate object with binary mask
+# isolated = cv2.bitwise_and(mask3ch, img)
+
+isolated = np.dstack([img, b_mask])
+
+cv2.imwrite('mask_isolatd.png', isolated)
+
+mask_depths = []
+xs = []
+ys = []
+
+with Image.open("mask_isolatd.png") as im:
+
+    draw = ImageDraw.Draw(im)
+
+    for mask_point in results[0].masks[0].xy[0]:
+        draw.point(mask_point, fill='green')
+
+    while len(xs) < 100:
+        x = random.randint(0, im.size[0] - 1)
+        y = random.randint(0, im.size[1] - 1)
+
+        r, g, b, a = im.getpixel((x, y))
+
+        if a != 0:
+
+            xs.append(x)
+            ys.append(y)   
+            mask_depths.append(depth_image[y, x]) 
+
+            draw.point([x, y], fill='orange')
+
+    avg_x = int(sum(xs) / len(xs))
+    avg_y = int(sum(ys) / len(ys))
+    draw.point([avg_y, avg_x], fill='red')
+
+    # write to stdout
+    im.save("marked.png")
+
+avg_depth = sum(mask_depths) / len(mask_depths)
+
+print("avg_depth:", avg_depth)
+
+

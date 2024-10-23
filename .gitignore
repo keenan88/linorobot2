@@ -2,3 +2,5 @@ log
 build
 install
 simulation/isaacsim/isaac-sim-assets-1-4.2.0
+yolo/yolo11n-seg.pt
+yolo/yolov8n-seg.pt
