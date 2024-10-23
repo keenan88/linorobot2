@@ -110,7 +110,7 @@ class TransformImagePublisher(Node):
         """
         Find the nearest image to the given timestamp.
         """
-        image_files = [f for f in os.listdir(self.image_dir) if f.startswith(f"{cam}_")]
+        image_files = [f for f in os.listdir(self.image_dir) if f.startswith(f"{cam}_32FC1")]
         if not image_files:
             return None
 

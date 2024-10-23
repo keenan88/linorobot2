@@ -1,8 +1,8 @@
 {
     "header": {
         "stamp": {
-            "sec": 23,
-            "nanosec": 588889460
+            "sec": 58,
+            "nanosec": 266668077
         },
         "frame_id": "front_rs_depth_optical_frame"
     },
