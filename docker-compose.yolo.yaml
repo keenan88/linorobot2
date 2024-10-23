@@ -1,0 +1,21 @@
+services:
+
+  linorobot2-yolo:
+    container_name: linorobot2-yolo
+    build:
+      context: .
+      dockerfile: docker/linorobot2/dockerfiles/yolo.dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./linorobot2_navigation/slam_images/:/home/slam_images
+      - ./yolo:/home/yolo
+    working_dir: /home/yolo
+    command: sleep infinity
+    network_mode: host
+    ipc: host
+    pid: host
+

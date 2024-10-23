@@ -13,8 +13,9 @@ Panels:
         - /Fleet Markers1/Topic1
         - /Local Plan1/Topic1
         - /front scan1/Topic1
+        - /Image1
       Splitter Ratio: 0.5029411911964417
-    Tree Height: 298
+    Tree Height: 351
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -245,167 +246,7 @@ Visualization Manager:
         map:
           odom:
             base_footprint:
-              base_link:
-                back_channel:
-                  {}
-                front_channel:
-                  {}
-                front_left_wheel:
-                  front_left_plate1:
-                    {}
-                  front_left_plate2:
-                    {}
-                  front_left_roller1:
-                    {}
-                  front_left_roller10:
-                    {}
-                  front_left_roller11:
-                    {}
-                  front_left_roller12:
-                    {}
-                  front_left_roller13:
-                    {}
-                  front_left_roller14:
-                    {}
-                  front_left_roller15:
-                    {}
-                  front_left_roller2:
-                    {}
-                  front_left_roller3:
-                    {}
-                  front_left_roller4:
-                    {}
-                  front_left_roller5:
-                    {}
-                  front_left_roller6:
-                    {}
-                  front_left_roller7:
-                    {}
-                  front_left_roller8:
-                    {}
-                  front_left_roller9:
-                    {}
-                front_right_wheel:
-                  front_right_drum:
-                    {}
-                  front_right_plate1:
-                    {}
-                  front_right_plate2:
-                    {}
-                  front_right_roller1:
-                    {}
-                  front_right_roller10:
-                    {}
-                  front_right_roller11:
-                    {}
-                  front_right_roller12:
-                    {}
-                  front_right_roller13:
-                    {}
-                  front_right_roller14:
-                    {}
-                  front_right_roller15:
-                    {}
-                  front_right_roller2:
-                    {}
-                  front_right_roller3:
-                    {}
-                  front_right_roller4:
-                    {}
-                  front_right_roller5:
-                    {}
-                  front_right_roller6:
-                    {}
-                  front_right_roller7:
-                    {}
-                  front_right_roller8:
-                    {}
-                  front_right_roller9:
-                    {}
-                front_rs_depth_optical_frame:
-                  {}
-                left_channel:
-                  {}
-                left_rs_depth_optical_frame:
-                  {}
-                rear_left_wheel:
-                  rear_left_drum:
-                    {}
-                  rear_left_plate1:
-                    {}
-                  rear_left_plate2:
-                    {}
-                  rear_left_roller1:
-                    {}
-                  rear_left_roller10:
-                    {}
-                  rear_left_roller11:
-                    {}
-                  rear_left_roller12:
-                    {}
-                  rear_left_roller13:
-                    {}
-                  rear_left_roller14:
-                    {}
-                  rear_left_roller15:
-                    {}
-                  rear_left_roller2:
-                    {}
-                  rear_left_roller3:
-                    {}
-                  rear_left_roller4:
-                    {}
-                  rear_left_roller5:
-                    {}
-                  rear_left_roller6:
-                    {}
-                  rear_left_roller7:
-                    {}
-                  rear_left_roller8:
-                    {}
-                  rear_left_roller9:
-                    {}
-                rear_right_wheel:
-                  rear_right_plate1:
-                    {}
-                  rear_right_plate2:
-                    {}
-                  rear_right_roller1:
-                    {}
-                  rear_right_roller10:
-                    {}
-                  rear_right_roller11:
-                    {}
-                  rear_right_roller12:
-                    {}
-                  rear_right_roller13:
-                    {}
-                  rear_right_roller14:
-                    {}
-                  rear_right_roller15:
-                    {}
-                  rear_right_roller2:
-                    {}
-                  rear_right_roller3:
-                    {}
-                  rear_right_roller4:
-                    {}
-                  rear_right_roller5:
-                    {}
-                  rear_right_roller6:
-                    {}
-                  rear_right_roller7:
-                    {}
-                  rear_right_roller8:
-                    {}
-                  rear_right_roller9:
-                    {}
-                rear_rs_depth_optical_frame:
-                  {}
-                right_channel:
-                  {}
-                right_rs_depth_optical_frame:
-                  {}
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 0.4000000059604645
@@ -852,6 +693,34 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /front_rs/front_rs/depth/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /front_rs/front_rs/color/image_raw
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 117; 135; 133
@@ -897,7 +766,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: 1.5349996089935303
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -907,21 +776,23 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 109.2937240600586
+      Scale: 217.30215454101562
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.36598625779151917
-      Y: -0.6313263177871704
+      X: 0.2206556499004364
+      Y: -0.15377643704414368
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 443
+  Height: 1016
   Hide Left Dock: false
   Hide Right Dock: false
+  Image:
+    collapsed: false
   Navigation 2:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000015600000165fc020000000bfb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b00000165000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300fffffffb000000100044006900730070006c00610079007300000002b500000128000000c700ffffff000000010000019000000165fc020000000bfb0000001000460072006f006e0074005200470042000000003b000000b60000000000000000fc0000003b000000d80000000000fffffffa000000000100000002fb00000010005200690067006800740052004700420000000000ffffffff0000000000000000fb0000000e004c00650066007400520047004200000005f0000001900000000000000000fb000000100052006900670068007400520047004200000001710000008a0000000000000000fc0000003b000000ec0000000000fffffffa000000000100000002fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000001000460072006f006e007400520047004201000005f0000001900000000000000000fb0000000e004c006500660074005200470042010000012d000000dc0000000000000000fb0000001000520069006700680074005200470042010000020f000000e20000000000000000fb0000000e0052006500610072005200470042000000003b000001650000000000000000fb0000000e005200650061007200520047004200000002b5000001280000000000000000fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000214000001c9000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000780000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000026a0000016500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000003a2fc020000000efb0000001200530065006c0065006300740069006f006e000000003b000000840000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b0000019a000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000000ffffffff0000000000000000fb00000018004e0061007600690067006100740069006f006e002000320000000108000001230000012300fffffffb000000100044006900730070006c00610079007300000002b500000128000000c700fffffffb0000000a0049006d00610067006501000001db000001310000002800fffffffb0000000a0049006d0061006700650100000312000000cb0000000000000000fb0000000a0049006d0061006700650100000312000000cb0000002800ffffff000000010000019000000165fc020000000bfb0000001000460072006f006e0074005200470042000000003b000000b60000000000000000fc0000003b000000d80000000000fffffffa000000000100000002fb00000010005200690067006800740052004700420000000000ffffffff0000000000000000fb0000000e004c00650066007400520047004200000005f0000001900000000000000000fb000000100052006900670068007400520047004200000001710000008a0000000000000000fc0000003b000000ec0000000000fffffffa000000000100000002fb0000000c00430061006d0065007200610000000000ffffffff0000000000000000fb0000001000460072006f006e007400520047004201000005f0000001900000000000000000fb0000000e004c006500660074005200470042010000012d000000dc0000000000000000fb0000001000520069006700680074005200470042010000020f000000e20000000000000000fb0000000e0052006500610072005200470042000000003b000001650000000000000000fb0000000e005200650061007200520047004200000002b5000001280000000000000000fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000214000001c9000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000780000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000026a000003a200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Tool Properties:
@@ -929,5 +800,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 966
-  X: 0
-  Y: 600
+  X: -5
+  Y: 27

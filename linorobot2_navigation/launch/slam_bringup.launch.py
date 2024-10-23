@@ -52,7 +52,7 @@ def generate_launch_description():
 
     ld.add_action(slam_toolbox)
     ld.add_action(navigation)
-    ld.add_action(image_recorder)
+    # ld.add_action(image_recorder)
     
     
     ld.add_action(rviz)
