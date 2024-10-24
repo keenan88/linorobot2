@@ -140,7 +140,7 @@ for slam_moment in slam_moments:
 
     cam = slam_moment['clr_image_path'].split('/')[5].split('_')[0]
 
-    if cam != 'front':
+    if cam != 'left':
         continue
 
     isolated_images = get_isolated_classes(model, slam_moment['clr_image_path'])
@@ -180,21 +180,21 @@ for slam_moment in slam_moments:
 
         base_link_to_left_cam = np.matrix([
             [1.0, 0.0, 0.0, 0.0],
-            [0.0, 0.0, -1.0, 0.247],
-            [0.0, 1.0, 0.0, 0.0],
+            [0.0, 0.0, 1.0, 0.247],
+            [0.0, -1.0, 0.0, 0.0],
             [0.0, 0.0, 0.0, 1.0],
         ])
 
         base_link_to_rear_cam = np.matrix([
-            [0.0, 1.0, 0.0, -0.41],
-            [0.0, 0.0, -1.0, 0.0],
-            [-1.0, 0.0, 0.0, 0.0],
-            [0.0, 0.0, 0.0, 1.0],
+            [0.0, 0.0, -1.0, -0.41],
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, -1.0, 0.0, 0.0],
+            [0.0, 0.0 , 0.0, 1.0],
         ])
 
         base_link_to_right_cam = np.matrix([
             [-1.0, 0.0, 0.0, 0.0],
-            [0.0, 0.0, -1.0, 0.247],
+            [0.0, 0.0, -1.0, -0.247],
             [0.0, -1.0, 0.0, 0.0],
             [0.0, 0.0, 0.0, 1.0],
         ])
