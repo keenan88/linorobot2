@@ -12,6 +12,8 @@ class MultiCameraListener(Node):
 
         self.depth_img_msgs = {'front': None, 'left': None, 'rear': None, 'right': None}
         self.color_img_msgs = {'front': None, 'left': None, 'rear': None, 'right': None}
+        self.img_save_lock = {'front': False, 'left': False, 'rear': False, 'right': False}
+        self.last_save_t = {'front': 0.0, 'left': 0.0, 'rear': 0.0, 'right': 0.0}
 
         # Create subscribers for the four depth image topics
         self.right_cam_depth_sub = self.create_subscription(Image, '/right_rs/right_rs/depth/image_raw', self.depth_msg_cb, 10)
@@ -49,18 +51,40 @@ class MultiCameraListener(Node):
         cam_pos = msg.header.frame_id.split('_')[0]
         self.depth_img_msgs[cam_pos] = msg
 
-        if self.color_img_msgs[cam_pos] != None:
+        if not self.img_save_lock[cam_pos]:
 
-            self.save_slam_moment(cam_pos)
+            self.img_save_lock[cam_pos] = True
+
+            if self.color_img_msgs[cam_pos] != None and self.depth_img_msgs[cam_pos] != None:
+
+                self.save_slam_moment(cam_pos)
+
+                self.depth_img_msgs[cam_pos] = None
+                self.color_img_msgs[cam_pos] = None
+
+            self.img_save_lock[cam_pos] = False
+
+
 
     def color_msg_cb(self, msg):
         # Assuming depth and colour images are fairly well time-aligned.
         cam_pos = msg.header.frame_id.split('_')[0]
         self.color_img_msgs[cam_pos] = msg
 
-        if self.depth_img_msgs[cam_pos] != None:
+        if not self.img_save_lock[cam_pos]:
 
-            self.save_slam_moment(cam_pos)
+            self.img_save_lock[cam_pos] = True
+
+            if self.color_img_msgs[cam_pos] != None and self.depth_img_msgs[cam_pos] != None:
+
+                self.save_slam_moment(cam_pos)
+
+                self.depth_img_msgs[cam_pos] = None
+                self.color_img_msgs[cam_pos] = None
+
+            self.img_save_lock[cam_pos] = False
+
+
 
     def intrinsics_cb(self, msg):
         camera_info_dict = {
@@ -98,41 +122,39 @@ class MultiCameraListener(Node):
 
     def save_slam_moment(self, cam_pos):
 
-        t = self.depth_img_msgs[cam_pos].header.stamp
+        t = self.color_img_msgs[cam_pos].header.stamp
         t = t.sec + t.nanosec / 1e9
 
-        if len(self.tfs['t']) > 0:
+        if len(self.tfs['t']) > 0 and t - self.last_save_t[cam_pos] > 0.2:
 
             nearest_tf_idx = min(range(len(self.tfs['t'])), key=lambda i: abs(self.tfs['t'][i] - t))
 
-            depth_img_path = self.save_image(self.depth_img_msgs[cam_pos])
-            clr_image_path = self.save_image(self.color_img_msgs[cam_pos])
+            if abs(t - self.tfs['t'][nearest_tf_idx]) < 0.05:
 
-            filename = os.path.join(self.save_dir, 'transforms.csv')
-            file_exists = os.path.isfile(filename)
+                depth_img_path = self.save_image(self.depth_img_msgs[cam_pos])
+                clr_image_path = self.save_image(self.color_img_msgs[cam_pos])
 
-            with open(filename, 'a', newline='') as csvfile:
-                csv_writer = csv.writer(csvfile)
+                filename = os.path.join(self.save_dir, 'transforms.csv')
+                file_exists = os.path.isfile(filename)
 
-                if not file_exists:
-                    csv_writer.writerow(['t', 'x', 'y', 'yaw', 'depth_image_path', 'clr_image_path'])
+                with open(filename, 'a', newline='') as csvfile:
+                    csv_writer = csv.writer(csvfile)
 
-                csv_writer.writerow([
-                    self.tfs['t'][nearest_tf_idx], 
-                    self.tfs['x'][nearest_tf_idx], 
-                    self.tfs['y'][nearest_tf_idx], 
-                    self.tfs['yaw'][nearest_tf_idx], 
-                    depth_img_path,
-                    clr_image_path
-                ])
-                
-            os.chmod(filename, 0o777)
+                    if not file_exists:
+                        csv_writer.writerow(['t', 'x', 'y', 'yaw', 'depth_image_path', 'clr_image_path'])
 
-            self.depth_img_msgs[cam_pos] = None
-            self.color_img_msgs[cam_pos] = None
+                    csv_writer.writerow([
+                        self.tfs['t'][nearest_tf_idx], 
+                        self.tfs['x'][nearest_tf_idx], 
+                        self.tfs['y'][nearest_tf_idx], 
+                        self.tfs['yaw'][nearest_tf_idx], 
+                        depth_img_path,
+                        clr_image_path
+                    ])
+                    
+                os.chmod(filename, 0o777)
 
-
-
+                self.last_save_t[cam_pos] = t
 
     def save_image(self, msg):
         camera_name = msg.header.frame_id.split('_')[0]  # Extracting the camera name from frame_id

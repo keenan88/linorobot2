@@ -17,7 +17,7 @@ def get_isolated_classes(model, color_image_path):
         label = result.names[class_idx]
         conf = result.boxes.conf[i]
 
-        if label == 'person' and conf >= 0.6:
+        if label == 'person' and conf >= 0.4:
 
             img = np.copy(result.orig_img)
 
@@ -44,14 +44,14 @@ def get_isolated_image_realworld_xyz(im, depth_image_path):
     image_xs = []
     image_ys = []
 
-    fx = 131.03448486328125
-    fy = 131.03448486328125
-    cx = 150.0
-    cy = 100.0
+    fx =  76.43678283691406
+    fy = 76.43678283691406
+    cx = 87.5
+    cy = 50.0
 
     draw = ImageDraw.Draw(im)
 
-    while len(image_xs) < 100:
+    while len(image_xs) < 1000:
         x_img = random.randint(0, im.size[0] - 1)
         y_img = random.randint(0, im.size[1] - 1)
 
@@ -103,86 +103,163 @@ def read_robot_path(csv_file):
                      'x': float(row[1]),
                      'y': float(row[2]),
                      'yaw': float(row[3]),
+                     'depth_image_path': row[4],
+                     'clr_image_path': row[5],
                 }
             )
     return robot_path
 
-slam_recording_dir = '/home/slam_images/0.0/'
+def inverse_homogeneous_transform(T: np.matrix) -> np.matrix:
+    R = T[:3, :3]  # Extract the rotation matrix
+    t = T[:3, 3]   # Extract the translation vector
 
-robot_traj = read_robot_path(slam_recording_dir + 'transforms.csv')
+    # Transpose of the rotation matrix
+    R_inv = R.T
+
+    # Inverse translation
+    t_inv = -R_inv * t  # Use matrix multiplication
+
+    # Construct the inverse transformation matrix
+    T_inv = np.matrix(np.identity(4))
+    T_inv[:3, :3] = R_inv
+    T_inv[:3, 3] = t_inv
+
+    return T_inv
+
+slam_recording_dir = '/home/yolo/slam_images/0.0/'
+
+slam_moments = read_robot_path(slam_recording_dir + 'transforms.csv')
 
 obstacles_coords = []
 
 model = YOLO("yolo11n-seg.pt")
 
-for cam in ['front', 'left', 'rear', 'right']:
+for slam_moment in slam_moments:    
 
-    print("Camera: ", cam)
+    # /home/yolo/slam_images/0.0/right_32FC1_295.70000716.tiff
 
-    for point in robot_traj:    
+    cam = slam_moment['clr_image_path'].split('/')[5].split('_')[0]
 
-        nearest_depth_image_path = find_nearest_image(cam, point['t'], slam_recording_dir, "32FC1")
-        nearest_color_image_path = find_nearest_image(cam, point['t'], slam_recording_dir, "rgb8")
+    if cam != 'front':
+        continue
 
-        isolated_images = get_isolated_classes(model, nearest_color_image_path)
+    isolated_images = get_isolated_classes(model, slam_moment['clr_image_path'])
 
-        for i, isolated_image in enumerate(isolated_images):
+    for i, isolated_image in enumerate(isolated_images):
 
-            cam_to_obj_x, cam_to_obj_y, cam_to_obj_z, im = get_isolated_image_realworld_xyz(isolated_image, nearest_depth_image_path)
+        cam_to_obj_x, cam_to_obj_y, cam_to_obj_z, im = get_isolated_image_realworld_xyz(isolated_image, slam_moment['depth_image_path'])
 
-            img_filename = "marked/" + cam + "/" + str(point['t']) + "_" + str(i) + ".png"
+        obj_in_cam = np.matrix([
+            [cam_to_obj_x],
+            [cam_to_obj_y],
+            [cam_to_obj_z],
+            [1.0]
+        ])
 
-            im.save(img_filename)
+        t = slam_moment['t']
+        img_filename = "/home/yolo/marked/" + cam + "/" + str(t) + "_" + str(i) + ".png"
 
-            # Camera frame is centered at camera, with:
-            # Z pointing out from the lens
-            # X pointing right
-            # Y pointing down
+        im.save(img_filename)
 
-            # Base link is at the centre of the robot, with:
-            # X pointing out the front of the robot
-            # Y pointing out the left of the robot
-            # Z pointing upwards
+        # Camera frame is centered at camera, with:
+        # Z pointing out from the lens
+        # X pointing right
+        # Y pointing down
 
-            base_link_to_cam_x = 0.41
-            base_link_to_cam_y = 0.247
+        # Base link is at the centre of the robot, with:
+        # X pointing out the front of the robot
+        # Y pointing out the left of the robot
+        # Z pointing upwards
 
-            if cam == 'front':
+        base_link_to_front_cam = np.matrix([
+            [0.0, 0.0, 1.0, 0.41], # 0.41
+            [-1.0, 0.0, 0.0, 0.0],
+            [0.0, -1.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 1.0],
+        ])
 
-                base_link_to_obj_x = base_link_to_cam_x + cam_to_obj_z
-                base_link_to_obj_y = -cam_to_obj_x
+        base_link_to_left_cam = np.matrix([
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -1.0, 0.247],
+            [0.0, 1.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 1.0],
+        ])
 
-            elif cam == 'left':
+        base_link_to_rear_cam = np.matrix([
+            [0.0, 1.0, 0.0, -0.41],
+            [0.0, 0.0, -1.0, 0.0],
+            [-1.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 1.0],
+        ])
 
-                base_link_to_obj_x = cam_to_obj_x
-                base_link_to_obj_y = base_link_to_cam_y +  cam_to_obj_z
+        base_link_to_right_cam = np.matrix([
+            [-1.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, -1.0, 0.247],
+            [0.0, -1.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 1.0],
+        ])
 
-            elif cam == 'rear':
+        map_to_robot_x = slam_moment['x']
+        map_to_robot_y = slam_moment['y']
+        map_to_robot_yaw = slam_moment['yaw']
 
-                base_link_to_obj_x = -(base_link_to_cam_x + cam_to_obj_z)
-                base_link_to_obj_y = cam_to_obj_x
+        c = math.cos(map_to_robot_yaw)
+        s = math.sin(map_to_robot_yaw)
 
-            elif cam == 'right':
+        map_to_base_link = np.matrix([
+            [c, -s, 0.0, map_to_robot_x],
+            [s, c, 0.0,  map_to_robot_y],
+            [0.0, 0.0, 1.0, 0.0],
+            [0.0, 0.0, 0.0, 1.0],
+        ])
 
-                base_link_to_obj_x = -cam_to_obj_x
-                base_link_to_obj_y = -(base_link_to_cam_y +  cam_to_obj_z)
+        
 
+        if cam == 'front':
 
+            obj_in_robot_frame = base_link_to_front_cam * obj_in_cam
 
-            x_map_to_obj = point['x'] + math.cos(point['yaw']) * base_link_to_obj_x + math.sin(point['yaw']) * base_link_to_obj_y
-            y_map_to_obj = point['y'] + math.sin(point['yaw']) * base_link_to_obj_x + math.cos(point['yaw']) * base_link_to_obj_y
+        elif cam == 'left':
 
-            obstacles_coords.append(
-                [
-                    point['t'],
-                    x_map_to_obj,
-                    y_map_to_obj,
-                    img_filename
-                ]
-            )
-    print()
+            obj_in_robot_frame = base_link_to_left_cam * obj_in_cam
 
-save_file = 'obstacle_coords.csv'
+        elif cam == 'rear':
+
+            obj_in_robot_frame = base_link_to_rear_cam * obj_in_cam
+
+        elif cam == 'right':
+
+            obj_in_robot_frame = base_link_to_right_cam * obj_in_cam
+
+        obj_in_map_frame = map_to_base_link * obj_in_robot_frame
+
+        print(cam)
+        print(map_to_robot_yaw)
+        print(obj_in_cam)
+        print(obj_in_robot_frame)
+        print(obj_in_map_frame)
+        print(map_to_base_link)
+        print()
+
+        input()
+
+        x_map_to_obj = obj_in_map_frame[0]
+        y_map_to_obj = obj_in_map_frame[1]
+
+        #print(cam, x_map_to_obj, y_map_to_obj)
+
+        obstacles_coords.append(
+            [
+                t,
+                x_map_to_obj,
+                y_map_to_obj,
+                img_filename
+            ]
+        )
+
+print(obstacles_coords)
+
+save_file = '/home/yolo/obstacle_coords.csv'
 with open(save_file, 'w') as file:
     writer = csv.writer(file)
 

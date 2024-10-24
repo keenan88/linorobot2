@@ -47,11 +47,13 @@ class MarkerPublisher(Node):
         
         for i, (t, x, y, filename) in enumerate(self.data):
 
-            if abs(t - time_s) < 0.5:
+            self.get_logger().info(f"{t, time_s, abs(t - time_s)}")
+
+            if abs(t - time_s) < 0.1:
 
                 marker = Marker()
                 marker.header.frame_id = "map"  # Assuming map frame
-                marker.header.stamp = self.get_clock().now().to_msg()
+                marker.header.stamp = msg.clock
 
                 # Marker ID must be unique
                 marker.id = i
@@ -61,7 +63,7 @@ class MarkerPublisher(Node):
                 # Position of the marker
                 marker.pose.position.x = x
                 marker.pose.position.y = y
-                marker.pose.position.z = 0.0
+                marker.pose.position.z = 0.1
 
                 # Orientation (identity quaternion)
                 marker.pose.orientation.x = 0.0
@@ -74,8 +76,9 @@ class MarkerPublisher(Node):
                 marker.scale.y = 0.2
                 marker.scale.z = 0.2
 
-                cam_pos = filename.split('/')[1]
+                # /home/yolo/marked/right/1004.100024313_0.png
 
+                cam_pos = filename.split("/")[4]
                 if cam_pos == 'front':
 
                     # Marker color (RGBA)
@@ -107,6 +110,10 @@ class MarkerPublisher(Node):
                     marker.color.g = 1.0  # Green color
                     marker.color.b = 0.0
                     marker.color.a = 1.0  # Fully opaque
+
+                else:
+
+                    marker.color.a = 1.0
 
                 # Add marker to the array
                 self.marker_array.markers.append(marker)

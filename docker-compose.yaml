@@ -18,7 +18,7 @@ services:
       - ./docker/linorobot2/entry_scripts/slam_nav_entrypoint.sh:/slam_nav_entrypoint.sh
       - ./yolo:/home/yolo
     working_dir: /home/humble_ws
-    entrypoint: /slam_nav_entrypoint.sh
+    # entrypoint: /slam_nav_entrypoint.sh
     command: sleep infinity
     network_mode: host
     ipc: host

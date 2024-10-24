@@ -12,6 +12,7 @@ Panels:
         - /RearRGB1
         - /RightRGB1
         - /LeftRGB1
+        - /MarkerArray1
       Splitter Ratio: 0.5029411911964417
     Tree Height: 705
   - Class: rviz_common/Selection
@@ -62,7 +63,7 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
-      Frame Timeout: 15
+      Frame Timeout: 10000
       Frames:
         All Enabled: false
         base_link:
@@ -113,7 +114,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /front_rs/front_rs/depth/image_rect_raw
+        Value: /front_rs/front_rs/color/image_raw
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -127,7 +128,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /rear_rs/rear_rs/depth/image_rect_raw
+        Value: /rear_rs/rear_rs/color/image_raw
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -141,7 +142,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /right_rs/right_rs/depth/image_rect_raw
+        Value: /right_rs/right_rs/color/image_raw
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -155,7 +156,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /left_rs/left_rs/depth/image_rect_raw
+        Value: /left_rs/left_rs/color/image_raw
       Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
@@ -214,7 +215,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: -0.004999999888241291
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -224,11 +225,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 59.408512115478516
+      Scale: 167.3604736328125
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -2.19266939163208
-      Y: 0.40287137031555176
+      X: -0.27496254444122314
+      Y: -0.0763620138168335
     Saved: ~
 Window Geometry:
   Displays:
