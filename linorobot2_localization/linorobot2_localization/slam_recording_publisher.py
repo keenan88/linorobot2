@@ -5,6 +5,7 @@ import os
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import TransformStamped
 from std_msgs.msg import Int32
+from rosgraph_msgs.msg import Clock
 import tf2_ros
 from cv_bridge import CvBridge
 import cv2
@@ -30,6 +31,8 @@ class TransformImagePublisher(Node):
 
         # TF broadcaster for transforms
         self.tf_broadcaster = tf2_ros.TransformBroadcaster(self)
+
+        self.timestamp_publisher = self.create_publisher(Clock, '/clock', 10)
 
         # Publish each transform and the nearest images every second
         self.slam_step_subscriber = self.create_subscription(Int32, '/slam_step', self.update_slam_step, 10)
@@ -78,6 +81,19 @@ class TransformImagePublisher(Node):
         timestamp = transform['timestamp']
         self.publish_nearest_images(timestamp)
 
+        self.publish_timestamp(timestamp)
+
+    def publish_timestamp(self, timestamp):
+
+        clock_msg = Clock()
+        timestamp = str(timestamp)
+        clock_msg.clock.sec = int(timestamp.split(".")[0])
+        ns = timestamp.split(".")[1]
+        while len(ns) < 9: ns += '0'
+        clock_msg.clock.nanosec = int(ns)
+
+        self.timestamp_publisher.publish(clock_msg)
+
     def publish_transform(self, transform):
         """
         Publish the given transform as a static transform.
@@ -110,7 +126,7 @@ class TransformImagePublisher(Node):
         """
         Find the nearest image to the given timestamp.
         """
-        image_files = [f for f in os.listdir(self.image_dir) if f.startswith(f"{cam}_32FC1")]
+        image_files = [f for f in os.listdir(self.image_dir) if f.startswith(f"{cam}_rgb8")]
         if not image_files:
             return None
 

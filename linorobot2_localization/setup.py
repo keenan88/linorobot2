@@ -26,7 +26,7 @@ setup(
             'path_orientation_updater = linorobot2_localization.path_orientation_updater:main',
             'slam_image_recorder = linorobot2_localization.slam_image_recorder:main',
             'slam_recording_publisher = linorobot2_localization.slam_recording_publisher:main',
-            'dynamic_obstacle_xy_recorder = linorobot2_localization.dynamic_obstacle_xy_recorder:main'
+            'detected_dynamic_obstacles_publisher = linorobot2_localization.detected_dynamic_obstacles_publisher:main'
         ],
     },
 )

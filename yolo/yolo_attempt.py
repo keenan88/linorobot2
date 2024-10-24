@@ -96,27 +96,22 @@ def read_robot_path(csv_file):
         reader = csv.reader(file)
         next(reader)
         for row in reader:
-            x = float(row[4])
-            y = float(row[5])
-            z = float(row[6])
-            w = float(row[7])
-            
-            yaw = math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z))
 
             robot_path.append(
                 {
                      't': float(row[0]),
                      'x': float(row[1]),
                      'y': float(row[2]),
-                     'z': float(row[3]),
-                     'yaw': yaw
+                     'yaw': float(row[3]),
                 }
             )
     return robot_path
 
 slam_recording_dir = '/home/slam_images/0.0/'
 
-robot_path = read_robot_path(slam_recording_dir + 'transforms.csv')
+robot_traj = read_robot_path(slam_recording_dir + 'transforms.csv')
+
+obstacles_coords = []
 
 model = YOLO("yolo11n-seg.pt")
 
@@ -124,7 +119,7 @@ for cam in ['front', 'left', 'rear', 'right']:
 
     print("Camera: ", cam)
 
-    for point in robot_path:    
+    for point in robot_traj:    
 
         nearest_depth_image_path = find_nearest_image(cam, point['t'], slam_recording_dir, "32FC1")
         nearest_color_image_path = find_nearest_image(cam, point['t'], slam_recording_dir, "rgb8")
@@ -133,19 +128,65 @@ for cam in ['front', 'left', 'rear', 'right']:
 
         for i, isolated_image in enumerate(isolated_images):
 
-            x, y, z, im = get_isolated_image_realworld_xyz(isolated_image, nearest_depth_image_path)
+            cam_to_obj_x, cam_to_obj_y, cam_to_obj_z, im = get_isolated_image_realworld_xyz(isolated_image, nearest_depth_image_path)
 
-            im.save("marked/" + cam + "/" + str(point['t']) + "_" + str(i) + ".png")
+            img_filename = "marked/" + cam + "/" + str(point['t']) + "_" + str(i) + ".png"
 
-    #        print("object realworld xyz:", x, y, z)
+            im.save(img_filename)
 
-            x_base_link_to_obj = z + 0.41
-            y_base_link_to_obj = y
+            # Camera frame is centered at camera, with:
+            # Z pointing out from the lens
+            # X pointing right
+            # Y pointing down
 
-            x_map_to_obj = point['x'] + math.cos(point['yaw']) * x_base_link_to_obj + math.sin(point['yaw']) * y_base_link_to_obj
-            y_map_to_obj = point['y'] + math.sin(point['yaw']) * x_base_link_to_obj + math.cos(point['yaw']) * y_base_link_to_obj
+            # Base link is at the centre of the robot, with:
+            # X pointing out the front of the robot
+            # Y pointing out the left of the robot
+            # Z pointing upwards
 
-            print(x_map_to_obj, y_map_to_obj)
+            base_link_to_cam_x = 0.41
+            base_link_to_cam_y = 0.247
 
+            if cam == 'front':
+
+                base_link_to_obj_x = base_link_to_cam_x + cam_to_obj_z
+                base_link_to_obj_y = -cam_to_obj_x
+
+            elif cam == 'left':
+
+                base_link_to_obj_x = cam_to_obj_x
+                base_link_to_obj_y = base_link_to_cam_y +  cam_to_obj_z
+
+            elif cam == 'rear':
+
+                base_link_to_obj_x = -(base_link_to_cam_x + cam_to_obj_z)
+                base_link_to_obj_y = cam_to_obj_x
+
+            elif cam == 'right':
+
+                base_link_to_obj_x = -cam_to_obj_x
+                base_link_to_obj_y = -(base_link_to_cam_y +  cam_to_obj_z)
+
+
+
+            x_map_to_obj = point['x'] + math.cos(point['yaw']) * base_link_to_obj_x + math.sin(point['yaw']) * base_link_to_obj_y
+            y_map_to_obj = point['y'] + math.sin(point['yaw']) * base_link_to_obj_x + math.cos(point['yaw']) * base_link_to_obj_y
+
+            obstacles_coords.append(
+                [
+                    point['t'],
+                    x_map_to_obj,
+                    y_map_to_obj,
+                    img_filename
+                ]
+            )
     print()
+
+save_file = 'obstacle_coords.csv'
+with open(save_file, 'w') as file:
+    writer = csv.writer(file)
+
+    writer.writerows(obstacles_coords)
+
+
 

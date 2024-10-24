@@ -2,11 +2,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge
-import tf2_ros
-import cv2
-import os
-import csv
-import json
+import tf2_ros, cv2, os, csv, json, math
 
 class MultiCameraListener(Node):
     def __init__(self):
@@ -31,31 +27,40 @@ class MultiCameraListener(Node):
         self.right_cam_intrinsics_sub = self.create_subscription(CameraInfo, '/right_rs/right_rs/depth/camera_info', self.intrinsics_cb, 10)
         self.left_cam_intrinsics_sub = self.create_subscription(CameraInfo, '/left_rs/left_rs/depth/camera_info', self.intrinsics_cb, 10)
         self.front_cam_intrinsics_sub = self.create_subscription(CameraInfo, '/front_rs/front_rs/depth/camera_info', self.intrinsics_cb, 10)
-        self.rear_cam_intrinsics_sub = self.create_subscription(CameraInfo, '/rear_rs/rear_rs/depth/camera_info', self.intrinsics_cb, 10)
-
-        # TF listener for map -> base_link transform
-        self.tf_buffer = tf2_ros.Buffer()
-        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
+        self.rear_cam_intrinsics_sub = self.create_subscription(CameraInfo, '/rear_rs/rear_rs/depth/camera_info', self.intrinsics_cb, 10)        
 
         # CvBridge to convert ROS images to OpenCV format
         self.bridge = CvBridge()
 
         # Directory to save images and transforms
         t = self.get_clock().now().to_msg()
-        self.save_dir = '/home/humble_ws/src/linorobot2_navigation/slam_images/' + str(t.sec + t.nanosec / 1e9) + "/"
+        self.save_dir = '/home/yolo/slam_images/' + str(t.sec + t.nanosec / 1e9) + "/"
         os.makedirs(self.save_dir, exist_ok=True)
         os.chmod(self.save_dir, 0o777)
 
         # Set timer to periodically query and save the transform
-        self.timer = self.create_timer(0.5, self.save_transform)
+        self.timer = self.create_timer(0.05, self.save_transform)
+        self.tfs = {'t': [], 'x':[], 'y': [], 'yaw': []}
+        self.tf_buffer = tf2_ros.Buffer()
+        self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
     def depth_msg_cb(self, msg):
+        # Assuming depth and colour images are fairly well time-aligned.
         cam_pos = msg.header.frame_id.split('_')[0]
         self.depth_img_msgs[cam_pos] = msg
 
+        if self.color_img_msgs[cam_pos] != None:
+
+            self.save_slam_moment(cam_pos)
+
     def color_msg_cb(self, msg):
+        # Assuming depth and colour images are fairly well time-aligned.
         cam_pos = msg.header.frame_id.split('_')[0]
         self.color_img_msgs[cam_pos] = msg
+
+        if self.depth_img_msgs[cam_pos] != None:
+
+            self.save_slam_moment(cam_pos)
 
     def intrinsics_cb(self, msg):
         camera_info_dict = {
@@ -91,12 +96,45 @@ class MultiCameraListener(Node):
 
         os.chmod(path, 0o777)
 
+    def save_slam_moment(self, cam_pos):
+
+        t = self.depth_img_msgs[cam_pos].header.stamp
+        t = t.sec + t.nanosec / 1e9
+
+        if len(self.tfs['t']) > 0:
+
+            nearest_tf_idx = min(range(len(self.tfs['t'])), key=lambda i: abs(self.tfs['t'][i] - t))
+
+            depth_img_path = self.save_image(self.depth_img_msgs[cam_pos])
+            clr_image_path = self.save_image(self.color_img_msgs[cam_pos])
+
+            filename = os.path.join(self.save_dir, 'transforms.csv')
+            file_exists = os.path.isfile(filename)
+
+            with open(filename, 'a', newline='') as csvfile:
+                csv_writer = csv.writer(csvfile)
+
+                if not file_exists:
+                    csv_writer.writerow(['t', 'x', 'y', 'yaw', 'depth_image_path', 'clr_image_path'])
+
+                csv_writer.writerow([
+                    self.tfs['t'][nearest_tf_idx], 
+                    self.tfs['x'][nearest_tf_idx], 
+                    self.tfs['y'][nearest_tf_idx], 
+                    self.tfs['yaw'][nearest_tf_idx], 
+                    depth_img_path,
+                    clr_image_path
+                ])
+                
+            os.chmod(filename, 0o777)
+
+            self.depth_img_msgs[cam_pos] = None
+            self.color_img_msgs[cam_pos] = None
+
+
+
 
     def save_image(self, msg):
-        """
-        Callback for saving images from the subscribed camera topics.
-        """
-
         camera_name = msg.header.frame_id.split('_')[0]  # Extracting the camera name from frame_id
 
         # Convert the ROS image message to an OpenCV image
@@ -111,55 +149,42 @@ class MultiCameraListener(Node):
         os.chmod(img_filename, 0o777)
         self.get_logger().info(f"Saved image from {camera_name} {msg.encoding} at {img_filename}")
 
+        return img_filename
+
     def save_transform(self):
-        """
-        Save the map -> base_link transform to a single CSV file.
-        """
         try:
-            image_msgs = list(self.depth_img_msgs.values()) + list(self.color_img_msgs.values())
             
-            if None not in image_msgs:
+            transform = self.tf_buffer.lookup_transform('map', 'base_link', rclpy.time.Time())                
 
-                # Get the transform from map to base_link
-                transform = self.tf_buffer.lookup_transform('map', 'base_link', rclpy.time.Time())
+            # Get the current timestamp
+            timestamp = transform.header.stamp
+            t = timestamp.sec + timestamp.nanosec / 1e9
 
-                # Get the current timestamp
-                t = transform.header.stamp
+            if t not in self.tfs['t']:
 
-                timestamp = str(t.sec + t.nanosec / 1e9)
-
-                for image_msg in image_msgs:
-                    self.save_image(image_msg)
-
-                # Prepare transform data for saving
-                translation = transform.transform.translation
-                rotation = transform.transform.rotation
-
-                # Define the CSV filename (will create if not exists)
-                transform_filename = os.path.join(self.save_dir, 'transforms.csv')
+                x = transform.transform.rotation.x
+                y = transform.transform.rotation.y
+                z = transform.transform.rotation.z
+                w = transform.transform.rotation.w
                 
+                yaw = math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z))
+
+                self.tfs['t'].insert(0, t)
+                self.tfs['x'].insert(0, transform.transform.translation.x)
+                self.tfs['y'].insert(0, transform.transform.translation.y)
+                self.tfs['yaw'].insert(0, yaw)
+
+                if len(self.tfs['t']) > 10:
+
+                    self.tfs['t'].pop()
+                    self.tfs['x'].pop()
+                    self.tfs['y'].pop()
+                    self.tfs['yaw'].pop()
+
+        except Exception as e:
+            self.get_logger().info(f"Could not get transform: {e}")
 
 
-                # Write or append the transform to the CSV file
-                file_exists = os.path.isfile(transform_filename)
-
-                with open(transform_filename, 'a', newline='') as csvfile:
-                    csv_writer = csv.writer(csvfile)
-
-                    # If file does not exist, write the header
-                    if not file_exists:
-                        csv_writer.writerow(['timestamp', 'translation_x', 'translation_y', 'translation_z',
-                                            'rotation_x', 'rotation_y', 'rotation_z', 'rotation_w'])
-
-                    # Write the transform data as a new row
-                    csv_writer.writerow([timestamp, translation.x, translation.y, translation.z,
-                                        rotation.x, rotation.y, rotation.z, rotation.w])
-                    
-                os.chmod(transform_filename, 0o777)
-
-                self.get_logger().info(f"Saved transform to {transform_filename}")
-        except tf2_ros.TransformException as ex:
-            self.get_logger().warn(f"Could not get transform: {ex}")
 
 
 def main(args=None):
